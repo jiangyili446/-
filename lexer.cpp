@@ -109,7 +109,7 @@ int main(int argc, char *argv[])
 	int tokenIndex=0;
 	token[tokenIndex]='\0';
 	int ifRead=1;
-	while(true){
+	while(1){
 		if(ifRead==1){
 			readChar=fgetc(fp1);
 		}
