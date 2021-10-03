@@ -182,6 +182,8 @@ int main(int argc, char *argv[])
 				
 			}else if(readChar=='\n'){
 				
+			}else if(readChar==EOF){
+				
 			}else{
 				
 				char c=readChar;
