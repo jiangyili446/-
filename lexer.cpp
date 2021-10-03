@@ -74,7 +74,7 @@ int a(char c){
 			break;
 		} 
 		case '*':{
-			printf("Multi\n");
+			printf("Mult\n");
 			return 0;
 			break;
 		} 
