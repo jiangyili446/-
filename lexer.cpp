@@ -100,11 +100,11 @@ int a(char c){
 		} 
 	}
 }
-int main()
+int main(int argc, char *argv[])
 {
 	FILE *fp1;
 	char readChar;
-	fp1=fopen("b.txt","r"); 
+	fp1=fopen(argv[1],"r"); 
 	char token[20];
 	int tokenIndex=0;
 	token[tokenIndex]='\0';
