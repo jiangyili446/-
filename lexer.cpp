@@ -109,11 +109,102 @@ int main(int argc, char *argv[])
 	int tokenIndex=0;
 	token[tokenIndex]='\0';
 	int ifRead=1;
-	while((readChar=fgetc(fp1))!=EOF){
-		
-		printf("%d\n",readChar);	
+	while(1){
+		if(ifRead==1){
+			readChar=fgetc(fp1);
+		}
+		ifRead=1;
+
+			if(classification(readChar)==1 || classification(readChar)==3 ){
+				
+				token[tokenIndex]=readChar;
+				tokenIndex++;
+				token[tokenIndex]='\0'; 
+				while((readChar=fgetc(fp1))!=EOF){
+					if(classification(readChar)==1 || classification(readChar)==2 || classification(readChar)==3 ){
+						token[tokenIndex]=readChar;
+						tokenIndex++;
+						token[tokenIndex]='\0'; 
+					}else if(readChar==' ' || readChar==10){
+						keys(token);
+						tokenIndex=0;
+						token[tokenIndex]='\0';
+						break;
+					}else if(classification(readChar)==4){
+						keys(token);
+						tokenIndex=0;
+						token[tokenIndex]='\0';
+						ifRead=0;
+						break;
+					}else{
+						keys(token);
+						tokenIndex=0;
+						token[tokenIndex]='\0';
+						ifRead=0;
+						return -1;
+					}
+				}
+				if(readChar==EOF){
+					keys(token);
+					return 0;
+				}
+				
+				
+			}else if(classification(readChar)==2){
+				
+				token[tokenIndex]=readChar;
+				tokenIndex++;
+				token[tokenIndex]='\0'; 
+				while((readChar=fgetc(fp1))!=EOF){
+					if(classification(readChar)==2){
+						token[tokenIndex]=readChar;
+						tokenIndex++;
+						token[tokenIndex]='\0'; 
+					}else if(readChar==' ' || readChar==10){
+						printf("Number(%s)\n",token);
+						tokenIndex=0;
+						token[tokenIndex]='\0';
+						break;
+					}else{
+						printf("Number(%s)\n",token);
+						tokenIndex=0;
+						token[tokenIndex]='\0';
+						ifRead=0; 
+						break;
+					}
+				}
+				if(readChar==EOF){
+					printf("Number(%s)\n",token);
+					return 0;
+				}
+				
+			}else if(readChar==' '){
+				
+			}else if(readChar=='\n'){
+				
+			}else if(readChar==9){
+				
+			}else if(readChar==EOF){
+				return 0;
+			}else{
+				
+				char c=readChar;
+				readChar=fgetc(fp1);
+				if(readChar==EOF){
+					a(c);
+					return 0;
+				}else if(c=='='&&readChar=='='){
+					printf("Eq\n");
+				}else{
+					if(a(c)==-1)
+						return 0;
+					ifRead=0; 
+					
+				}
+				
+			}
+			
 		
 		
 	}
-	return 0;
 }
