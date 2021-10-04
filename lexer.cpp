@@ -111,7 +111,7 @@ int main(int argc, char *argv[])
 	int ifRead=1;
 	while((readChar=fgetc(fp1))!=EOF){
 		
-		printf("%c",readChar);	
+		printf("%c %d\n",readChar,readChar);	
 		
 		
 	}
