@@ -141,6 +141,7 @@ int main(int argc, char *argv[])
 						tokenIndex=0;
 						token[tokenIndex]='\0';
 						ifRead=0;
+						break;
 					}
 				}
 				if(readChar==EOF){
