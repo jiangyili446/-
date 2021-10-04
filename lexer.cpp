@@ -190,12 +190,12 @@ int main(int argc, char *argv[])
 				readChar=fgetc(fp1);
 				if(readChar==EOF){
 					a(c);
-					return 0;
+					return 3;
 				}else if(c=='='&&readChar=='='){
 					printf("Eq\n");
 				}else{
 					if(a(c)==-1)
-						return 0;
+						return 2;
 					ifRead=0; 
 					
 				}
