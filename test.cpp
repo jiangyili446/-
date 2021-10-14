@@ -9,11 +9,7 @@ int main(int argc, char *argv[])
 	char c;
 	int a=0;
 	int b=0;
-	while((c=fgetc(fp))!=' '){
-		a=c-'0'+a*10;
-	}
 	while((c=fgetc(fp))!=EOF){
-		b=c-'0'+b*10;
+		printf("%c",c);
 	}
-	printf("%d\n",a+b); 
 }
