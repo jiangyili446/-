@@ -1,4 +1,4 @@
-[jobs.test-submit]
+[jobs.lab1]
 
 image = { source = "dockerfile", path = ".", tag = "pascal-lab1" }
 
