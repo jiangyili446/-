@@ -9,7 +9,6 @@ int main(int argc, char *argv[])
 	char c;
 	int a=0;
 	int b=0;
-	printf("define    \n dso_local i32 @main(){
-    ret i32     234
-}");
+	printf("define    \n dso_local i32 @main(){ret i32     234}");
+	return 0;
 }
