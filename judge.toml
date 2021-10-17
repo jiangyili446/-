@@ -3,5 +3,5 @@
 image = { source = "dockerfile", path = ".", tag = "pascal-lab1" }
 
 run = [
-  "./program $input",
+  "./program $input $ir",
 ]
