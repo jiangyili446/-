@@ -17,7 +17,9 @@ void clean_notes(char *input,char *output){
 			char c2=fgetc(fp);
 			if(c2=='/'){
 				while( (c=fgetc(fp))!='\n' ){
-					
+					if(c==EOF){
+						break;
+					}
 				}
 				fprintf(fp2,"\n");
 			}
