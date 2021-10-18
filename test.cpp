@@ -443,7 +443,7 @@ int main(int argc, char *argv[])
 char k;
 
 while( (k=fgetc(fp7))!=EOF ){
-		printf("%c",k);
+		printf("%d %c",k,k);
 	}
 	printf("\n");
 	while( (k=fgetc(fp6))!=EOF ){
