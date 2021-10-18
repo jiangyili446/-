@@ -407,6 +407,8 @@ int main(int argc, char *argv[])
 	FILE *fp1;
 	fp1=fopen("no_notes.txt","r"); 
 	
+	
+	
 	FILE *fp2;
 	fp2=fopen("lexer.txt","w"); 
 	
@@ -422,6 +424,8 @@ int main(int argc, char *argv[])
 	FILE *fp3;
 	fp3=fopen("lexer.txt","r"); 
 	
+	
+	
 	FILE *fp4;
 	fp4=fopen(argv[2],"w"); 
 	
@@ -430,9 +434,21 @@ int main(int argc, char *argv[])
 	fclose(fp3);
 	fclose(fp4);
 	
-	FILE *fp5;
+	FILE *fp5,*fp6,*fp7;
 	fp5=fopen(argv[2],"r"); 
-	char k;
+	fp6=fopen("lexer.txt","r"); 
+	fp7=fopen("no_notes.txt","r"); 
+
+
+char k;
+
+while( (k=fgetc(fp7))!=EOF ){
+		printf("%c",k);
+	}
+	printf("\n");
+	while( (k=fgetc(fp6))!=EOF ){
+		printf("%c",k);
+	}printf("\n");
 	while( (k=fgetc(fp5))!=EOF ){
 		printf("%c",k);
 	}
