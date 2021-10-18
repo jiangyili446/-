@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
 	char c;
 	int a=0;
 	int b=0;
-	printf("define  dso_local i32 @main(){ret i32 100}");
-	fprintf(fp2,"define  dso_local i32 @main(){ret i32 100}");
+	printf("define  dso_local \n i32\n  @main\n(\n)\n{\n ret \n  i32 \n 100  \n}  \n");
+	fprintf(fp2,"define  dso_local \n i32\n  @main \n ( \n ) \n { \n ret \n  i32 \n 100  \n}  \n");
 	return 0;
 }
