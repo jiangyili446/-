@@ -361,20 +361,20 @@ int lexer(FILE *fp1,FILE *fp2){
 }
 int yufa(FILE *fp1,FILE *fp2){
 	char buf[100];
-	fprintf(fp2,"define dso_local\n");
+	fprintf(fp2,"define dso_local ");
 	while(fgets(buf,100,fp1)!=NULL){
 		
 		if(strcmp(buf,"Ident(int)\n")==0){
-			fprintf(fp2,"i32\n");
+			fprintf(fp2,"i32 ");
 		}
 		else if(strcmp(buf,"Ident(main)\n")==0){
-			fprintf(fp2,"@main\n");
+			fprintf(fp2,"@main");
 		}
 		else if(strcmp(buf,"LPar\n")==0){
-			fprintf(fp2,"(\n");
+			fprintf(fp2,"(");
 		}
 		else if(strcmp(buf,"RPar\n")==0){
-			fprintf(fp2,")\n");
+			fprintf(fp2,") ");
 		}
 		else if(strcmp(buf,"LBrace\n")==0){
 			fprintf(fp2,"{\n");
@@ -383,7 +383,7 @@ int yufa(FILE *fp1,FILE *fp2){
 			fprintf(fp2,"}\n");
 		}
 		else if(strcmp(buf,"Return\n")==0){
-			fprintf(fp2,"ret\n");
+			fprintf(fp2,"ret ");
 		}
 		else if(buf[0]=='N'){
 			int num=0;
@@ -426,5 +426,17 @@ int main(int argc, char *argv[])
 	fp4=fopen(argv[2],"w"); 
 	
 	yufa(fp3,fp4);
+	
+	fclose(fp3);
+	fclose(fp4);
+	
+	FILE *fp5;
+	fp5=fopen(argv[2],"r"); 
+	char k;
+	while( (k=fgetc(fp5))!=EOF ){
+		printf("%c",k);
+	}
+	
+	
 	
 }
