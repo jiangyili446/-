@@ -2,6 +2,9 @@
 #include<stdlib.h>
 #include<math.h>
 #include<string.h>
+
+FILE *yufafp;
+
 void clean_notes(char *input,char *output){
 	FILE *fp,*fp2;
 	fp=fopen(input,"r");
@@ -359,7 +362,7 @@ int lexer(FILE *fp1,FILE *fp2){
 		
 	}
 }
-int yufa(FILE *fp1,FILE *fp2){
+int translate(FILE *fp1,FILE *fp2){
 	char buf[100];
 	fprintf(fp2,"define dso_local ");
 	while(fgets(buf,100,fp1)!=NULL){
@@ -397,6 +400,122 @@ int yufa(FILE *fp1,FILE *fp2){
 		}
 	}
 }
+
+int functype(FILE *fp){
+	char buf[100];
+	fgets(buf,100,fp);
+	if( strcmp(buf,"Ident(int)\n")==0 ){
+		return 0;
+	}
+	else{
+		printf(" error\n");
+		return 9;
+	}
+}
+
+int ident(FILE *fp){
+	char buf[100];
+	fgets(buf,100,fp);
+	if( strcmp(buf,"Ident(main)\n")==0 ){
+		return 0;
+	}
+	else{
+		printf("ident error\n");
+		return 9;
+	}
+}
+
+int stmt(FILE *fp){
+	char buf[100];
+	fgets(buf,100,fp);
+	if( strcmp(buf,"Return\n")==0 ){
+		fgets(buf,100,fp);
+		if( buf[0]=='N' ){
+			fgets(buf,100,fp);
+			if( strcmp(buf,"Semicolon\n")==0 ){
+				return 0;
+			}
+			else{
+		printf("stmt error\n");
+				return 9;
+			}
+		}
+		else{
+		printf("stmt error\n");
+			return 9;
+		}
+	}
+	else{
+		printf("stmt error\n");
+		return 9;
+	}
+}
+int block(FILE *fp){
+	char buf[100];
+	fgets(buf,100,fp);
+	if( strcmp(buf,"LBrace\n")==0 ){
+		if( stmt(fp)==0 ){
+			fgets(buf,100,fp);
+			if( strcmp(buf,"RBrace\n")==0 ){
+				return 0;
+			}
+			else{
+		printf("block error\n");
+				return 9;
+			}
+		}
+		else{
+		printf("block error\n");
+			return 9;
+		}
+	}
+	else{
+		printf("block error\n");
+		return 9;
+	}
+}
+int funcdef(FILE *fp){
+	char buf[100];
+	if( functype(fp)==0 ){
+		if( ident(fp)==0 ){
+			fgets(buf,100,fp);
+			if( strcmp(buf,"LPar\n")==0 ){
+				fgets(buf,100,fp);
+				if( strcmp(buf,"RPar\n")==0 ){
+					if( block(fp)==0 ){
+						return 0;
+					}
+					else{
+		printf("funcdef error1\n");
+						return 9;
+					}
+				}
+				else{
+		printf("funcdef error2\n");
+					return 9;
+				}
+			}
+			else{
+		printf("funcdef error3\n");
+				return 9;
+			}
+		}
+		else{
+		printf("funcdef error\n");
+			return 9;
+		}
+	}
+}
+int comunit(FILE *fp){
+	if( funcdef(fp)==0 ){
+		return 0;
+	}
+	else{
+		
+		printf("comunit error\n");
+		return 9;
+	}
+}
 int main(int argc, char *argv[])
 {
 	
@@ -421,6 +540,12 @@ int main(int argc, char *argv[])
 		return 9;
 	}
 	
+	yufafp=fopen("lexer.txt","r");
+	if(comunit(yufafp)!=0 ){
+		return 9;
+	}
+	fclose(yufafp);
+	
 	FILE *fp3;
 	fp3=fopen("lexer.txt","r"); 
 	
@@ -429,10 +554,12 @@ int main(int argc, char *argv[])
 	FILE *fp4;
 	fp4=fopen(argv[2],"w"); 
 	
-	yufa(fp3,fp4);
+	translate(fp3,fp4);
 	
 	fclose(fp3);
 	fclose(fp4);
+	
+	
 	
 	FILE *fp5,*fp6,*fp7;
 	fp5=fopen(argv[2],"r"); 
