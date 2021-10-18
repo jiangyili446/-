@@ -331,7 +331,7 @@ int lexer(FILE *fp1,FILE *fp2){
 			else if(readChar=='\n'){
 				
 			}
-			else if(readChar==9){
+			else if(readChar==9 || readChar==13){
 				
 			}
 			else if(readChar==EOF){
@@ -443,7 +443,7 @@ int main(int argc, char *argv[])
 char k;
 
 while( (k=fgetc(fp7))!=EOF ){
-		printf("%d %c",k,k);
+		printf("%c",k);
 	}
 	printf("\n");
 	while( (k=fgetc(fp6))!=EOF ){
