@@ -260,15 +260,13 @@ int lexer(FILE *fp1,FILE *fp2){
 								break;
 							}
 						}else{
-							if(times==0){
-								return 9;
-							}else{
+							
 								fprintf(fp2,"Number(%d)\n",octal);
 								tokenIndex=0;
 								token[tokenIndex]='\0';
 								ifRead=0; 
 								break;
-							}
+							
 							
 						}
 						times++;
