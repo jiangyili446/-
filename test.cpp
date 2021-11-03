@@ -397,8 +397,8 @@ int translate(FILE *fp1,FILE *fp2){
 			fprintf(fp2,"}\n");
 		}
 		else if(strcmp(buf,"Return\n")==0){
-			
 			fprintf(fp2,"ret\n");
+			
 		}
 		else if(buf[0]=='N'){
 			int num=0;
@@ -555,7 +555,52 @@ int main(int argc, char *argv[])
 	FILE *fp1;
 	fp1=fopen("no_notes.txt","r"); 
 	
+	FILE *fpp;
+	fpp=fopen("plus_sub.txt","w"); 
 	
+	char c;
+	char cc[200];
+	int ccindex=0; 
+	while( (c=fgetc(fp1))!=EOF  ){
+		
+				if( c=='+' && ccindex>0 ){
+					if( cc[ccindex-1]=='+'  ){
+						
+					}
+					else if( cc[ccindex-1]=='-'  ){
+						cc[ccindex-1]='-';
+					}
+					else{
+						cc[ccindex]=c;
+						ccindex++;
+					}
+				}
+				else if( c=='-' && ccindex>0 ){
+					if( cc[ccindex-1]=='+'  ){
+						cc[ccindex-1]='-';
+					}
+					else if( cc[ccindex-1]=='-'  ){
+						cc[ccindex-1]='+';
+					}
+					else{
+						cc[ccindex]=c;
+						ccindex++;
+					}
+				}
+				else{
+					cc[ccindex]=c;
+					ccindex++;
+				}
+			
+	}
+	
+	printf("%s",cc);
+	fprintf(fpp,"%s",cc);
+	fclose(fp1);
+	fclose(fpp);
+	
+	
+	fp1=fopen("plus_sub.txt","r"); 
 	
 	FILE *fp2;
 	fp2=fopen("lexer.txt","w"); 
