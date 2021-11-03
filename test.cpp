@@ -421,7 +421,7 @@ int mulexp(FILE *fp);
 
 int addexp(FILE *fp);
 
-int exp(FILE *fp);
+int testexp(FILE *fp);
 
 int functype(FILE *fp){
 	char buf[100];
@@ -453,7 +453,7 @@ int stmt(FILE *fp){
 	char buf[100];
 	fgets(buf,100,fp);
 	if( strcmp(buf,"Return\n")==0 ){
-		if( exp(fp)==0 ){
+		if( testexp(fp)==0 ){
 			
 				fgets(buf,100,fp);
 				if( strcmp(buf,"Semicolon\n")==0 ){
@@ -631,7 +631,7 @@ int primaryexp(FILE *fp){
 	char buf[100];
 	fgets(buf,100,fp);
 	if( strcmp(buf,"LPar\n")==0 ){
-		if( exp(fp)==0 ){
+		if( testexp(fp)==0 ){
 			fgets(buf,100,fp);
 			if( strcmp(buf,"RPar\n")==0 ){
 				return 0;
@@ -734,7 +734,7 @@ int addexp(FILE *fp){
 }
 
 
-int exp(FILE *fp){
+int testexp(FILE *fp){
 	if( addexp(fp)==0 ){
 		return 0;
 	}else{
