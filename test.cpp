@@ -3,6 +3,8 @@
 #include<math.h>
 #include<string.h>
 
+char aa[20][100];
+int index=0;
 FILE *yufafp;
 
 void clean_notes(char *input,char *output){
@@ -396,7 +398,7 @@ int translate(FILE *fp1,FILE *fp2){
 			fprintf(fp2,"}\n");
 		}
 		else if(strcmp(buf,"Return\n")==0){
-			fprintf(fp2,"ret ");
+			fprintf(ret,"}\n");
 		}
 		else if(buf[0]=='N'){
 			int num=0;
@@ -460,18 +462,18 @@ int stmt(FILE *fp){
 					return 0;
 				}
 				else{
-					printf("stmt error\n");
+					//printf("stmt error\n");
 					return 9;
 				}
 			
 		} 
 		else{
-			printf("stmt error\n");
+			//printf("stmt error\n");
 			return 9;
 		}
 	}
 	else{
-		printf("stmt error\n");
+		//printf("stmt error\n");
 		return 9;
 	}
 }
@@ -485,17 +487,17 @@ int block(FILE *fp){
 				return 0;
 			}
 			else{
-				printf("block error\n");
+				//printf("block error\n");
 				return 9;
 			}
 		}
 		else{
-			printf("block error\n");
+			//printf("block error\n");
 			return 9;
 		}
 	}
 	else{
-		printf("block error\n");
+		//printf("block error\n");
 		return 9;
 	}
 }
@@ -511,22 +513,22 @@ int funcdef(FILE *fp){
 						return 0;
 					}
 					else{
-		printf("funcdef error1\n");
+						//printf("funcdef error1\n");
 						return 9;
 					}
 				}
 				else{
-		printf("funcdef error2\n");
+					//printf("funcdef error2\n");
 					return 9;
 				}
 			}
 			else{
-		printf("funcdef error3\n");
+				//printf("funcdef error3\n");
 				return 9;
 			}
 		}
 		else{
-		printf("funcdef error\n");
+			//printf("funcdef error\n");
 			return 9;
 		}
 	}
@@ -537,7 +539,7 @@ int comunit(FILE *fp){
 	}
 	else{
 		
-		printf("comunit error\n");
+		//printf("comunit error\n");
 		return 9;
 	}
 }
@@ -607,7 +609,10 @@ int main(int argc, char *argv[])
 		printf("%c",k);
 	}
 	
-	
+	printf("\n");
+	for(int i=0;i<index;i++){
+		printf("hh %s",aa[i]);
+	} 
 	
 }
 
@@ -621,7 +626,7 @@ int unaryop(FILE *fp){
 		return 0;
 	}
 	else{
-		printf("unaryop error\n");
+		//printf("unaryop error\n");
 		return 9;
 	}
 		
@@ -637,12 +642,12 @@ int primaryexp(FILE *fp){
 				return 0;
 			}
 			else{
-				printf("primaryexp error\n");
+				//printf("primaryexp error\n");
 				return 9;
 			}
 		}
 		else{
-			printf("primaryexp error\n");
+			//printf("primaryexp error\n");
 			return 9;
 		}
 	}
@@ -652,7 +657,7 @@ int primaryexp(FILE *fp){
 			return 0;
 		}
 		else{
-			printf("primaryexp error\n");
+			//printf("primaryexp error\n");
 			return 9;
 		}
 	}
@@ -668,12 +673,12 @@ int unaryexp(FILE *fp){
 			return 0;
 		}
 		else{
-			printf("unaryexp error\n");
+			//printf("unaryexp error\n");
 			return 9;
 		}
 	}
 	else{
-		printf("unaryexp error\n");
+		//printf("unaryexp error\n");
 		return 9;
 	}
 }
@@ -690,17 +695,17 @@ int mulexp(FILE *fp){
 				return 0;
 			}
 			else{
-				printf("mulexp error\n");
+				//printf("mulexp error\n");
 				return 9;
 			}
 		}
 		else{
-			printf("mulexp error\n");
+			//printf("mulexp error\n");
 			return 9;
 		}
 	}
 	else{
-		printf("mulexp error\n");
+		//printf("mulexp error\n");
 		return 9;
 	}
 }
@@ -718,17 +723,17 @@ int addexp(FILE *fp){
 				return 0;
 			}
 			else{
-				printf("addexp error\n");
+				//printf("addexp error\n");
 				return 9;
 			}
 		}
 		else{
-			printf("addexp error\n");
+			//printf("addexp error\n");
 			return 9;
 		}
 	}
 	else{
-		printf("addexp error\n");
+		//printf("addexp error\n");
 		return 9;
 	}
 }
@@ -738,7 +743,7 @@ int testexp(FILE *fp){
 	if( addexp(fp)==0 ){
 		return 0;
 	}else{
-		printf("exp error\n");
+		//printf("exp error\n");
 		return 9;
 	}
 }
