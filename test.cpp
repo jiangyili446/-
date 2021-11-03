@@ -411,6 +411,18 @@ int translate(FILE *fp1,FILE *fp2){
 	}
 }
 
+int unaryexp(FILE *fp);
+
+int primaryexp(FILE *fp);
+
+int unaryexp(FILE *fp);
+
+int mulexp(FILE *fp);
+
+int addexp(FILE *fp);
+
+int exp(FILE *fp);
+
 int functype(FILE *fp){
 	char buf[100];
 	fgets(buf,100,fp);
@@ -435,26 +447,14 @@ int ident(FILE *fp){
 	}
 }
 
-int unaryexp(FILE *fp);
 
-int primaryexp(FILE *fp);
-
-int unaryexp(FILE *fp);
-
-int mulexp(FILE *fp);
-
-int addexp(FILE *fp);
-
-
-int exp(FILE *fp);
 
 int stmt(FILE *fp){
 	char buf[100];
 	fgets(buf,100,fp);
 	if( strcmp(buf,"Return\n")==0 ){
 		if( exp(fp)==0 ){
-			fgets(buf,100,fp);
-			if( buf[0]=='N' ){
+			
 				fgets(buf,100,fp);
 				if( strcmp(buf,"Semicolon\n")==0 ){
 					return 0;
@@ -463,11 +463,7 @@ int stmt(FILE *fp){
 					printf("stmt error\n");
 					return 9;
 				}
-			}
-			else{
-				printf("stmt error\n");
-				return 9;
-			}
+			
 		} 
 		else{
 			printf("stmt error\n");
@@ -489,12 +485,12 @@ int block(FILE *fp){
 				return 0;
 			}
 			else{
-		printf("block error\n");
+				printf("block error\n");
 				return 9;
 			}
 		}
 		else{
-		printf("block error\n");
+			printf("block error\n");
 			return 9;
 		}
 	}
@@ -712,7 +708,7 @@ int mulexp(FILE *fp){
 
 int addexp(FILE *fp){
 	char buf[100];
-	if(mulexp(fp)==0){
+	if( mulexp(fp)==0 ){
 		return 0;
 	}
 	else if( addexp(fp)==0 ){
@@ -739,7 +735,7 @@ int addexp(FILE *fp){
 
 
 int exp(FILE *fp){
-	if(addexp(fp)==0){
+	if( addexp(fp)==0 ){
 		return 0;
 	}else{
 		printf("exp error\n");
