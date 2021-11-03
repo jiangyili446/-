@@ -3,8 +3,7 @@
 #include<math.h>
 #include<string.h>
 
-char aa[20][100];
-int index=0;
+
 FILE *yufafp;
 
 void clean_notes(char *input,char *output){
@@ -398,7 +397,8 @@ int translate(FILE *fp1,FILE *fp2){
 			fprintf(fp2,"}\n");
 		}
 		else if(strcmp(buf,"Return\n")==0){
-			fprintf(ret,"}\n");
+			
+			fprintf(fp2,"ret\n");
 		}
 		else if(buf[0]=='N'){
 			int num=0;
@@ -609,10 +609,7 @@ int main(int argc, char *argv[])
 		printf("%c",k);
 	}
 	
-	printf("\n");
-	for(int i=0;i<index;i++){
-		printf("hh %s",aa[i]);
-	} 
+	
 	
 }
 
