@@ -1,6 +1,6 @@
 [jobs.lab1]
 
-image = { source = "dockerfile", path = ".", tag = "pascal-lab1" }
+image = { source = "dockerfile", path = ".", tag = "pascal-lab2" }
 
 run = [
   "./program $input $ir",
