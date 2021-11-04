@@ -2,10 +2,249 @@
 #include<stdlib.h>
 #include<math.h>
 #include<string.h>
-
-
+#include<cstring>
+char name[30][8]={"%x1","%x2","%x3","%x4","%x5","%x6","%x7","%x8","%x9","%x10","%x11","%x12","%x13"};
+int name_index=0;
 FILE *yufafp;
+char a3[50][20];
+int a3index=0;
 
+char final_exp[500];
+
+int cmp(char *s1,char *s2){
+	printf("s1:%s   s2:%s\n",s1,s2);
+	if( strcmp(s1,"")==0 ){
+		if( strcmp(s2,"")==0){
+			return 6;
+		}
+		else
+			return -1;
+	}
+	else if( strcmp(s1,"Plus\n")==0 || strcmp(s1,"Sub\n")==0 ){
+	
+		if( strcmp(s2,"Plus\n")==0 || strcmp(s2,"Sub\n")==0 ){
+			return 1;
+		}
+		else if( strcmp(s2,"Mult\n")==0 || strcmp(s2,"Div\n")==0 || strcmp(s2,"Mol\n")==0 ){
+			return -1;
+		}
+		else if( strcmp(s2,"LPar\n")==0 ){
+			return -1;
+		}
+		else if( strcmp(s2,"RPar\n")==0 ){
+			return 1;
+		}
+		else if( s2[0]=='N' ){
+			return -1;
+		}
+		else if( strcmp(s2,"")==0){
+			return 1;
+		}
+		else{
+			printf("cmp error\n");
+			return 9;
+		}
+	}
+	else if( strcmp(s1,"Mult\n")==0 || strcmp(s1,"Div\n")==0 || strcmp(s1,"Mol\n")==0 ){
+		
+		if( strcmp(s2,"Plus\n")==0 || strcmp(s2,"Sub\n")==0 ){
+			return 1;
+		}
+		else if( strcmp(s2,"Mult\n")==0 || strcmp(s2,"Div\n")==0 || strcmp(s2,"Mol\n")==0 ){
+			return 1;
+		}
+		else if( strcmp(s2,"LPar\n")==0 ){
+			return -1;
+		}
+		else if( strcmp(s2,"RPar\n")==0 ){
+			return 1;
+		}
+		else if( s2[0]=='N' ){
+			return -1;
+		}
+		else if( strcmp(s2,"")==0){
+			return 1;
+		}
+		else{
+			printf("cmp error\n");
+			return 9;
+		}
+	}
+	else if( strcmp(s1,"LPar\n")==0 ){
+	
+		if( strcmp(s2,"Plus\n")==0 || strcmp(s2,"Sub\n")==0 ){
+			return -1;
+		}
+		else if( strcmp(s2,"Mult\n")==0 || strcmp(s2,"Div\n")==0 || strcmp(s2,"Mol\n")==0 ){
+			return -1;
+		}
+		else if( strcmp(s2,"LPar\n")==0 ){
+			return -1;
+		}
+		else if( strcmp(s2,"RPar\n")==0 ){
+			return 0;
+		}
+		else if( s2[0]=='N' ){
+			return -1;
+		}
+		else if( strcmp(s2,"")==0){
+			return 1;
+		}
+		else{
+			printf("cmp error\n");
+			return 9;
+		}
+	}
+	else if( strcmp(s1,"RPar\n")==0 ){
+	
+		if( strcmp(s2,"Plus\n")==0 || strcmp(s2,"Sub\n")==0 ){
+			return 1;	
+		}
+		else if( strcmp(s2,"Mult\n")==0 || strcmp(s2,"Div\n")==0 || strcmp(s2,"Mol\n")==0 ){
+			return 1;
+		}
+		else if( strcmp(s2,"LPar\n")==0 ){
+			return 9;
+		}
+		else if( strcmp(s2,"RPar\n")==0 ){
+			return 1;
+		}
+		else if( s2[0]=='N' ){
+			return 9;
+		}
+		else if( strcmp(s2,"")==0){
+			return 1;
+		}
+		else{
+			printf("cmp error\n");
+			return 9;
+		}
+	}
+	else if( s1[0]=='N' ){
+	
+		if( strcmp(s2,"Plus\n")==0 || strcmp(s2,"Sub\n")==0 ){
+			return 1;
+		}
+		else if( strcmp(s2,"Mult\n")==0 || strcmp(s2,"Div\n")==0 || strcmp(s2,"Mol\n")==0 ){
+			return 1;
+		}
+		else if( strcmp(s2,"LPar\n")==0 ){
+			return 9;
+		}
+		else if( strcmp(s2,"RPar\n")==0 ){
+			return 1;
+		}
+		else if( s2[0]=='N' ){
+			return 9;
+		}
+		else if( strcmp(s2,"")==0){
+			return 1;
+		}
+		else{
+			printf("cmp error\n");
+			return 9;
+		}
+	}
+	else{
+		printf("cmp error\n");
+		return 9;
+	}
+}
+
+int suanfu(){
+	
+	char list[50][20];
+	int end=0;
+	int a3begin=0;
+	strcpy(list[end],a3[a3begin]);
+	end++;
+	a3begin++;
+	while(end>0){
+		int f,g;
+		int k;
+		
+		
+		if(list[end-1][0]=='%'){
+			k=cmp(list[end-2],a3[a3begin]);
+			f=0;
+		}
+		else{
+			k=cmp(list[end-1],a3[a3begin]);
+			f=1;
+		}
+		if( k==1 ){
+			
+			if(f==0){
+				if( list[end-1][0]=='%' && strcmp(list[end-2],"Plus\n")==0 && list[end-3][0]=='%'){
+					
+				}
+				else if( list[end-1][0]=='%' && strcmp(list[end-2],"Sub\n")==0 && list[end-3][0]=='%'){
+					strcat(final_exp,name[name_index]);
+					strcat(final_exp," = sub i32 ");
+					strcat(final_exp,list[end-3]);
+					strcat(final_exp,", ");
+					strcat(final_exp,list[end-1]);
+					strcat(final_exp,"\n");
+					
+					end =end -2;
+					strcpy(list[end-1],name[name_index]);
+					name_index++;
+					printf("final_exp: %s",final_exp);
+				}
+				else if( list[end-1][0]=='%' && strcmp(list[end-2],"Mult\n")==0 && list[end-3][0]=='%'){
+					
+				}
+				else if( list[end-1][0]=='%' && strcmp(list[end-2],"Div\n")==0 && list[end-3][0]=='%'){
+					
+				}
+				else if( list[end-1][0]=='%' && strcmp(list[end-2],"Mol\n")==0 && list[end-3][0]=='%'){
+					
+				}
+			}
+			else if(f==1){
+				
+				if( list[end-1][0]=='N' ){
+					
+					char num[5];
+					int num_index=0;
+					for(int m=7;list[end-1][m]!=')';m++){
+						num[num_index]=list[end-1][m];
+						num_index++;
+					}
+					strcat(final_exp,name[name_index]);
+					strcat(final_exp," = sub i32 ");
+					strcat(final_exp,num);
+					strcat(final_exp,", 0\n");
+					
+					strcpy(list[end-1],name[name_index]);
+					name_index++;
+					printf("final_exp: %s",final_exp);
+				}
+				else if( strcmp(list[end-3],"LPar\n")==0 && list[end-2][0]=='%' && strcmp(list[end-1],"RPar\n")==0){
+					strcpy(list[end-3],list[end-2]);
+					end=end-2;
+				}
+			}
+			
+			
+		}
+		else if( k==-1 || k==0 ){
+			strcpy(list[end],a3[a3begin]);
+			end++;
+			a3begin++;
+		}
+		else if( k ==6 ){
+			return 0;
+		}
+		else{
+			printf("suanfu error\n");
+			return 9;
+			break;
+		}
+	}
+	
+	return 0;
+}
 void clean_notes(char *input,char *output){
 	FILE *fp,*fp2;
 	fp=fopen(input,"r");
@@ -397,7 +636,12 @@ int translate(FILE *fp1,FILE *fp2){
 			fprintf(fp2,"}\n");
 		}
 		else if(strcmp(buf,"Return\n")==0){
-			fprintf(fp2,"ret\n");
+			for(int j=0;j<strlen(final_exp);j++){
+				fprintf(fp2,"%c",final_exp[j]);
+			}
+	
+			fprintf(fp2,"ret %s\n}",name[name_index-1]);
+			return 0;
 //			char aa[20][100];
 //			int index=0;
 //			
@@ -512,32 +756,33 @@ int ident(FILE *fp){
 
 
 int stmt(FILE *fp){
-	char buf[100];
+	char buf[20];
 	fgets(buf,100,fp);
 	if( strcmp(buf,"Return\n")==0 ){
-		char aa[20][100];
-		char buf2[100];
+		char aa[50][20];
+		char buf2[20];
 		int index=0;
 		
 
-		while(fgets(buf2,100,fp)!=NULL){
+		while(fgets(buf2,20,fp)!=NULL){
 			if(strcmp(buf2,"Semicolon\n")==0){
 				break;
 			}
 			else{
-				
 				strcpy(aa[index],buf2);
 				index++;
 			}
 		}		
-			
+		
+		
 			//抵消加减
-		char a2[20][100];
+		char a2[50][20];
 		int a2index;
 		int aaindex;
-		for(a2index=0,aaindex=0 ; aaindex<index ; aaindex++){
 	
-			if( strcmp(aa[aaindex],"Plus\n")==0 && a2index>0 ){
+		for(a2index=0,aaindex=0 ; aaindex<index ; aaindex++){
+			
+			if( aa[aaindex][0]=='P' && a2index>0 ){
 				if( strcmp(a2[a2index-1],"Plus\n")==0  ){
 					
 				}
@@ -545,11 +790,11 @@ int stmt(FILE *fp){
 					strcpy(a2[a2index-1],"Sub\n");
 				}
 				else{
-					strcpy(a2[a2index],aa[aaindex]);
+					strcpy(a2[a2index],"Plus\n");
 					a2index++;
 				}
 			}
-			else if(strcmp(aa[aaindex],"Sub\n")==0 && a2index>0 ){
+			else if(aa[aaindex][0]=='S' && a2index>0 ){
 				if( strcmp(a2[a2index-1],"Plus\n")==0  ){
 					strcpy(a2[a2index-1],"Sub\n");
 				}
@@ -557,30 +802,73 @@ int stmt(FILE *fp){
 					strcpy(a2[a2index-1],"Plus\n");
 				}
 				else{
-					strcpy(a2[a2index],aa[aaindex]);
+					strcpy(a2[a2index],"Sub\n");
 					a2index++;
 				}
 			}
 			else{
-					strcpy(a2[a2index],aa[aaindex]);
+				char buf3[20];
+				strcpy(buf3,aa[aaindex]);
+				strcpy(a2[a2index],buf3);
 				a2index++;
 			}
 		} 
+		
+		
+		for(int z=0;z<a2index;z++){
+			if(z==0){
+				if( strcmp(a2[z],"Plus\n")==0 || strcmp(a2[z],"Sub\n")==0 ){
+					strcpy(a3[a3index],"Number(0)\n");
+					a3index++;
+					strcpy(a3[a3index],a2[z]);
+					a3index++;
+				}
+				else{
+					strcpy(a3[a3index],a2[z]);
+					a3index++;
+				}
+			}
+			else{
+				if( strcmp(a2[z],"LPar\n")==0 && (strcmp(a2[z+1],"Plus\n")==0 || strcmp(a2[z+1],"Sub\n")==0) ){
+					strcpy(a3[a3index],"LPar\n");
+					a3index++;
+					strcpy(a3[a3index],"Number(0)\n");
+					a3index++;
+				}
+				else{
+					strcpy(a3[a3index],a2[z]);
+					a3index++;
+				}
+			}
+		}
+		
 		printf("aa:\n");
 		for(int z=0;z<index;z++){
-			printf("%s",aa[z]);
+			printf("z%d:%s",z,aa[z]);
 		}
 		printf("\n");
+		
+		
 		printf("a2:\n");
 		for(int z=0;z<a2index;z++){
 			printf("%s",a2[z]);
 		}
 		printf("\n");
 		
+		printf("a3:\n");
+		for(int z=0;z<a3index;z++){
+			printf("%s",a3[z]);
+		}
+		printf("\n");
 		
+		if( suanfu()==0 ){
+			return 0;
+		}
+		else{
+			printf("stmt error\n");
+			return 9;
+		}
 		
-
-		return 0;
 	}
 	else{
 		printf("stmt error\n");
@@ -704,9 +992,9 @@ int main(int argc, char *argv[])
 			
 	}
 	cc[ccindex]='\0';
-	printf("%s",cc);
+	
 	fprintf(fpp,"%s",cc);
-	printf("end\n");
+
 	fclose(fp1);
 	fclose(fpp);
 	
