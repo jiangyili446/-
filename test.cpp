@@ -640,7 +640,7 @@ int translate(FILE *fp1,FILE *fp2){
 				fprintf(fp2,"%c",final_exp[j]);
 			}
 	
-			fprintf(fp2,"ret %s\n}",name[name_index-1]);
+			fprintf(fp2,"ret i32 %s\n}",name[name_index-1]);
 			return 0;
 //			char aa[20][100];
 //			int index=0;
