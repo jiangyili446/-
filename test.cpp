@@ -398,7 +398,67 @@ int translate(FILE *fp1,FILE *fp2){
 		}
 		else if(strcmp(buf,"Return\n")==0){
 			fprintf(fp2,"ret\n");
+//			char aa[20][100];
+//			int index=0;
+//			
+//			char buf2[100];
+//			while(fgets(buf2,100,fp1)!=NULL){
+//				if(strcmp(buf2,"Semicolon\n")==0){
+//					break;
+//				}
+//				else{
+//					
+//					strcpy(aa[index],buf2);
+//					index++;
+//				}
+//			}
 			
+			
+			//抵消加减
+//			char a2[20][100];
+//			int a2index;
+//			int aaindex;
+//			for(a2index=0,aaindex=0 ; aaindex<index ; aaindex++){
+//		
+//				if( strcmp(aa[aaindex],"Plus\n")==0 && a2index>0 ){
+//					if( strcmp(a2[a2index-1],"Plus\n")==0  ){
+//						
+//					}
+//					else if( strcmp(a2[a2index-1],"Sub\n")==0  ){
+//						strcpy(a2[a2index-1],"Sub\n");
+//					}
+//					else{
+//						strcpy(a2[a2index],aa[aaindex]);
+//						a2index++;
+//					}
+//				}
+//				else if(strcmp(aa[aaindex],"Sub\n")==0 && a2index>0 ){
+//					if( strcmp(a2[a2index-1],"Plus\n")==0  ){
+//						strcpy(a2[a2index-1],"Sub\n");
+//					}
+//					else if( strcmp(a2[a2index-1],"Sub\n")==0  ){
+//						strcpy(a2[a2index-1],"Plus\n");
+//					}
+//					else{
+//						strcpy(a2[a2index],aa[aaindex]);
+//						a2index++;
+//					}
+//				}
+//				else{
+//					strcpy(a2[a2index],aa[aaindex]);
+//					a2index++;
+//				}
+//			} 
+//			printf("aa:\n");
+//			for(int z=0;z<index;z++){
+//				printf("%s",aa[z]);
+//			}
+//			printf("\n");
+//			printf("a2:\n");
+//			for(int z=0;z<a2index;z++){
+//				printf("%s",a2[z]);
+//			}
+//			printf("\n");
 		}
 		else if(buf[0]=='N'){
 			int num=0;
@@ -455,25 +515,75 @@ int stmt(FILE *fp){
 	char buf[100];
 	fgets(buf,100,fp);
 	if( strcmp(buf,"Return\n")==0 ){
-		if( testexp(fp)==0 ){
+		char aa[20][100];
+		char buf2[100];
+		int index=0;
+		
+
+		while(fgets(buf2,100,fp)!=NULL){
+			if(strcmp(buf2,"Semicolon\n")==0){
+				break;
+			}
+			else{
+				
+				strcpy(aa[index],buf2);
+				index++;
+			}
+		}		
 			
-				fgets(buf,100,fp);
-				if( strcmp(buf,"Semicolon\n")==0 ){
-					return 0;
+			//抵消加减
+		char a2[20][100];
+		int a2index;
+		int aaindex;
+		for(a2index=0,aaindex=0 ; aaindex<index ; aaindex++){
+	
+			if( strcmp(aa[aaindex],"Plus\n")==0 && a2index>0 ){
+				if( strcmp(a2[a2index-1],"Plus\n")==0  ){
+					
+				}
+				else if( strcmp(a2[a2index-1],"Sub\n")==0  ){
+					strcpy(a2[a2index-1],"Sub\n");
 				}
 				else{
-					//printf("stmt error\n");
-					return 9;
+					strcpy(a2[a2index],aa[aaindex]);
+					a2index++;
 				}
-			
+			}
+			else if(strcmp(aa[aaindex],"Sub\n")==0 && a2index>0 ){
+				if( strcmp(a2[a2index-1],"Plus\n")==0  ){
+					strcpy(a2[a2index-1],"Sub\n");
+				}
+				else if( strcmp(a2[a2index-1],"Sub\n")==0  ){
+					strcpy(a2[a2index-1],"Plus\n");
+				}
+				else{
+					strcpy(a2[a2index],aa[aaindex]);
+					a2index++;
+				}
+			}
+			else{
+					strcpy(a2[a2index],aa[aaindex]);
+				a2index++;
+			}
 		} 
-		else{
-			//printf("stmt error\n");
-			return 9;
+		printf("aa:\n");
+		for(int z=0;z<index;z++){
+			printf("%s",aa[z]);
 		}
+		printf("\n");
+		printf("a2:\n");
+		for(int z=0;z<a2index;z++){
+			printf("%s",a2[z]);
+		}
+		printf("\n");
+		
+		
+		
+
+		return 0;
 	}
 	else{
-		//printf("stmt error\n");
+		printf("stmt error\n");
 		return 9;
 	}
 }
@@ -487,17 +597,17 @@ int block(FILE *fp){
 				return 0;
 			}
 			else{
-				//printf("block error\n");
+				printf("block error\n");
 				return 9;
 			}
 		}
 		else{
-			//printf("block error\n");
+			printf("block error\n");
 			return 9;
 		}
 	}
 	else{
-		//printf("block error\n");
+		printf("block error\n");
 		return 9;
 	}
 }
@@ -513,22 +623,22 @@ int funcdef(FILE *fp){
 						return 0;
 					}
 					else{
-						//printf("funcdef error1\n");
+						printf("funcdef error1\n");
 						return 9;
 					}
 				}
 				else{
-					//printf("funcdef error2\n");
+					printf("funcdef error2\n");
 					return 9;
 				}
 			}
 			else{
-				//printf("funcdef error3\n");
+				printf("funcdef error3\n");
 				return 9;
 			}
 		}
 		else{
-			//printf("funcdef error\n");
+			printf("funcdef error\n");
 			return 9;
 		}
 	}
@@ -539,7 +649,7 @@ int comunit(FILE *fp){
 	}
 	else{
 		
-		//printf("comunit error\n");
+		printf("comunit error\n");
 		return 9;
 	}
 }
@@ -593,32 +703,38 @@ int main(int argc, char *argv[])
 				}
 			
 	}
-	
+	cc[ccindex]='\0';
 	printf("%s",cc);
 	fprintf(fpp,"%s",cc);
+	printf("end\n");
 	fclose(fp1);
 	fclose(fpp);
 	
-	
-	fp1=fopen("plus_sub.txt","r"); 
+	FILE *fp11;
+	fp11=fopen("no_notes.txt","r"); 
 	
 	FILE *fp2;
 	fp2=fopen("lexer.txt","w"); 
 	
-	if (lexer(fp1,fp2)==0){
-		fclose(fp1);
+	if (lexer(fp11,fp2)==0){
+		fclose(fp11);
 		fclose(fp2);
 	}else{
-		fclose(fp1);
+		fclose(fp11);
 		fclose(fp2);
 		return 9;
 	}
 	
+
+	
 	yufafp=fopen("lexer.txt","r");
+
 	if(comunit(yufafp)!=0 ){
 		return 9;
 	}
 	fclose(yufafp);
+	
+
 	
 	FILE *fp3;
 	fp3=fopen("lexer.txt","r"); 
@@ -668,7 +784,7 @@ int unaryop(FILE *fp){
 		return 0;
 	}
 	else{
-		//printf("unaryop error\n");
+		printf("unaryop error\n");
 		return 9;
 	}
 		
@@ -684,12 +800,12 @@ int primaryexp(FILE *fp){
 				return 0;
 			}
 			else{
-				//printf("primaryexp error\n");
+				printf("primaryexp error\n");
 				return 9;
 			}
 		}
 		else{
-			//printf("primaryexp error\n");
+			printf("primaryexp error\n");
 			return 9;
 		}
 	}
@@ -699,7 +815,7 @@ int primaryexp(FILE *fp){
 			return 0;
 		}
 		else{
-			//printf("primaryexp error\n");
+			printf("primaryexp error\n");
 			return 9;
 		}
 	}
@@ -715,12 +831,12 @@ int unaryexp(FILE *fp){
 			return 0;
 		}
 		else{
-			//printf("unaryexp error\n");
+			printf("unaryexp error\n");
 			return 9;
 		}
 	}
 	else{
-		//printf("unaryexp error\n");
+		printf("unaryexp error\n");
 		return 9;
 	}
 }
@@ -737,17 +853,17 @@ int mulexp(FILE *fp){
 				return 0;
 			}
 			else{
-				//printf("mulexp error\n");
+				printf("mulexp error\n");
 				return 9;
 			}
 		}
 		else{
-			//printf("mulexp error\n");
+			printf("mulexp error\n");
 			return 9;
 		}
 	}
 	else{
-		//printf("mulexp error\n");
+		printf("mulexp error\n");
 		return 9;
 	}
 }
@@ -765,17 +881,17 @@ int addexp(FILE *fp){
 				return 0;
 			}
 			else{
-				//printf("addexp error\n");
+				printf("addexp error\n");
 				return 9;
 			}
 		}
 		else{
-			//printf("addexp error\n");
+			printf("addexp error\n");
 			return 9;
 		}
 	}
 	else{
-		//printf("addexp error\n");
+		printf("addexp error\n");
 		return 9;
 	}
 }
@@ -785,7 +901,7 @@ int testexp(FILE *fp){
 	if( addexp(fp)==0 ){
 		return 0;
 	}else{
-		//printf("exp error\n");
+		printf("exp error\n");
 		return 9;
 	}
 }
