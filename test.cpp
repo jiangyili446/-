@@ -176,7 +176,17 @@ int suanfu(){
 			
 			if(f==0){
 				if( list[end-1][0]=='%' && strcmp(list[end-2],"Plus\n")==0 && list[end-3][0]=='%'){
+					strcat(final_exp,name[name_index]);
+					strcat(final_exp," = add i32 ");
+					strcat(final_exp,list[end-3]);
+					strcat(final_exp,", ");
+					strcat(final_exp,list[end-1]);
+					strcat(final_exp,"\n");
 					
+					end =end -2;
+					strcpy(list[end-1],name[name_index]);
+					name_index++;
+					printf("final_exp: %s",final_exp);
 				}
 				else if( list[end-1][0]=='%' && strcmp(list[end-2],"Sub\n")==0 && list[end-3][0]=='%'){
 					strcat(final_exp,name[name_index]);
@@ -192,13 +202,43 @@ int suanfu(){
 					printf("final_exp: %s",final_exp);
 				}
 				else if( list[end-1][0]=='%' && strcmp(list[end-2],"Mult\n")==0 && list[end-3][0]=='%'){
+					strcat(final_exp,name[name_index]);
+					strcat(final_exp," = mul i32 ");
+					strcat(final_exp,list[end-3]);
+					strcat(final_exp,", ");
+					strcat(final_exp,list[end-1]);
+					strcat(final_exp,"\n");
 					
+					end =end -2;
+					strcpy(list[end-1],name[name_index]);
+					name_index++;
+					printf("final_exp: %s",final_exp);
 				}
 				else if( list[end-1][0]=='%' && strcmp(list[end-2],"Div\n")==0 && list[end-3][0]=='%'){
+					strcat(final_exp,name[name_index]);
+					strcat(final_exp," = sdiv i32 ");
+					strcat(final_exp,list[end-3]);
+					strcat(final_exp,", ");
+					strcat(final_exp,list[end-1]);
+					strcat(final_exp,"\n");
 					
+					end =end -2;
+					strcpy(list[end-1],name[name_index]);
+					name_index++;
+					printf("final_exp: %s",final_exp);
 				}
 				else if( list[end-1][0]=='%' && strcmp(list[end-2],"Mol\n")==0 && list[end-3][0]=='%'){
+					strcat(final_exp,name[name_index]);
+					strcat(final_exp," =  i32 ");
+					strcat(final_exp,list[end-3]);
+					strcat(final_exp,", ");
+					strcat(final_exp,list[end-1]);
+					strcat(final_exp,"\n");
 					
+					end =end -2;
+					strcpy(list[end-1],name[name_index]);
+					name_index++;
+					printf("final_exp: %s",final_exp);
 				}
 			}
 			else if(f==1){
