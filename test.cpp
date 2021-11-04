@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<math.h>
 #include<string.h>
-#include<cstring>
+
 char name[30][8]={"%x1","%x2","%x3","%x4","%x5","%x6","%x7","%x8","%x9","%x10","%x11","%x12","%x13"};
 int name_index=0;
 FILE *yufafp;
