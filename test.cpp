@@ -241,6 +241,9 @@ int suanfu(){
 					name_index++;
 					printf("final_exp: %s",final_exp);
 				}
+				else{
+					return 9;
+				}
 			}
 			else if(f==1){
 				
@@ -264,6 +267,9 @@ int suanfu(){
 				else if( strcmp(list[end-3],"LPar\n")==0 && list[end-2][0]=='%' && strcmp(list[end-1],"RPar\n")==0){
 					strcpy(list[end-3],list[end-2]);
 					end=end-2;
+				}
+				else{
+					return 9;
 				}
 			}
 			
