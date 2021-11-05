@@ -204,7 +204,7 @@ int suanfu(){
 				}
 				else if( list[end-1][0]=='%' && strcmp(list[end-2],"Mult\n")==0 && list[end-3][0]=='%'){
 					strcat(final_exp,name[name_index]);
-					strcat(final_exp," = mol i32 ");
+					strcat(final_exp," = mul i32 ");
 					strcat(final_exp,list[end-3]);
 					strcat(final_exp,", ");
 					strcat(final_exp,list[end-1]);
@@ -230,7 +230,7 @@ int suanfu(){
 				}
 				else if( list[end-1][0]=='%' && strcmp(list[end-2],"Mol\n")==0 && list[end-3][0]=='%'){
 					strcat(final_exp,name[name_index]);
-					strcat(final_exp," =  i32 ");
+					strcat(final_exp," = mod i32 ");
 					strcat(final_exp,list[end-3]);
 					strcat(final_exp,", ");
 					strcat(final_exp,list[end-1]);
