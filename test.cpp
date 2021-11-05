@@ -229,12 +229,31 @@ int suanfu(){
 					printf("final_exp: %s",final_exp);
 				}
 				else if( list[end-1][0]=='%' && strcmp(list[end-2],"Mol\n")==0 && list[end-3][0]=='%'){
+					
+					
 					strcat(final_exp,name[name_index]);
-					strcat(final_exp," = mol i32 ");
+					strcat(final_exp," = sdiv i32 ");
 					strcat(final_exp,list[end-3]);
 					strcat(final_exp,", ");
 					strcat(final_exp,list[end-1]);
 					strcat(final_exp,"\n");
+					name_index++;
+					
+					strcat(final_exp,name[name_index]);
+					strcat(final_exp," = mul i32 ");
+					strcat(final_exp,list[end-1]);
+					strcat(final_exp,", ");
+					strcat(final_exp,name[name_index-1]);
+					strcat(final_exp,"\n");
+					name_index++;
+					
+					strcat(final_exp,name[name_index]);
+					strcat(final_exp," = sub i32 ");
+					strcat(final_exp,list[end-3]);
+					strcat(final_exp,", ");
+					strcat(final_exp,name[name_index-1]);
+					strcat(final_exp,"\n");
+					
 					
 					end =end -2;
 					strcpy(list[end-1],name[name_index]);
