@@ -245,7 +245,7 @@ int suanfu(){
 				
 				if( list[end-1][0]=='N' ){
 					
-					char num[5];
+					char num[5]="\0";
 					int num_index=0;
 					for(int m=7;list[end-1][m]!=')';m++){
 						num[num_index]=list[end-1][m];
