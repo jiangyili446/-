@@ -125,9 +125,9 @@ public class lab1 {
         if( functype(fp)==0 ){
             if( ident(fp)==0 ){
                 buf = fp.readLine();
-                if( buf.equals("LPar") ){
+                if( buf!=null && buf.equals("LPar") ){
                     buf = fp.readLine();
-                    if( buf.equals("RPar") ){
+                    if( buf!=null && buf.equals("RPar") ){
                         if( block(fp)==0 ){
                             return 0;
                         }
@@ -157,10 +157,10 @@ public class lab1 {
     private static int block(BufferedReader fp) throws IOException {
         String buf = null;
         buf=fp.readLine();
-        if( buf.equals("LBrace") ){
+        if( buf!=null && buf.equals("LBrace") ){
             if( stmt(fp)==0 ){
                 buf=fp.readLine();
-                if( buf==null || buf.equals("RBrace") ){
+                if( buf!=null &&  buf.equals("RBrace") ){
                     return 0;
                 }
                 else{
@@ -182,11 +182,11 @@ public class lab1 {
     private static int stmt(BufferedReader fp) throws IOException {
         String buf = null;
         buf=fp.readLine();
-        if( buf.equals("Return") ){
+        if( buf!=null && buf.equals("Return") ){
             buf=fp.readLine();
-            if( buf.toCharArray()[0]=='N' ){
+            if( buf!=null && buf.toCharArray()[0]=='N' ){
                 buf=fp.readLine();
-                if( buf.equals("Semicolon") ){
+                if( buf!=null && buf.equals("Semicolon") ){
                     return 0;
                 }else{
                     System.out.print("stmt error\n");
@@ -208,7 +208,7 @@ public class lab1 {
     private static int ident(BufferedReader fp) throws IOException {
         String buf = null;
         buf=fp.readLine();
-        if( buf.equals("Ident(main)") ){
+        if( buf!=null && buf.equals("Ident(main)") ){
             return 0;
         }
         else{
@@ -220,7 +220,7 @@ public class lab1 {
     private static int functype(BufferedReader fp) throws IOException {
         String buf = null;
         buf=fp.readLine();
-        if( buf.equals("Ident(int)") ){
+        if( buf!=null && buf.equals("Ident(int)") ){
             return 0;
         }
         else{
@@ -674,10 +674,12 @@ public class lab1 {
                     i++;
                     fp2.write("\n");
                 } else if (c2 == '*') {
-                    while ( i!=inputfile.length() ) {
-
+                    while ( i<inputfile.length() ) {
+                        c = (char) fp.read();
+                        i++;
                         if (c == '*') {
                             c = (char) fp.read();
+                            i++;
                             if (c == '/') {
                                 break;
                             }
