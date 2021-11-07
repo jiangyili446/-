@@ -127,7 +127,7 @@ public class lab2 {
                 translateExp(fp2, exp, expSize);
                 fp2.write(finalExp);
                 int nameindex_ = nameIndex-1;
-                fp2.write("ret %x"+nameindex_+"\n");
+                fp2.write("ret i32 %x"+nameindex_+"\n");
             } else if (buf.toCharArray()[0] == 'N') {
                 int num = 0;
                 for (int i = 7; buf.toCharArray()[i] != ')'; i++) {
@@ -150,7 +150,7 @@ public class lab2 {
             if (aa[aaindex].toCharArray()[0] == 'P' && a2index > 0) {
                 if (a2[a2index - 1].equals("Plus")) {
 
-                } else if (a2[a2index - 1].equals("Plus")) {
+                } else if (a2[a2index - 1].equals("Sub")) {
                     a2[a2index - 1] = "Sub";
                 } else {
                     a2[a2index] = "Plus";
@@ -159,7 +159,7 @@ public class lab2 {
             } else if (aa[aaindex].toCharArray()[0] == 'S' && a2index > 0) {
                 if (a2[a2index - 1].equals("Plus")) {
                     a2[a2index - 1] = "Sub";
-                } else if (a2[a2index - 1].equals("Plus")) {
+                } else if (a2[a2index - 1].equals("Sub")) {
                     a2[a2index - 1] = "Plus";
                 } else {
                     a2[a2index] = "Sub";
