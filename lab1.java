@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.Locale;
 
-public class lab2 {
+public class lab1 {
 
     public static FileReader yufafp = null;
     public static BufferedReader f1 = null;
