@@ -300,6 +300,7 @@ public class lab1 {
                 token[tokenIndex] = '\0';
 
                 readChar = (char) fp1.read();
+                i++;
                 if (readChar == 'x' || readChar == 'X') {
 
                     tokenIndex = 0;
