@@ -126,6 +126,8 @@ public class lab2 {
                 }
                 translateExp(fp2, exp, expSize);
                 fp2.write(finalExp);
+                int nameindex_ = nameIndex-1;
+                fp2.write("ret %x"+nameindex_+"\n");
             } else if (buf.toCharArray()[0] == 'N') {
                 int num = 0;
                 for (int i = 7; buf.toCharArray()[i] != ')'; i++) {
