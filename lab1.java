@@ -55,6 +55,7 @@ public class lab1 {
             //int l = fp7.read();
             //System.out.print(i+"  "+l+"  "+(char)l+"\n");
         }
+        //System.out.println(no_notes.length());
         System.out.println();
         System.out.println("lexer.txt:");
         for (int i = 0; i < lexer.length(); i++) {
@@ -159,7 +160,7 @@ public class lab1 {
         if( buf.equals("LBrace") ){
             if( stmt(fp)==0 ){
                 buf=fp.readLine();
-                if( buf.equals("RBrace") ){
+                if( buf==null || buf.equals("RBrace") ){
                     return 0;
                 }
                 else{
@@ -238,7 +239,7 @@ public class lab1 {
         int tokenIndex = 0;
         token[tokenIndex] = '\0';
         System.out.println("token" + String.valueOf(token));
-        int i = 0;
+        int i = -1;
         int ifRead = 1;
         while (true) {
             if (ifRead == 1) {
