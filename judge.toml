@@ -1,7 +1,7 @@
-[jobs.test-submit]
+[jobs.lab1]
 
-image = { source = "dockerfile", path = ".", tag = "pascal-lex-example" }
+image = { source = "dockerfile", path = ".", tag = "pascal-lab1" }
 
 run = [
-  "./program $input",
+  "java program $input $ir",
 ]
