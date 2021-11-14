@@ -14,5 +14,5 @@ public class lab3 {
         }
 
     }
-
+}
     
