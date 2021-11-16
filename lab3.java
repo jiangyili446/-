@@ -431,6 +431,7 @@ public class lab3 {
             return s;
         }
         else{
+            System.out.println(substring);
             s=constIntMap.get(substring);
             if(s!=null){
                 return s;
@@ -1770,6 +1771,7 @@ public class lab3 {
 
                 } else {
                     fp2.write("/");
+                    fp2.write(c2);
                 }
             } else {
                 fp2.write(c);
