@@ -232,8 +232,8 @@ public class lab3 {
                 if( intMap.get(a[0].substring(6,a[0].length()-1))!=null ){
                     s=intMap.get(a[0].substring(6,a[0].length()-1));
                     int nameindexsub1=nameIndex-1;
-                    calExp+=s+" = sub i32 %x"+nameindexsub1+", 0\n";
-                    calExp+="\n";
+                    calExp+="store i32 %x"+nameindexsub1+", i32* "+s;
+                    calExp+="\n\n";
                 }else{
                     System.exit(10);
                 }
@@ -339,8 +339,8 @@ public class lab3 {
                             if( constIntMap.get(a[0].substring(6,a[0].length()-1))!=null ){
                                 s=constIntMap.get(a[0].substring(6,a[0].length()-1));
                                 int nameindexsub1=nameIndex-1;
-                                calExp+=s+" = sub i32 %x"+nameindexsub1+", 0\n";
-                                calExp+="\n";
+                                calExp+="store i32 %x"+nameindexsub1+", i32* "+s;
+                                calExp+="\n\n";
                             }else{
                                 System.exit(11);
                             }
@@ -409,8 +409,8 @@ public class lab3 {
                             if( intMap.get(a[0].substring(6,a[0].length()-1))!=null ){
                                 s=intMap.get(a[0].substring(6,a[0].length()-1));
                                 int nameindexsub1=nameIndex-1;
-                                calExp+=s+" = sub i32 %x"+nameindexsub1+", 0\n";
-                                calExp+="\n";
+                                calExp+="store i32 %x"+nameindexsub1+", i32* "+s;
+                                calExp+="\n\n";
                             }else{
                                 System.exit(10);
                             }
