@@ -246,7 +246,7 @@ public class lab3 {
         int aaIndex=0;
         for(int l=2;l<aIndex-1;l++){
             if(a[l].substring(0,2).equals("Id")){
-                String origin = find(a[l].substring(6,a[l].length()-1));
+                String origin = findint(a[l].substring(6,a[l].length()-1));
                 aa[aaIndex]="%x"+nameIndex;
                 calExp+="%x"+nameIndex+" = load i32, i32* "+origin+"\n";
                 nameIndex++;
@@ -261,6 +261,8 @@ public class lab3 {
         calExp+="call void @"+a[0].substring(6,a[0].length()-1)+"(i32 %x"+nameindexsub1+")\n";
         calExp+="\n";
     }
+
+
 
     private static void exp3(String[] a, int aIndex) {
         String[] aa=new String[500];
@@ -424,14 +426,23 @@ public class lab3 {
 
         }
     }
+    private static String findint(String substring) {
+        String s = intMap.get(substring);
+        if(s!=null){
+            return s;
+        }
+        else{
+                System.exit(181);
 
+        }
+        return null;
+    }
     private static String find(String substring) {
         String s = intMap.get(substring);
         if(s!=null){
             return s;
         }
         else{
-            System.out.println(substring);
             s=constIntMap.get(substring);
             if(s!=null){
                 return s;
