@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.Locale;
 
-public class lab3 {
+public class lab4 {
 
     
     public static void main(String[] args) throws IOException {
