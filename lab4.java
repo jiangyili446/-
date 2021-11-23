@@ -10,7 +10,7 @@ public class lab4 {
         
         FileReader a=new FileReader(inputfile);
         for(int i=0;i<inputfile.length();i++){
-            System.out.print((char)a.read());
+            System.out.println(a.read());
         }
 
     }
