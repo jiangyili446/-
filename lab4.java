@@ -25,7 +25,7 @@ public class lab4 {
                 "    }\n" +
                 "    putint(a);\n" +
                 "    return 0;\n" +
-                "}";
+                "}\n";
         String s="";
         FileReader a=new FileReader(inputfile);
         FileWriter b=new FileWriter(outputfile);
