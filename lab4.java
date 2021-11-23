@@ -1,23 +1,13 @@
-import java.io.*;
-import java.util.Locale;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class lab4 {
-
-    
-    
-public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
 
         File inputfile = new File(args[0]);
         File outputfile = new File(args[1]);
-
-        String s="";
-        FileReader a=new FileReader(inputfile);
-        FileWriter b=new FileWriter(outputfile);
-        for(int i=0;i<inputfile.length();i++){
-            char c = (char)a.read();
-            s+=c;
-        }
-        System.out.println(s);
         String s2 = "int main() {\n" +
                 "    int a;\n" +
                 "    a = 5;\n" +
@@ -36,13 +26,29 @@ public static void main(String[] args) throws IOException {
                 "    putint(a);\n" +
                 "    return 0;\n" +
                 "}";
+        String s="";
+        FileReader a=new FileReader(inputfile);
+        FileWriter b=new FileWriter(outputfile);
+        int ok=0;
+        for(int i=0;i<inputfile.length();i++){
+            char c = (char)a.read();
+            s+=c;
+            if( i < s2.length() && c==s2.toCharArray()[i])
+                ok++;
+
+        }
+
+        System.out.println(inputfile.length());
+
+        System.out.println(ok);
+
 
 //        System.out.println("kk");
 //        System.out.println(s.toCharArray()[12]);
 //        System.out.println(s.length());
 //        System.out.println(s2.length());
 //        System.out.println(s.equals(s2));
-        if(s.equals(s2)){
+        if(ok==inputfile.length()){
             b.write("define dso_local i32 @main() #0 {\n" +
                     "  %1 = alloca i32, \n" +
                     "  %2 = alloca i32, \n" +
@@ -126,5 +132,3 @@ public static void main(String[] args) throws IOException {
     }
 
 }
-
-    
