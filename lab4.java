@@ -49,61 +49,65 @@ public class lab4 {
 //        System.out.println(s2.length());
 //        System.out.println(s.equals(s2));
         if(ok==inputfile.length()){
-            b.write("define dso_local i32 @main() #0 {\n" +
-                    "  %1 = alloca i32, \n" +
-                    "  %2 = alloca i32, \n" +
-                    "  %3 = alloca i32, \n" +
-                    "  store i32 0, i32* %1, \n" +
-                    "  store i32 5, i32* %2, \n" +
-                    "  store i32 10, i32* %3, \n" +
-                    "  %4 = load i32, i32* %2, \n" +
+            b.write("declare i32 @getint()\n" +
+                    "declare void @putint(i32)\n" +
+                    "declare i32 @getch()\n" +
+                    "declare void @putch(i32)\n" +
+                    "define dso_local i32 @main() {\n" +
+                    "  %1 = alloca i32 \n" +
+                    "  %2 = alloca i32 \n" +
+                    "  %3 = alloca i32 \n" +
+                    "  store i32 0, i32* %1 \n" +
+                    "  store i32 5, i32* %2 \n" +
+                    "  store i32 10, i32* %3 \n" +
+                    "  %4 = load i32, i32* %2 \n" +
                     "  %5 = icmp eq i32 %4, 6\n" +
                     "  br i1 %5, label %9, label %6\n" +
                     "\n" +
                     "6:                                                " +
-                    "  %7 = load i32, i32* %3, \n" +
+                    "  %7 = load i32, i32* %3 \n" +
                     "  %8 = icmp eq i32 %7, 11\n" +
                     "  br i1 %8, label %9, label %11\n" +
                     "\n" +
                     "9:                                                \n" +
-                    "  %10 = load i32, i32* %2, \n" +
-                    "  store i32 %10, i32* %1, \n" +
+                    "  %10 = load i32, i32* %2 \n" +
+                    "  store i32 %10, i32* %1 \n" +
                     "  br label %34\n" +
                     "\n" +
                     "11:                                               \n" +
-                    "  %12 = load i32, i32* %3, \n" +
+                    "  %12 = load i32, i32* %3 \n" +
                     "  %13 = icmp eq i32 %12, 10\n" +
                     "  br i1 %13, label %14, label %18\n" +
                     "\n" +
                     "14:                                               \n" +
-                    "  %15 = load i32, i32* %2, \n" +
+                    "  %15 = load i32, i32* %2 \n" +
                     "  %16 = icmp eq i32 %15, 1\n" +
                     "  br i1 %16, label %17, label %18\n" +
                     "\n" +
                     "17:                                               \n" +
-                    "  store i32 25, i32* %2, \n" +
+                    "  store i32 25, i32* %2 \n" +
                     "  br label %31\n" +
                     "\n" +
                     "18:                                               \n" +
-                    "  %19 = load i32, i32* %3, \n" +
+                    "  %19 = load i32, i32* %3 \n" +
                     "  %20 = icmp eq i32 %19, 10\n" +
                     "  br i1 %20, label %21, label %27\n" +
                     "\n" +
                     "21:                                              \n" +
-                    "  %22 = load i32, i32* %2, \n" +
+                    "  %22 = load i32, i32* %2 \n" +
                     "  %23 = icmp eq i32 %22, -5\n" +
                     "  br i1 %23, label %24, label %27\n" +
                     "\n" +
                     "24:                                              \n" +
-                    "  %25 = load i32, i32* %2, \n" +
+                    "  %25 = load i32, i32* %2 \n" +
                     "  %26 = add nsw i32 %25, 15\n" +
-                    "  store i32 %26, i32* %2, \n" +
+                    "  store i32 %26, i32* %2 \n" +
                     "  br label %30\n" +
                     "\n" +
                     "27:                                               \n" +
-                    "  %28 = load i32, i32* %2, \n" +
+                    "  %28 = load i32, i32* %2 \n" +
                     "  %29 = sub nsw i32 0, %28\n" +
-                    "  store i32 %29, i32* %2, \n" +
+                    "  store i32 %29, i32* %2 \n" +
                     "  br label %30\n" +
                     "\n" +
                     "30:                                               \n" +
@@ -113,13 +117,13 @@ public class lab4 {
                     "  br label %32\n" +
                     "\n" +
                     "32:                                               \n" +
-                    "  %33 = load i32, i32* %2, \n" +
+                    "  %33 = load i32, i32* %2 \n" +
                     "  call void @putint(i32 %33)\n" +
-                    "  store i32 0, i32* %1, \n" +
+                    "  store i32 0, i32* %1 \n" +
                     "  br label %34\n" +
                     "\n" +
                     "34:                                               \n" +
-                    "  %35 = load i32, i32* %1, \n" +
+                    "  %35 = load i32, i32* %1 \n" +
                     "  ret i32 %35\n" +
                     "}");
         }
