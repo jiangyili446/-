@@ -134,7 +134,7 @@ public class lab4 {
                 "\n" +
                 "    putint((a));\n" +
                 "    return 0;\n" +
-                "}";
+                "}\n";
         String s7 = "// test if-{if-else}\n" +
                 "int main() {\n" +
                 "    int a;\n" +
@@ -149,7 +149,7 @@ public class lab4 {
                 "    }\n" +
                 "    putint(a);\n" +
                 "    return 0;\n" +
-                "}";
+                "}\n";
         String s8 = "// test if-{if}-else\n" +
                 "int main() {\n" +
                 "    int a;\n" +
@@ -163,7 +163,7 @@ public class lab4 {
                 "        a = a + 15;\n" +
                 "    putint(a);\n" +
                 "    return 0;\n" +
-                "}";
+                "}\n";
         String s9 = "int main() {\n" +
                 "    int a, b;\n" +
                 "    a = getint();\n" +
@@ -176,7 +176,7 @@ public class lab4 {
                 "    }\n" +
                 "    putint(c);\n" +
                 "    return 0;\n" +
-                "}";
+                "}\n";
         String s10 = "int main() {\n" +
                 "    int a = 1, sum;\n" +
                 "    if (a == 1) {\n" +
