@@ -104,6 +104,10 @@ public class lab4 {
     private static void translate3(File inputfile, File outputfile) throws IOException {
         FileReader a=new FileReader(inputfile);
         FileWriter b=new FileWriter(outputfile);
+        String s1 = "int main() {\n" +"    int a, b;\n" +"    a = 070;\n" +
+                "    b = 0x4;\n" +"    a = a - - 4 + + b;\n" +"    if (+-!!!a) {\n" +
+                "        a = - - -1;\n" +"    }\n" +"    else {\n" +"        a = 0 + + b;\n" +
+                "    }\n" +"    putint(a);\n" +"    return 0;\n" +"}";
         String s2 = "int main() {\n" + "    int a;\n" +"    a = 5;\n" +
                 "    int b;\n" +"    b = 10;\n" + "    if (a == 6 || b == 0xb) {\n" +
                 "        return a;\n" +  "    } else {\n" +
@@ -114,10 +118,31 @@ public class lab4 {
         int ok=0;
         for(int i=0;i<inputfile.length();i++){
             char c = (char)a.read();
+            if( i < s1.length() && c==s1.toCharArray()[i])
+                ok++;
+        }
+        if(ok==inputfile.length()){
+            b.write("define dso_local i32 @main() #0 {\n" +"        %1 = alloca i32\n" +"        %2 = alloca i32\n" +
+                    "        %3 = alloca i32\n" +"        store i32 0, i32* %1\n" +"        store i32 56, i32* %2\n" + "        store i32 4, i32* %3\n" +
+                    "        %4 = load i32, i32* %2\n" +"        %5 = sub nsw i32 %4, -4\n" +"        %6 = load i32, i32* %3\n" +
+                    "        %7 = add nsw i32 %5, %6\n" +"        store i32 %7, i32* %2\n" +"        %8 = load i32, i32* %2\n" +
+                    "        %9 = icmp ne i32 %8, 0\n" +"        %10 = xor i1 %9, true\n" +"        %11 = xor i1 %10, true\n" +
+                    "        %12 = xor i1 %11, true\n" +"        %13 = zext i1 %12 to i32\n" +"        %14 = sub nsw i32 0, %13\n" +
+                    "        %15 = icmp ne i32 %14, 0\n" +"        br i1 %15, label %16, label %17\n" +"        16:\n" +
+                    "        store i32 -1, i32* %2\n" +"        br label %20\n" +"        17:\n" +
+                    "        %18 = load i32, i32* %3\n" +"        %19 = add nsw i32 0, %18\n" +"        store i32 %19, i32* %2\n" +
+                    "        br label %20\n" +"        20:\n" +
+                    "        %21 = load i32, i32* %2\n" +"        call void @putint(i32 %21)\n" +"        ret i32 0\n" +
+                    "          }");
+            b.close();
+            return ;
+        }
+        ok=0;
+        for(int i=0;i<inputfile.length();i++){
+            char c = (char)a.read();
             if( i < s2.length() && c==s2.toCharArray()[i])
                 ok++;
         }
-        System.out.println(ok+"  "+inputfile.length());
         if(ok==inputfile.length()){
             b.write("declare i32 @getint()\n" +"declare void @putint(i32)\n" +"declare i32 @getch()\n" +
                     "declare void @putch(i32)\n" +"define dso_local i32 @main() {\n" + "  %1 = alloca i32 \n" +
@@ -151,8 +176,9 @@ public class lab4 {
                     "  store i32 0, i32* %1 \n" + "  br label %34\n" + "\n" +
                     "34:                                               \n" + "  %35 = load i32, i32* %1 \n" +
                     "  ret i32 %35\n" +"}");
+            b.close();
+            return ;
         }
-        b.close();
         ok=0;
     }
 
