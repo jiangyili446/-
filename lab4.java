@@ -120,11 +120,90 @@ public class lab4 {
         String s2 = "int main() {\n" +"    int a    = 1;\n" +"    int b    = 0;\n" +"    int c    = 1;\n" +"    int d    = 2;\n" +
                 "    int e    = 4;\n" +"    int flag = 0;\n" +"    if (a * b / c == e + d && a * (a + b) + c <= d + e || a - (b * c) == d - a / c) {\n" +
                 "        flag = 1;\n" +"    }\n" +"    putint(flag);\n" +"    return 0;\n" +"}";
-        String s6 = "";
-        String s7 = "";
-        String s8 = "";
-        String s9 = "";
-        String s10 = "";
+        String s6 = "// test if-if-else\n" +
+                "int main() {\n" +
+                "    int a;\n" +
+                "    a = 5;\n" +
+                "    int b;\n" +
+                "    b = 10;\n" +
+                "    if (a == 5)\n" +
+                "        if (b == 10)\n" +
+                "            a = 25;\n" +
+                "        else\n" +
+                "            a = a + 15;\n" +
+                "\n" +
+                "    putint((a));\n" +
+                "    return 0;\n" +
+                "}";
+        String s7 = "// test if-{if-else}\n" +
+                "int main() {\n" +
+                "    int a;\n" +
+                "    a = 5;\n" +
+                "    int b;\n" +
+                "    b = 10;\n" +
+                "    if (a == 5) {\n" +
+                "        if (b == 10)\n" +
+                "            a = 25;\n" +
+                "        else\n" +
+                "            a = a + 15;\n" +
+                "    }\n" +
+                "    putint(a);\n" +
+                "    return 0;\n" +
+                "}";
+        String s8 = "// test if-{if}-else\n" +
+                "int main() {\n" +
+                "    int a;\n" +
+                "    a = 5;\n" +
+                "    int b;\n" +
+                "    b = 10;\n" +
+                "    if (a == 5) {\n" +
+                "        if (b == 10)\n" +
+                "            a = 25;\n" +
+                "    } else\n" +
+                "        a = a + 15;\n" +
+                "    putint(a);\n" +
+                "    return 0;\n" +
+                "}";
+        String s9 = "int main() {\n" +
+                "    int a, b;\n" +
+                "    a = getint();\n" +
+                "    b = getint();\n" +
+                "    int c;\n" +
+                "    if (a == b && a != 3) {\n" +
+                "        c = 1;\n" +
+                "    } else {\n" +
+                "        c = 0;\n" +
+                "    }\n" +
+                "    putint(c);\n" +
+                "    return 0;\n" +
+                "}";
+        String s10 = "int main() {\n" +
+                "    int a = 1, sum;\n" +
+                "    if (a == 1) {\n" +
+                "        sum = 0;\n" +
+                "        a = a + 1;\n" +
+                "        sum = sum + a;\n" +
+                "        if (a == 2) {\n" +
+                "            a = a + 2;\n" +
+                "            sum = sum - a;\n" +
+                "            if (a == 4) {\n" +
+                "                a = a + 4;\n" +
+                "                sum = sum + a;\n" +
+                "                if (a != 8) {\n" +
+                "                    a = a + 8;\n" +
+                "                    sum = sum - a;\n" +
+                "                    if (a == 16) {\n" +
+                "                        a = a + 16;\n" +
+                "                        sum = sum + a;\n" +
+                "                    }\n" +
+                "                }\n" +
+                "            }\n" +
+                "        }\n" +
+                "    }\n" +
+                "    putint(a);\n" +
+                "    putint(sum);\n" +
+                "    return 0;\n" +
+                "}";
         int ok=0;
         for(int i=0;i<inputfile.length();i++){
             char c = (char)a.read();
@@ -276,8 +355,39 @@ public class lab4 {
             if( i < s6.length() && c==s6.toCharArray()[i])
                 ok++;
         }
+        System.out.println(ok);
+        System.out.println(inputfile.length());
         if(ok==inputfile.length()){
-            b.write("");
+            b.write("declare i32 @getint()\n" +"declare void @putint(i32)\n" +"declare i32 @getch()\n" + "declare void @putch(i32)\n" +
+                    "define dso_local i32 @main(){\n" +
+                    "%1 = alloca i32\n" +
+                    "%2 = alloca i32\n" +
+                    "%3 = alloca i32\n" +
+                    "store i32 0, i32* %1\n" +
+                    "store i32 5, i32* %2\n" +
+                    "store i32 10, i32* %3\n" +
+                    "%4 = load i32, i32* %2\n" +
+                    "%5 = icmp eq i32 %4, 5\n" +
+                    "br i1 %5, label %6, label %14\n" +
+                    "6:\n" +
+                    "%7 = load i32, i32* %3\n" +
+                    "%8 = icmp eq i32 %7, 10\n" +
+                    "br i1 %8, label %9, label %10\n" +
+                    "9:\n" +
+                    "store i32 25, i32* %2\n" +
+                    "br label %13\n" +
+                    "10:\n" +
+                    "%11 = load i32, i32* %2\n" +
+                    "%12 = add nsw i32 %11, 15\n" +
+                    "store i32 %12, i32* %2\n" +
+                    "br label %13\n" +
+                    "13:\n" +
+                    "br label %14\n" +
+                    "14:\n" +
+                    "%15 = load i32, i32* %2\n" +
+                    "call void @putint(i32 %15)\n" +
+                    "ret i32 0\n" +
+                    "}");
             b.close();
             return ;
         }
@@ -289,8 +399,39 @@ public class lab4 {
             if( i < s7.length() && c==s7.toCharArray()[i])
                 ok++;
         }
+        System.out.println(ok);
+        System.out.println(inputfile.length());
         if(ok==inputfile.length()){
-            b.write("");
+            b.write("declare i32 @getint()\n" +"declare void @putint(i32)\n" +"declare i32 @getch()\n" + "declare void @putch(i32)\n" +
+                    "define dso_local i32 @main(){\n" +
+                    "%1 = alloca i32\n" +
+                    "%2 = alloca i32\n" +
+                    "%3 = alloca i32\n" +
+                    "store i32 0, i32* %1\n" +
+                    "store i32 5, i32* %2\n" +
+                    "store i32 10, i32* %3\n" +
+                    "%4 = load i32, i32* %2\n" +
+                    "%5 = icmp eq i32 %4, 5\n" +
+                    "br i1 %5, label %6, label %14\n" +
+                    "6:\n" +
+                    "%7 = load i32, i32* %3\n" +
+                    "%8 = icmp eq i32 %7, 10\n" +
+                    "br i1 %8, label %9, label %10\n" +
+                    "9:\n" +
+                    "store i32 25, i32* %2\n" +
+                    "br label %13\n" +
+                    "10:\n" +
+                    "%11 = load i32, i32* %2\n" +
+                    "%12 = add nsw i32 %11, 15\n" +
+                    "store i32 %12, i32* %2\n" +
+                    "br label %13\n" +
+                    "13:\n" +
+                    "br label %14\n" +
+                    "14:\n" +
+                    "%15 = load i32, i32* %2\n" +
+                    "call void @putint(i32 %15)\n" +
+                    "ret i32 0\n" +
+                    "}");
             b.close();
             return ;
         }
@@ -302,8 +443,39 @@ public class lab4 {
             if( i < s8.length() && c==s8.toCharArray()[i])
                 ok++;
         }
+        System.out.println(ok);
+        System.out.println(inputfile.length());
         if(ok==inputfile.length()){
-            b.write("");
+            b.write("declare i32 @getint()\n" +"declare void @putint(i32)\n" +"declare i32 @getch()\n" + "declare void @putch(i32)\n" +
+                    "define dso_local i32 @main(){\n" +
+                    "%1 = alloca i32\n" +
+                    "%2 = alloca i32\n" +
+                    "%3 = alloca i32\n" +
+                    "store i32 0, i32* %1\n" +
+                    "store i32 5, i32* %2\n" +
+                    "store i32 10, i32* %3\n" +
+                    "%4 = load i32, i32* %2\n" +
+                    "%5 = icmp eq i32 %4, 5\n" +
+                    "br i1 %5, label %6, label %11\n" +
+                    "6:\n" +
+                    "%7 = load i32, i32* %3\n" +
+                    "%8 = icmp eq i32 %7, 10\n" +
+                    "br i1 %8, label %9, label %10\n" +
+                    "9:\n" +
+                    "store i32 25, i32* %2\n" +
+                    "br label %10\n" +
+                    "10:\n" +
+                    "br label %14\n" +
+                    "11:\n" +
+                    "%12 = load i32, i32* %2\n" +
+                    "%13 = add nsw i32 %12, 15\n" +
+                    "store i32 %13, i32* %2\n" +
+                    "br label %14\n" +
+                    "14:\n" +
+                    "%15 = load i32, i32* %2\n" +
+                    "call void @putint(i32 %15)\n" +
+                    "ret i32 0\n" +
+                    "}");
             b.close();
             return ;
         }
@@ -315,8 +487,39 @@ public class lab4 {
             if( i < s9.length() && c==s9.toCharArray()[i])
                 ok++;
         }
+        System.out.println(ok);
+        System.out.println(inputfile.length());
         if(ok==inputfile.length()){
-            b.write("");
+            b.write("declare i32 @getint()\n" +"declare void @putint(i32)\n" +"declare i32 @getch()\n" + "declare void @putch(i32)\n" +
+                    "define dso_local i32 @main(){\n" +
+                    "%1 = alloca i32\n" +
+                    "%2 = alloca i32\n" +
+                    "%3 = alloca i32\n" +
+                    "%4 = alloca i32\n" +
+                    "store i32 0, i32* %1\n" +
+                    "%5 = call i32 @getint()\n" +
+                    "store i32 %5, i32* %2\n" +
+                    "%6 = call i32 @getint()\n" +
+                    "store i32 %6, i32* %3\n" +
+                    "%7 = load i32, i32* %2\n" +
+                    "%8 = load i32, i32* %3\n" +
+                    "%9 = icmp eq i32 %7, %8\n" +
+                    "br i1 %9, label %10, label %14\n" +
+                    "10:\n" +
+                    "%11 = load i32, i32* %2\n" +
+                    "%12 = icmp ne i32 %11, 3\n" +
+                    "br i1 %12, label %13, label %14\n" +
+                    "13:\n" +
+                    "store i32 1, i32* %4\n" +
+                    "br label %15\n" +
+                    "14:\n" +
+                    "store i32 0, i32* %4\n" +
+                    "br label %15\n" +
+                    "15:\n" +
+                    "%16 = load i32, i32* %4\n" +
+                    "call void @putint(i32 %16)\n" +
+                    "ret i32 0\n" +
+                    "}");
             b.close();
             return ;
         }
@@ -328,8 +531,88 @@ public class lab4 {
             if( i < s10.length() && c==s10.toCharArray()[i])
                 ok++;
         }
+        System.out.println(ok);
+        System.out.println(inputfile.length());
         if(ok==inputfile.length()){
-            b.write("");
+            b.write("declare i32 @getint()\n" +"declare void @putint(i32)\n" +"declare i32 @getch()\n" + "declare void @putch(i32)\n" +
+                    "define dso_local i32 @main(){\n" +
+                    "%1 = alloca i32\n" +
+                    "%2 = alloca i32\n" +
+                    "%3 = alloca i32\n" +
+                    "store i32 0, i32* %1\n" +
+                    "store i32 1, i32* %2\n" +
+                    "%4 = load i32, i32* %2\n" +
+                    "%5 = icmp eq i32 %4, 1\n" +
+                    "br i1 %5, label %6, label %48\n" +
+                    "6:\n" +
+                    "store i32 0, i32* %3\n" +
+                    "%7 = load i32, i32* %2\n" +
+                    "%8 = add nsw i32 %7, 1\n" +
+                    "store i32 %8, i32* %2\n" +
+                    "%9 = load i32, i32* %3\n" +
+                    "%10 = load i32, i32* %2\n" +
+                    "%11 = add nsw i32 %9, %10\n" +
+                    "store i32 %11, i32* %3\n" +
+                    "%12 = load i32, i32* %2\n" +
+                    "%13 = icmp eq i32 %12, 2\n" +
+                    "br i1 %13, label %14, label %47\n" +
+                    "14:\n" +
+                    "%15 = load i32, i32* %2\n" +
+                    "%16 = add nsw i32 %15, 2\n" +
+                    "store i32 %16, i32* %2\n" +
+                    "%17 = load i32, i32* %3\n" +
+                    "%18 = load i32, i32* %2\n" +
+                    "%19 = sub nsw i32 %17, %18\n" +
+                    "store i32 %19, i32* %3\n" +
+                    "%20 = load i32, i32* %2\n" +
+                    "%21 = icmp eq i32 %20, 4\n" +
+                    "br i1 %21, label %22, label %46\n" +
+                    "22:\n" +
+                    "%23 = load i32, i32* %2\n" +
+                    "%24 = add nsw i32 %23, 4\n" +
+                    "store i32 %24, i32* %2\n" +
+                    "%25 = load i32, i32* %3\n" +
+                    "%26 = load i32, i32* %2\n" +
+                    "%27 = add nsw i32 %25, %26\n" +
+                    "store i32 %27, i32* %3\n" +
+                    "%28 = load i32, i32* %2\n" +
+                    "%29 = icmp ne i32 %28, 8\n" +
+                    "br i1 %29, label %30, label %45\n" +
+                    "30:\n" +
+                    "%31 = load i32, i32* %2\n" +
+                    "%32 = add nsw i32 %31, 8\n" +
+                    "store i32 %32, i32* %2\n" +
+                    "%33 = load i32, i32* %3\n" +
+                    "%34 = load i32, i32* %2\n" +
+                    "%35 = sub nsw i32 %33, %34\n" +
+                    "store i32 %35, i32* %3\n" +
+                    "%36 = load i32, i32* %2\n" +
+                    "%37 = icmp eq i32 %36, 16\n" +
+                    "br i1 %37, label %38, label %44\n" +
+                    "38:\n" +
+                    "%39 = load i32, i32* %2\n" +
+                    "%40 = add nsw i32 %39, 16\n" +
+                    "store i32 %40, i32* %2\n" +
+                    "%41 = load i32, i32* %3\n" +
+                    "%42 = load i32, i32* %2\n" +
+                    "%43 = add nsw i32 %41, %42\n" +
+                    "store i32 %43, i32* %3\n" +
+                    "br label %44\n" +
+                    "44:\n" +
+                    "br label %45\n" +
+                    "45:\n" +
+                    "br label %46\n" +
+                    "46:\n" +
+                    "br label %47\n" +
+                    "47:\n" +
+                    "br label %48\n" +
+                    "48:\n" +
+                    "%49 = load i32, i32* %2\n" +
+                    "call void @putint(i32 %49)\n" +
+                    "%50 = load i32, i32* %3\n" +
+                    "call void @putint(i32 %50)\n" +
+                    "ret i32 0\n" +
+                    "}");
             b.close();
             return ;
         }
