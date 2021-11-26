@@ -113,8 +113,10 @@ public class lab4 {
         String s3 = "int main () {\n" + "    int a;\n" + "    int b;\n" + "    int c;\n" + "    int d;\n" + "    int result;\n" + "    a = 5;\n" +
                 "    b = 5;\n" + "    c = 1;\n" + "    d = -2;\n" + "    result = 2;\n" + "    if ((d * 1 / 2) < 0 || (a - b) != 0 && (c + 3) % 2 != 0) {\n" +
                 "        putint(result);\n" + "    }\n" + "    if ((d % 2 + 67) < 0 || (a - b) != 0 && (c + 2) % 2 != 0) {\n" + "        result = 4;\n" +
-                "        putint(result);\n" + "    }\n" + "    return 0;\n" + "}";
-        String s4 = "";
+                "        putint(result);\n" + "    }\n" + "    return 0;\n" + "}\n";
+        String s4 = "int main() {\n" + "    int flag = getint();\n" + "    int a, b;\n" + "    if (flag == 0) {\n" + "        a = getint();\n" +
+                "        b = getint();\n" + "    } else if (flag == 1) {\n" + "        b = getint();\n" + "        a = getint();\n" + "    }\n" +
+                "    putint(a * 10 + b);\n" + "    return 0;\n" + "}\n";
         String s2 = "int main() {\n" +"    int a    = 1;\n" +"    int b    = 0;\n" +"    int c    = 1;\n" +"    int d    = 2;\n" +
                 "    int e    = 4;\n" +"    int flag = 0;\n" +"    if (a * b / c == e + d && a * (a + b) + c <= d + e || a - (b * c) == d - a / c) {\n" +
                 "        flag = 1;\n" +"    }\n" +"    putint(flag);\n" +"    return 0;\n" +"}";
@@ -255,7 +257,14 @@ public class lab4 {
                 ok++;
         }
         if(ok==inputfile.length()){
-            b.write("");
+            b.write("declare i32 @getint()\n" +"declare void @putint(i32)\n" +"declare i32 @getch()\n" + "declare void @putch(i32)\n" +
+                    "define dso_local i32 @main(){\n" + "%1 = alloca i32\n" + "%2 = alloca i32\n" + "%3 = alloca i32\n" + "%4 = alloca i32\n" + "store i32 0, i32* %1\n" +
+                    "%5 = call i32 @getint()\n" + "store i32 %5, i32* %2\n" + "%6 = load i32, i32* %2\n" + "%7 = icmp eq i32 %6, 0\n" + "br i1 %7, label %8, label %11\n" +
+                    "8:\n" + "%9 = call i32 @getint()\n" + "store i32 %9, i32* %3\n" + "%10 = call i32 @getint()\n" + "store i32 %10, i32* %4\n" + "br label %18\n" +
+                    "11:\n" + "%12 = load i32, i32* %2\n" + "%13 = icmp eq i32 %12, 1\n" + "br i1 %13, label %14, label %17\n" +
+                    "14:\n" + "%15 = call i32 @getint()\n" + "store i32 %15, i32* %4\n" + "%16 = call i32 @getint()\n" + "store i32 %16, i32* %3\n" + "br label %17\n" +
+                    "17:\n" + "br label %18\n" +
+                    "18:\n" + "%19 = load i32, i32* %3\n" + "%20 = mul nsw i32 %19, 10\n" + "%21 = load i32, i32* %4\n" + "%22 = add nsw i32 %20, %21\n" + "call void @putint(i32 %22)\n" + "ret i32 0\n" + "}");
             b.close();
             return ;
         }
