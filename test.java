@@ -3,7 +3,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class lab4 {
+public class test {
     public static void main(String[] args) throws IOException {
 
         File inputfile = new File(args[0]);
