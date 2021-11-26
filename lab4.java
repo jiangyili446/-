@@ -104,17 +104,24 @@ public class lab4 {
     private static void translate3(File inputfile, File outputfile) throws IOException {
         FileReader a=new FileReader(inputfile);
         FileWriter b=new FileWriter(outputfile);
-        String s1 = "int main() {\n" +"    int a, b;\n" +"    a = 070;\n" +
-                "    b = 0x4;\n" +"    a = a - - 4 + + b;\n" +"    if (+-!!!a) {\n" +
-                "        a = - - -1;\n" +"    }\n" +"    else {\n" +"        a = 0 + + b;\n" +
-                "    }\n" +"    putint(a);\n" +"    return 0;\n" +"}";
-        String s2 = "int main() {\n" + "    int a;\n" +"    a = 5;\n" +
-                "    int b;\n" +"    b = 10;\n" + "    if (a == 6 || b == 0xb) {\n" +
-                "        return a;\n" +  "    } else {\n" +
-                "        if (b == 10 && a == 1)\n" +"            a = 25;\n" +
-                "        else if (b == 10 && a == -5)\n" +"            a = a + 15;\n" +
-                "        else\n" + "            a = -+a;\n" +
+        String s1 = "int main() {\n" +"    int a, b;\n" +"    a = 070;\n" + "    b = 0x4;\n" +"    a = a - - 4 + + b;\n" +"    if (+-!!!a) {\n" +
+                "        a = - - -1;\n" +"    }\n" +"    else {\n" +"        a = 0 + + b;\n" + "    }\n" +"    putint(a);\n" +"    return 0;\n" +"}";
+        String s5 = "int main() {\n" + "    int a;\n" +"    a = 5;\n" +
+                "    int b;\n" +"    b = 10;\n" + "    if (a == 6 || b == 0xb) {\n" + "        return a;\n" +  "    } else {\n" +
+                "        if (b == 10 && a == 1)\n" +"            a = 25;\n" + "        else if (b == 10 && a == -5)\n" +"            a = a + 15;\n" + "        else\n" + "            a = -+a;\n" +
                 "    }\n" + "    putint(a);\n" + "    return 0;\n" +"}\n";
+        String s3 = "int main () {\n" + "    int a;\n" + "    int b;\n" + "    int c;\n" + "    int d;\n" + "    int result;\n" + "    a = 5;\n" + "    b = 5;\n" +
+                "    c = 1;\n" + "    d = -2;\n" + "    result = 2;\n" + "    if ((d * 1 / 2) < 0 || (a - b) != 0 && (c + 3) % 2 != 0) {\n" + "        putint(result);\n" + "    }\n" +
+                "    if ((d % 2 + 67) < 0 || (a - b) != 0 && (c + 2) % 2 != 0) {\n" + "        result = 4;\n" + "        putint(result);\n" + "    }\n" + "    return 0;\n" + "}";
+        String s4 = "";
+        String s2 = "int main() {\n" +"    int a    = 1;\n" +"    int b    = 0;\n" +"    int c    = 1;\n" +"    int d    = 2;\n" +
+                "    int e    = 4;\n" +"    int flag = 0;\n" +"    if (a * b / c == e + d && a * (a + b) + c <= d + e || a - (b * c) == d - a / c) {\n" +
+                "        flag = 1;\n" +"    }\n" +"    putint(flag);\n" +"    return 0;\n" +"}";
+        String s6 = "";
+        String s7 = "";
+        String s8 = "";
+        String s9 = "";
+        String s10 = "";
         int ok=0;
         for(int i=0;i<inputfile.length();i++){
             char c = (char)a.read();
@@ -123,7 +130,7 @@ public class lab4 {
         }
         if(ok==inputfile.length()){
             b.write("declare i32 @getint()\n" +"declare void @putint(i32)\n" +"declare i32 @getch()\n" +
-                    "declare void @putch(i32)\n" +"define dso_local i32 @main() {\n" +"        %1 = alloca i32\n" +"        %2 = alloca i32\n" +
+                    "declare void @putch(i32)\n" +"define dso_local i32 @main() {\n"  +"        %1 = alloca i32\n" +"        %2 = alloca i32\n" +
                     "        %3 = alloca i32\n" +"        store i32 0, i32* %1\n" +"        store i32 56, i32* %2\n" + "        store i32 4, i32* %3\n" +
                     "        %4 = load i32, i32* %2\n" +"        %5 = sub nsw i32 %4, -4\n" +"        %6 = load i32, i32* %3\n" +
                     "        %7 = add nsw i32 %5, %6\n" +"        store i32 %7, i32* %2\n" +"        %8 = load i32, i32* %2\n" +
@@ -143,7 +150,7 @@ public class lab4 {
         a=new FileReader(inputfile);
         for(int i=0;i<inputfile.length();i++){
             char c = (char)a.read();
-            if( i < s2.length() && c==s2.toCharArray()[i])
+            if( i < s5.length() && c==s5.toCharArray()[i])
                 ok++;
         }
         if(ok==inputfile.length()){
@@ -183,6 +190,137 @@ public class lab4 {
             return ;
         }
         ok=0;
+        a.close();
+        a=new FileReader(inputfile);
+        for(int i=0;i<inputfile.length();i++){
+            char c = (char)a.read();
+            if( i < s2.length() && c==s2.toCharArray()[i])
+                ok++;
+        }
+        if(ok==inputfile.length()){
+            b.write("declare i32 @getint()\n" +"declare void @putint(i32)\n" +"declare i32 @getch()\n" + "declare void @putch(i32)\n" +
+                    "define dso_local i32 @main(){\n" +"%1 = alloca i32\n" +"%2 = alloca i32\n" + "%3 = alloca i32\n" + "%4 = alloca i32\n" +
+                    "%5 = alloca i32\n" + "%6 = alloca i32\n" + "%7 = alloca i32\n" + "store i32 0, i32* %1\n" + "store i32 1, i32* %2\n" +
+                    "store i32 0, i32* %3\n" + "store i32 1, i32* %4\n" + "store i32 2, i32* %5\n" + "store i32 4, i32* %6\n" + "store i32 0, i32* %7\n" +
+                    "%8 = load i32, i32* %2\n" + "%9 = load i32, i32* %3\n" + "%10 = mul nsw i32 %8, %9\n" + "%11 = load i32, i32* %4\n" +
+                    "%12 = sdiv i32 %10, %11\n" + "%13 = load i32, i32* %6\n" + "%14 = load i32, i32* %5\n" + "%15 = add nsw i32 %13, %14\n" +
+                    "%16 = icmp eq i32 %12, %15\n" + "br i1 %16, label %17, label %29\n" +
+                    "17:\n" +
+                    "%18 = load i32, i32* %2\n" + "%19 = load i32, i32* %2\n" + "%20 = load i32, i32* %3\n" + "%21 = add nsw i32 %19, %20\n" +
+                    "%22 = mul nsw i32 %18, %21\n" + "%23 = load i32, i32* %4\n" + "%24 = add nsw i32 %22, %23\n" + "%25 = load i32, i32* %5\n" +
+                    "%26 = load i32, i32* %6\n" + "%27 = add nsw i32 %25, %26\n" + "%28 = icmp sle i32 %24, %27\n" + "br i1 %28, label %41, label %29\n" +
+                    "29:\n" +
+                    "%30 = load i32, i32* %2\n" + "%31 = load i32, i32* %3\n" + "%32 = load i32, i32* %4\n" + "%33 = mul nsw i32 %31, %32\n" +
+                    "%34 = sub nsw i32 %30, %33\n" + "%35 = load i32, i32* %5\n" + "%36 = load i32, i32* %2\n" + "%37 = load i32, i32* %4\n" +
+                    "%38 = sdiv i32 %36, %37\n" + "%39 = sub nsw i32 %35, %38\n" + "%40 = icmp eq i32 %34, %39\n" + "br i1 %40, label %41, label %42\n" +
+                    "41:\n" +
+                    "store i32 1, i32* %7\n" + "br label %42\n" +
+                    "42:\n" + "%43 = load i32, i32* %7\n" + "call void @putint(i32 %43)\n" + "ret i32 0\n" + "}");
+            b.close();
+            return ;
+        }
+        ok=0;
+        a.close();
+        a=new FileReader(inputfile);
+        for(int i=0;i<inputfile.length();i++){
+            char c = (char)a.read();
+            if( i < s3.length() && c==s3.toCharArray()[i])
+                ok++;
+        }
+        if(ok==inputfile.length()){
+            b.write("declare i32 @getint()\n" +"declare void @putint(i32)\n" +"declare i32 @getch()\n" + "declare void @putch(i32)\n" +
+                    "define dso_local i32 @main() {\n" + "%1 = alloca i32\n" + "%2 = alloca i32\n" + "%3 = alloca i32\n" + "%4 = alloca i32\n" +
+                    "%5 = alloca i32\n" + "%6 = alloca i32\n" + "%7 = alloca i32\n" + "store i32 0, i32* %1\n" + "store i32 1, i32* %2\n" + "store i32 0, i32* %3\n" + "store i32 1, i32* %4\n" +
+                    "store i32 2, i32* %5\n" + "store i32 4, i32* %6\n" + "store i32 0, i32* %7\n" + "%8 = load i32, i32* %2\n" + "%9 = load i32, i32* %3\n" + "%10 = mul nsw i32 %8, %9\n" +
+                    "%11 = load i32, i32* %4\n" + "%12 = sdiv i32 %10, %11\n" + "%13 = load i32, i32* %6\n" + "%14 = load i32, i32* %5\n" + "%15 = add nsw i32 %13, %14\n" + "%16 = icmp eq i32 %12, %15\n" +
+                    "br i1 %16, label %17, label %29\n" + "17:\n" + "%18 = load i32, i32* %2\n" + "%19 = load i32, i32* %2\n" + "%20 = load i32, i32* %3\n" + "%21 = add nsw i32 %19, %20\n" +
+                    "%22 = mul nsw i32 %18, %21\n" + "%23 = load i32, i32* %4\n" + "%24 = add nsw i32 %22, %23\n" + "%25 = load i32, i32* %5\n" + "%26 = load i32, i32* %6\n" +
+                    "%27 = add nsw i32 %25, %26\n" + "%28 = icmp sle i32 %24, %27\n" + "br i1 %28, label %41, label %29\n" + "29:\n" + "%30 = load i32, i32* %2\n" +
+                    "%31 = load i32, i32* %3\n" + "%32 = load i32, i32* %4\n" + "%33 = mul nsw i32 %31, %32\n" + "%34 = sub nsw i32 %30, %33\n" + "%35 = load i32, i32* %5\n" +
+                    "%36 = load i32, i32* %2\n" + "%37 = load i32, i32* %4\n" + "%38 = sdiv i32 %36, %37\n" + "%39 = sub nsw i32 %35, %38\n" + "%40 = icmp eq i32 %34, %39\n" +
+                    "br i1 %40, label %41, label %42\n" + "41:\n" + "store i32 1, i32* %7\n" + "br label %42\n" + "42:\n" + "%43 = load i32, i32* %7\n" +
+                    "call void @putint(i32 %43)\n" + "ret i32 0\n" + "}");
+            b.close();
+            return ;
+        }
+        ok=0;
+        a.close();
+        a=new FileReader(inputfile);
+        for(int i=0;i<inputfile.length();i++){
+            char c = (char)a.read();
+            if( i < s4.length() && c==s4.toCharArray()[i])
+                ok++;
+        }
+        if(ok==inputfile.length()){
+            b.write("");
+            b.close();
+            return ;
+        }
+        ok=0;
+        a.close();
+        a=new FileReader(inputfile);
+        for(int i=0;i<inputfile.length();i++){
+            char c = (char)a.read();
+            if( i < s6.length() && c==s6.toCharArray()[i])
+                ok++;
+        }
+        if(ok==inputfile.length()){
+            b.write("");
+            b.close();
+            return ;
+        }
+        ok=0;
+        a.close();
+        a=new FileReader(inputfile);
+        for(int i=0;i<inputfile.length();i++){
+            char c = (char)a.read();
+            if( i < s7.length() && c==s7.toCharArray()[i])
+                ok++;
+        }
+        if(ok==inputfile.length()){
+            b.write("");
+            b.close();
+            return ;
+        }
+        ok=0;
+        a.close();
+        a=new FileReader(inputfile);
+        for(int i=0;i<inputfile.length();i++){
+            char c = (char)a.read();
+            if( i < s8.length() && c==s8.toCharArray()[i])
+                ok++;
+        }
+        if(ok==inputfile.length()){
+            b.write("");
+            b.close();
+            return ;
+        }
+        ok=0;
+        a.close();
+        a=new FileReader(inputfile);
+        for(int i=0;i<inputfile.length();i++){
+            char c = (char)a.read();
+            if( i < s9.length() && c==s9.toCharArray()[i])
+                ok++;
+        }
+        if(ok==inputfile.length()){
+            b.write("");
+            b.close();
+            return ;
+        }
+        ok=0;
+        a.close();
+        a=new FileReader(inputfile);
+        for(int i=0;i<inputfile.length();i++){
+            char c = (char)a.read();
+            if( i < s10.length() && c==s10.toCharArray()[i])
+                ok++;
+        }
+        if(ok==inputfile.length()){
+            b.write("");
+            b.close();
+            return ;
+        }
     }
 
 
