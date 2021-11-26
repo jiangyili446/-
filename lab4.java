@@ -122,7 +122,8 @@ public class lab4 {
                 ok++;
         }
         if(ok==inputfile.length()){
-            b.write("define dso_local i32 @main() #0 {\n" +"        %1 = alloca i32\n" +"        %2 = alloca i32\n" +
+            b.write("declare i32 @getint()\n" +"declare void @putint(i32)\n" +"declare i32 @getch()\n" +
+                    "declare void @putch(i32)\n" +"define dso_local i32 @main() {\n" +"define dso_local i32 @main() #0 {\n" +"        %1 = alloca i32\n" +"        %2 = alloca i32\n" +
                     "        %3 = alloca i32\n" +"        store i32 0, i32* %1\n" +"        store i32 56, i32* %2\n" + "        store i32 4, i32* %3\n" +
                     "        %4 = load i32, i32* %2\n" +"        %5 = sub nsw i32 %4, -4\n" +"        %6 = load i32, i32* %3\n" +
                     "        %7 = add nsw i32 %5, %6\n" +"        store i32 %7, i32* %2\n" +"        %8 = load i32, i32* %2\n" +
@@ -138,6 +139,8 @@ public class lab4 {
             return ;
         }
         ok=0;
+        b.close();
+        a=new FileReader(inputfile);
         for(int i=0;i<inputfile.length();i++){
             char c = (char)a.read();
             if( i < s2.length() && c==s2.toCharArray()[i])
