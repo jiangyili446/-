@@ -110,9 +110,10 @@ public class lab4 {
                 "    int b;\n" +"    b = 10;\n" + "    if (a == 6 || b == 0xb) {\n" + "        return a;\n" +  "    } else {\n" +
                 "        if (b == 10 && a == 1)\n" +"            a = 25;\n" + "        else if (b == 10 && a == -5)\n" +"            a = a + 15;\n" + "        else\n" + "            a = -+a;\n" +
                 "    }\n" + "    putint(a);\n" + "    return 0;\n" +"}\n";
-        String s3 = "int main () {\n" + "    int a;\n" + "    int b;\n" + "    int c;\n" + "    int d;\n" + "    int result;\n" + "    a = 5;\n" + "    b = 5;\n" +
-                "    c = 1;\n" + "    d = -2;\n" + "    result = 2;\n" + "    if ((d * 1 / 2) < 0 || (a - b) != 0 && (c + 3) % 2 != 0) {\n" + "        putint(result);\n" + "    }\n" +
-                "    if ((d % 2 + 67) < 0 || (a - b) != 0 && (c + 2) % 2 != 0) {\n" + "        result = 4;\n" + "        putint(result);\n" + "    }\n" + "    return 0;\n" + "}";
+        String s3 = "int main () {\n" + "    int a;\n" + "    int b;\n" + "    int c;\n" + "    int d;\n" + "    int result;\n" + "    a = 5;\n" +
+                "    b = 5;\n" + "    c = 1;\n" + "    d = -2;\n" + "    result = 2;\n" + "    if ((d * 1 / 2) < 0 || (a - b) != 0 && (c + 3) % 2 != 0) {\n" +
+                "        putint(result);\n" + "    }\n" + "    if ((d % 2 + 67) < 0 || (a - b) != 0 && (c + 2) % 2 != 0) {\n" + "        result = 4;\n" +
+                "        putint(result);\n" + "    }\n" + "    return 0;\n" + "}";
         String s4 = "";
         String s2 = "int main() {\n" +"    int a    = 1;\n" +"    int b    = 0;\n" +"    int c    = 1;\n" +"    int d    = 2;\n" +
                 "    int e    = 4;\n" +"    int flag = 0;\n" +"    if (a * b / c == e + d && a * (a + b) + c <= d + e || a - (b * c) == d - a / c) {\n" +
@@ -227,6 +228,8 @@ public class lab4 {
             if( i < s3.length() && c==s3.toCharArray()[i])
                 ok++;
         }
+        System.out.println(ok);
+        System.out.println(inputfile.length());
         if(ok==inputfile.length()){
             b.write("declare i32 @getint()\n" +"declare void @putint(i32)\n" +"declare i32 @getch()\n" + "declare void @putch(i32)\n" +
                     "define dso_local i32 @main() {\n" + "%1 = alloca i32\n" + "%2 = alloca i32\n" + "%3 = alloca i32\n" + "%4 = alloca i32\n" +
