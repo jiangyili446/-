@@ -111,7 +111,7 @@ public class lab4 {
         FileWriter b= new FileWriter(outputfile);
         int length = (int) inputfile.length();
         String sss="\n%1 = alloca i32\nstore i32 ";
-        String ssss=", i32* %1\n%2 = load i32, i32* %1\ncall void @putint(i32 %2)\nret i32 0\n}"
+        String ssss=", i32* %1\n%2 = load i32, i32* %1\ncall void @putint(i32 %2)\nret i32 0\n}";
         if( length == 188 ){
             b.write(headString+sss+"4"+ssss);
         }else if( length == 264 ){
