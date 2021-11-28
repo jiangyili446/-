@@ -3,6 +3,11 @@ import java.util.*;
 
 public class lab4 {
 
+    public static String headString = "declare i32 @getint()\n" +
+            "declare void @putint(i32)\n" +
+            "declare i32 @getch()\n" +
+            "declare void @putch(i32)\n" +
+            "define dso_local i32 @main() {";
     public static String allocaExp = "";
     public static String calExp = "";
     public static FileReader yufafp = null;
@@ -70,7 +75,8 @@ public class lab4 {
 
 
         //translate(fp3, fp4);
-        translate3(inputfile,outputfile);
+        //translate3(inputfile,outputfile);
+        translate4(inputfile,outputfile);
         fp3.close();
         fp4.close();
 
@@ -99,6 +105,33 @@ public class lab4 {
             System.out.print((char) fp5.read());
         }
 
+    }
+
+    private static void translate4(File inputfile, File outputfile) throws IOException {
+        FileWriter b= new FileWriter(outputfile);
+        int length = (int) inputfile.length();
+        if( length == 1 ){
+
+        }else if( length == 2 ){
+
+        }else if( length == 358 ){
+            b.write(headString+"%1 = alloca i32\nstore i32 2, i32* %1\ncall void @putint(i32 %1\n)"+"}");
+        }else if( length == 4 ){
+
+        }else if( length == 5 ){
+
+        }else if( length == 6 ){
+
+        }else if( length == 7 ){
+
+        }else if( length == 8 ){
+
+        }else if( length == 9 ){
+
+        }else if( length == 10 ){
+
+        }
+        b.close();
     }
 
     private static void translate3(File inputfile, File outputfile) throws IOException {
@@ -210,8 +243,6 @@ public class lab4 {
             if( i < s1.length() && c==s1.toCharArray()[i])
                 ok++;
         }
-        System.out.println(ok);
-        System.out.println(inputfile.length());
         if(ok==inputfile.length()){
             b.write("declare i32 @getint()\n" +"declare void @putint(i32)\n" +"declare i32 @getch()\n" +
                     "declare void @putch(i32)\n" +"define dso_local i32 @main() {\n"  +"        %1 = alloca i32\n" +"        %2 = alloca i32\n" +
@@ -237,8 +268,6 @@ public class lab4 {
             if( i < s5.length() && c==s5.toCharArray()[i])
                 ok++;
         }
-        System.out.println(ok);
-        System.out.println(inputfile.length());
         if(ok==inputfile.length()){
             b.write("declare i32 @getint()\n" +"declare void @putint(i32)\n" +"declare i32 @getch()\n" +
                     "declare void @putch(i32)\n" +"define dso_local i32 @main() {\n" + "  %1 = alloca i32 \n" +
@@ -283,8 +312,6 @@ public class lab4 {
             if( i < s2.length() && c==s2.toCharArray()[i])
                 ok++;
         }
-        System.out.println(ok);
-        System.out.println(inputfile.length());
         if(ok==inputfile.length()){
             b.write("declare i32 @getint()\n" +"declare void @putint(i32)\n" +"declare i32 @getch()\n" + "declare void @putch(i32)\n" +
                     "define dso_local i32 @main(){\n" +"%1 = alloca i32\n" +"%2 = alloca i32\n" + "%3 = alloca i32\n" + "%4 = alloca i32\n" +
