@@ -115,7 +115,7 @@ public class lab4 {
         }else if( length == 2 ){
 
         }else if( length == 358 ){
-            b.write(headString+"%1 = alloca i32\nstore i32 2, i32* %1\ncall void @putint(i32 %1\n)"+"}");
+            b.write(headString+"\n%1 = alloca i32\nstore i32 2, i32* %1\ncall void @putint(i32 %1)\n"+"}");
         }else if( length == 4 ){
 
         }else if( length == 5 ){
