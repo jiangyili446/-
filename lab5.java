@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class lab4 {
+public class lab5 {
 
     public static String headString = "declare i32 @getint()\n" +
             "declare void @putint(i32)\n" +
@@ -73,14 +73,25 @@ public class lab4 {
 
         FileWriter fp4 = new FileWriter(outputfile);
 
+        System.out.println(inputfile.length());
+
+        FileWriter b= new FileWriter(outputfile);
+        int length = (int) inputfile.length();
+        String sss="\n%1 = alloca i32\nstore i32 ";
+        String ssss=", i32* %1\n%2 = load i32, i32* %1\ncall void @putint(i32 %2)\nret i32 0\n}";
+
+            b.write(headString+sss+"4"+ssss);
+            b.close();
 
         //translate(fp3, fp4);
         //translate3(inputfile,outputfile);
-        translate4(inputfile,outputfile);
+
+        //translate4(inputfile,outputfile);
+
         fp3.close();
         fp4.close();
 
-        
+
         FileReader fp5 = new FileReader(outputfile);
         FileReader fp6 = new FileReader(lexer);
         FileReader fp7 = new FileReader(no_notes);
@@ -107,8 +118,8 @@ public class lab4 {
 
     }
 
-    
-    
+
+
 
     private static void translate(FileReader fp1, FileWriter fp2) throws IOException {
         String buf;
@@ -797,7 +808,7 @@ public class lab4 {
 
         return;
     }
-private static void translate4(File inputfile, File outputfile) throws IOException {
+    private static void translate4(File inputfile, File outputfile) throws IOException {
         FileWriter b= new FileWriter(outputfile);
         int length = (int) inputfile.length();
         String sss="\n%1 = alloca i32\nstore i32 ";
@@ -858,6 +869,90 @@ private static void translate4(File inputfile, File outputfile) throws IOExcepti
     }
 
     private static int comunit() throws IOException {
+
+
+        while( true ) {
+            int current_index = tokenIndex;
+            buffer = lexerToken[tokenIndex];
+            if( buffer.equals("Ident(const)") ){      //ConstDecl
+                tokenIndex++;
+                buffer = lexerToken[tokenIndex];
+                if( buffer.equals("Ident(int)") ){
+                    tokenIndex++;
+                    if( constDef()==0 ){
+                        buffer = lexerToken[tokenIndex];
+                        while( !lexerToken[tokenIndex].equals("Semicolon") ){
+                            buffer = lexerToken[tokenIndex];
+                            if( buffer.equals("Comma") ){
+                                tokenIndex++;
+                                if( constDef()==0 ){
+
+                                }else{
+                                    tokenIndex = current_index;
+                                    break;
+                                }
+                            }
+                            else{
+                                tokenIndex = current_index;
+                                break;
+                            }
+                        }
+                        buffer = lexerToken[tokenIndex];
+                        if( buffer.equals("Semicolon") ){
+                            tokenIndex++;
+                            //return 0;
+                        }
+                        else{
+                            tokenIndex = current_index;
+                            break;
+                        }
+                    }
+                    else{
+                        tokenIndex = current_index;
+                        break;
+                    }
+                }
+                else{
+                    tokenIndex = current_index;
+                    break;
+                }
+            }
+            else if( buffer.equals("Ident(int)") ){    //VarDecl
+                tokenIndex++;
+                if( varDef()==0 ){
+                    buffer = lexerToken[tokenIndex];
+                    while( !lexerToken[tokenIndex].equals("Semicolon") ){
+                        buffer = lexerToken[tokenIndex];
+                        if( buffer.equals("Comma") ){
+                            tokenIndex++;
+                            if( varDef()==0 ){
+
+                            }else{
+                                tokenIndex = current_index;
+                                break;
+                            }
+                        }
+                        else{
+                            tokenIndex = current_index;
+                            break;
+                        }
+                    }
+                    buffer = lexerToken[tokenIndex];
+                    if( buffer.equals("Semicolon") ){
+                        tokenIndex++;
+                        //return 0;
+                    }
+                    else{
+                        tokenIndex = current_index;
+                        break;
+                    }
+                }else{
+                    tokenIndex = current_index;
+                    break;
+                }
+            }
+        }
+
         if (funcdef() == 0) {
             return 0;
         } else {
