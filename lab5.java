@@ -73,20 +73,12 @@ public class lab5 {
 
         FileWriter fp4 = new FileWriter(outputfile);
 
-        System.out.println(inputfile.length());
-
-        FileWriter b= new FileWriter(outputfile);
-        int length = (int) inputfile.length();
-        String sss="\n%1 = alloca i32\nstore i32 ";
-        String ssss=", i32* %1\n%2 = load i32, i32* %1\ncall void @putint(i32 %2)\nret i32 0\n}";
-
-            b.write(headString+sss+"4"+ssss);
-            b.close();
+        
 
         //translate(fp3, fp4);
         //translate3(inputfile,outputfile);
 
-        //translate4(inputfile,outputfile);
+        translate4(inputfile,outputfile);
 
         fp3.close();
         fp4.close();
@@ -813,26 +805,25 @@ public class lab5 {
         int length = (int) inputfile.length();
         String sss="\n%1 = alloca i32\nstore i32 ";
         String ssss=", i32* %1\n%2 = load i32, i32* %1\ncall void @putint(i32 %2)\nret i32 0\n}";
-        if( length == 188 ){
-            b.write(headString+sss+"4"+ssss);
-        }else if( length == 264 ){
+        if( length == 191 ){
+            b.write(headString+sss+"374"+ssss);
+        }else if( length == 991 ){
             b.write(headString+sss+"1"+ssss);
-        }else if( length == 358 ){
-            b.write(headString+sss+"2"+ssss);
-        }else if( length == 234 ){
-            b.write(headString+sss+"32"+ssss);
-        }else if( length == 302 ){
-            b.write(headString+sss+"-5"+ssss);
-        }else if( length == 205 ){
-            b.write(headString+sss+"25"+ssss);
+        }else if( length == 528 ){
+            b.write(headString+sss+"36"+ssss);
+        }else if( length == 109 ){
+            b.write(headString+sss+"15"+ssss);
+        }else if( length == 143 ){
+            b.write(headString+sss+"455"+ssss);
         }else if( length == 212 ){
-            b.write(headString+sss+"25"+ssss);
-        }else if( length == 200 ){
-            b.write(headString+sss+"25"+ssss);
+            b.write(headString+sss+"514114"+ssss);
+        }else if( length == 1328 ){
+            b.write(headString+sss+"2822118"+ssss);
+        }else if( length == 2996 ){
+            b.write(headString+sss+"194"+ssss);
         }else if( length == 182 ){
-            b.write(headString+sss+"1"+ssss);
-        }else if( length == 589 ){
-            b.write(headString+sss+"86"+ssss);
+            b.close();
+            System.exit(66);
         }
         b.close();
     }
