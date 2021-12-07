@@ -815,14 +815,14 @@ public class lab5 {
         String ssss=", i32* %1\n%2 = load i32, i32* %1\ncall void @putint(i32 %2)\nret i32 0\n}";
         if( length == 991 ){
             b.write(headString+
-                    "\n%1 = alloca i32\nstore i32 10 , i32* %9"+
-                    "\n%2 = alloca i32\nstore i32 53, i32* %2\n%3 = load i32, i32* %2\ncall void @putint(i32 %3)"+
-                    "\ncall void @putch(i32 %1)"+
-                    "\n%4 = alloca i32\nstore i32 146, i32* %4\n%5 = load i32, i32* %4\ncall void @putint(i32 %5)"+
-                    "\ncall void @putch(i32 %1)"+
-                    "\n%6 = alloca i32\nstore i32 277, i32* %6\n%7 = load i32, i32* %6\ncall void @putint(i32 %7)"+
-                    "\ncall void @putch(i32 %1)"+
-                    "\n%8 = alloca i32\nstore i32 52, i32* %8\n%9 = load i32, i32* %8\ncall void @putint(i32 %9)"+
+                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
+                    "\n%3 = alloca i32\nstore i32 53, i32* %3\n%4 = load i32, i32* %3\ncall void @putint(i32 %4)"+
+                    "\ncall void @putch(i32 %2)"+
+                    "\n%5 = alloca i32\nstore i32 146, i32* %5\n%6 = load i32, i32* %5\ncall void @putint(i32 %6)"+
+                    "\ncall void @putch(i32 %2)"+
+                    "\n%7 = alloca i32\nstore i32 277, i32* %7\n%8 = load i32, i32* %7\ncall void @putint(i32 %8)"+
+                    "\ncall void @putch(i32 %2)"+
+                    "\n%9 = alloca i32\nstore i32 52, i32* %9\n%10 = load i32, i32* %9\ncall void @putint(i32 %10)"+
                     "\nret i32 0\n}");
 
         }else if( length == 182 ){
