@@ -1,7 +1,7 @@
-[jobs.lab5]
+[jobs.lab6]
 
-image = { source = "dockerfile", path = ".", tag = "pascal-lab5" }
+image = { source = "dockerfile", path = ".", tag = "pascal-lab6" }
 
 run = [
-  "java lab5 $input $ir",
+  "java lab6 $input $ir",
 ]
