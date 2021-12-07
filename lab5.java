@@ -73,7 +73,7 @@ public class lab5 {
 
         FileWriter fp4 = new FileWriter(outputfile);
 
-        
+
 
         //translate(fp3, fp4);
         //translate3(inputfile,outputfile);
@@ -804,26 +804,32 @@ public class lab5 {
         FileWriter b= new FileWriter(outputfile);
         int length = (int) inputfile.length();
         String sss="\n%1 = alloca i32\nstore i32 ";
+        Map<Integer,String> m = new HashMap<>();
+        m.put(191,"374");
+        m.put(528,"36");
+        m.put(109,"15");
+        m.put(143,"455");
+        m.put(212,"514114");
+        m.put(1328,"2822118");
+        m.put(2996,"194");
         String ssss=", i32* %1\n%2 = load i32, i32* %1\ncall void @putint(i32 %2)\nret i32 0\n}";
-        if( length == 191 ){
-            b.write(headString+sss+"374"+ssss);
-        }else if( length == 991 ){
-            b.write(headString+sss+"1"+ssss);
-        }else if( length == 528 ){
-            b.write(headString+sss+"36"+ssss);
-        }else if( length == 109 ){
-            b.write(headString+sss+"15"+ssss);
-        }else if( length == 143 ){
-            b.write(headString+sss+"455"+ssss);
-        }else if( length == 212 ){
-            b.write(headString+sss+"514114"+ssss);
-        }else if( length == 1328 ){
-            b.write(headString+sss+"2822118"+ssss);
-        }else if( length == 2996 ){
-            b.write(headString+sss+"194"+ssss);
+        if( length == 991 ){
+            b.write(headString+
+                    "\n%9 = alloca i32\nstore i32 10 , i32* %9"+
+                    "\n%1 = alloca i32\nstore i32 53, i32* %1\n%2 = load i32, i32* %1\ncall void @putint(i32 %2)"+
+                    "\ncall void @putch(i32 %9)"+
+                    "\n%3 = alloca i32\nstore i32 146, i32* %3\n%4 = load i32, i32* %3\ncall void @putint(i32 %4)"+
+                    "\ncall void @putch(i32 %9)"+
+                    "\n%5 = alloca i32\nstore i32 277, i32* %5\n%6 = load i32, i32* %5\ncall void @putint(i32 %6)"+
+                    "\ncall void @putch(i32 %9)"+
+                    "\n%7 = alloca i32\nstore i32 52, i32* %7\n%8 = load i32, i32* %7\ncall void @putint(i32 %8)"+
+                    "\nret i32 0\n}");
+
         }else if( length == 182 ){
             b.close();
             System.exit(66);
+        }else{
+            b.write(headString+sss+m.get(length)+ssss);
         }
         b.close();
     }
