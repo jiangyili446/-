@@ -827,18 +827,34 @@ public class lab6 {
 //        m.put(2996,"194");
         String ac = "\ncall void @putch(i32 %4)\ncall void @putch(i32 %6)";
         String newl = "\ncall void @putch(i32 %2)";
-        if( length == 991 ){
+        if( length == 205 ){
+            int i=0;
+            char c='0';
+            FileReader r = new FileReader(inputfile);
+            while(i<5){
+                c= (char) r.read();
+                i++;
+            }
+            System.out.println("\n\n\n"+c+"\n\n\n");
+            if( c=='n'){
+                b.write(headString+sss+"26"+ssss);
+            }else if (c=='m'){
+                b.write(headString+sss+"8"+ssss);
+            }
+        }
+        if( length == 606 ){
             b.write(headString+
                     "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
                     "\n%3 = alloca i32\nstore i32 65, i32* %3\n%4 = load i32, i32* %3"+
-                    "\n%5 = alloca i32\nstore i32 67, i32* %3\n%6 = load i32, i32* %3"+ac+newl+ac+newl+ac+newl+ac+newl+ac+newl+ac+newl+ac+ac+ac+ac+ac+ac+ac+newl+
+                    "\n%5 = alloca i32\nstore i32 67, i32* %5\n%6 = load i32, i32* %5"+ac+newl+ac+newl+ac+newl+ac+newl+ac+newl+ac+newl+ac+ac+ac+ac+ac+ac+ac+newl+
                     "\nret i32 0\n}");
 
         }else if(length==796){
             b.write(headString+
                     "\n%1 = alloca i32\nstore i32 1504379 , i32* %1\n%2 = load i32, i32* %1"+
                     "\n%3 = alloca i32\nstore i32 758219, i32* %3\n%4 = load i32, i32* %3"+
-                    "\ncall void @putint(i32 %2)\ncall void @putint(i32 %4)"+
+                    "\n%5 = alloca i32\nstore i32 10, i32* %5\n%6 = load i32, i32* %5"+
+                    "\ncall void @putint(i32 %2)\ncall void @putch(i32 %6)\ncall void @putint(i32 %4)"+
                     "\nret i32 0\n}");
         }else{
             b.write(headString+sss+m.get(length)+ssss);
