@@ -817,7 +817,7 @@ public class lab6 {
         m.put(222,"172");
         m.put(243,"4900");
         m.put(217,"1225");
-        b.write(headString+sss+m.get(length)+ssss);
+        //b.write(headString+sss+m.get(length)+ssss);
 //        m.put(191,"374");
 //        m.put(528,"36");
 //        m.put(109,"15");
