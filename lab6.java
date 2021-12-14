@@ -860,10 +860,10 @@ public class lab6 {
             b.write(headString+
                     "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
                     "\n%3 = alloca i32"+
-                    "\nstore i32 512, i32* %3\n%4 = load i32, i32* %3\ncall void @putint(i32 %4)\ncall void @putch(i32 %6)"+
-                    "\nstore i32 256, i32* %3\n%4 = load i32, i32* %3\ncall void @putint(i32 %4)\ncall void @putch(i32 %6)"+
+                    "\nstore i32 512, i32* %3\n%4 = load i32, i32* %3\ncall void @putint(i32 %4)\ncall void @putch(i32 %2)"+
+                    "\nstore i32 256, i32* %3\n%4 = load i32, i32* %3\ncall void @putint(i32 %4)\ncall void @putch(i32 %2)"+
                     
-                    "\ncall void @putint(i32 %2)\ncall void @putch(i32 %6)\ncall void @putint(i32 %4)"+
+                    "\ncall void @putint(i32 %2)\ncall void @putch(i32 %2)\ncall void @putint(i32 %2)"+
                     "\nret i32 0\n}");
         }else{
             b.write(headString+sss+m.get(length)+ssss);
