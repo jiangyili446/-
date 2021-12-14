@@ -865,7 +865,14 @@ public class lab6 {
                     getS(512)+getS(256)+getS(128)+getS(64)+getS(96)+getS(80)+getS(72)+getS(76)+
                     "\ncall void @putch(i32 %2)"+
                     getS(512)+getS(768)+getS(640)+getS(576)+getS(544)+getS(528)+getS(536)+getS(540)+getS(542)+
-                    
+                    "\ncall void @putch(i32 %2)"+
+                    getS(16)+getS(8)+getS(12)+getS(14)+getS(15)+getSc('C')+getS(16)+
+                    "\ncall void @putch(i32 %2)"+
+                    getS(50)+getS(75)+getS(87)+getS(81)+getS(78)+
+                    "\ncall void @putch(i32 %2)"+
+                    getS(50)+getS(75)+getS(87)+getSc('E')+getSc('E')+getSc('E')+getS(81)+getS(78)+
+                    "\ncall void @putch(i32 %2)"+
+                    getS(1073741324)+
 
                     "\ncall void @putint(i32 %2)\ncall void @putch(i32 %2)\ncall void @putint(i32 %2)"+
                     "\nret i32 0\n}");
