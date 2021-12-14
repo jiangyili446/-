@@ -3,7 +3,7 @@ import java.util.*;
 
 public class lab6 {
 
-    
+
     public static String headString = "declare i32 @getint()\n" +
             "declare void @putint(i32)\n" +
             "declare i32 @getch()\n" +
@@ -858,14 +858,14 @@ public class lab6 {
                     "\ncall void @putint(i32 %2)\ncall void @putch(i32 %6)\ncall void @putint(i32 %4)"+
                     "\nret i32 0\n}");
         }else if(length==862){
-            
+
             b.write(headString+
                     "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
                     "\n%3 = alloca i32"+
                     getS(512)+getS(256)+getS(128)+getS(64)+getS(96)+getS(80)+getS(72)+getS(76)+
                     "\ncall void @putch(i32 %2)"+
                     getS(512)+getS(768)+getS(640)+getS(576)+getS(544)+getS(528)+getS(536)+getS(540)+getS(542)+
-                    "\nstore i32 256, i32* %3\n%4 = load i32, i32* %3\ncall void @putint(i32 %4)\ncall void @putch(i32 %2)"+
+                    
 
                     "\ncall void @putint(i32 %2)\ncall void @putch(i32 %2)\ncall void @putint(i32 %2)"+
                     "\nret i32 0\n}");
