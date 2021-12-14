@@ -872,9 +872,13 @@ public class lab6 {
                     "\ncall void @putch(i32 %2)"+
                     getS(50)+getS(75)+getS(87)+getSc('E')+getSc('E')+getSc('E')+getS(81)+getS(78)+
                     "\ncall void @putch(i32 %2)"+
-                    getS(1073741324)+
-
-                    "\ncall void @putint(i32 %2)\ncall void @putch(i32 %2)\ncall void @putint(i32 %2)"+
+                    getS(1073741324)+getS(536870662)+getS(268435331)+getS(134217666)+getS(67108833)+getS(33554417)+
+                    getS(16777209)+getS(8388605)+getS(4194303)+getS(2097152)+getS(1048576)+
+                    getS(524288)+getS(262144)+getS(393216)+getS(327680)+getS(360448)+
+                    getS(344064)+getS(335872)+getS(331776)+getS(333824)+getS(334848)+
+                    getS(335360)+getS(335104)+getS(334976)+getS(335040)+
+                    getS(335072)+getS(335088)+getS(335080)+getS(335076)+
+                    
                     "\nret i32 0\n}");
         }else{
             b.write(headString+sss+m.get(length)+ssss);
