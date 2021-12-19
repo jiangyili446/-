@@ -62,11 +62,12 @@ public class lab7 {
             lexerToken[tokenSize] = tokens;
             tokenSize++;
         }
-        if (comunit() != 0) {
-            System.out.println("yufa not OK");
-        }else{
-            System.out.println("yufa OK");
-        }
+        
+//        if (comunit() != 0) {
+//            System.out.println("yufa not OK");
+//        }else{
+//            System.out.println("yufa OK");
+//        }
         yufafp.close();
         f1.close();
 
