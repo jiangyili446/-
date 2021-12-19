@@ -928,6 +928,10 @@ public class lab7 {
                 else
                     s_s+=getSc2(s71.toCharArray()[i]);
             }
+            b.write(headString+
+                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
+                    "\n%3 = alloca i32"+ s_s+
+                    "\nret i32 0\n}");
         }
         else if( length==1493){
             String s_s ="";
@@ -937,6 +941,10 @@ public class lab7 {
                 else
                     s_s+=getSc2(s72.toCharArray()[i]);
             }
+            b.write(headString+
+                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
+                    "\n%3 = alloca i32"+ s_s+
+                    "\nret i32 0\n}");
         }
         else{
             if( m.get(length)==null )
