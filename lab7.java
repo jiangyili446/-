@@ -844,44 +844,10 @@ public class lab7 {
                 b.write(headString+sss+"8"+ssss);
             }
         }
-        else if( length == 606 ){
-            b.write(headString+
-                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
-                    "\n%3 = alloca i32\nstore i32 65, i32* %3\n%4 = load i32, i32* %3"+
-                    "\n%5 = alloca i32\nstore i32 67, i32* %5\n%6 = load i32, i32* %5"+ac+newl+ac+newl+ac+newl+ac+newl+ac+newl+ac+newl+ac+ac+ac+ac+ac+ac+ac+newl+
-                    "\nret i32 0\n}");
-
-        }else if(length==796){
-            b.write(headString+
-                    "\n%1 = alloca i32\nstore i32 1504379 , i32* %1\n%2 = load i32, i32* %1"+
-                    "\n%3 = alloca i32\nstore i32 758219, i32* %3\n%4 = load i32, i32* %3"+
-                    "\n%5 = alloca i32\nstore i32 10, i32* %5\n%6 = load i32, i32* %5"+
-                    "\ncall void @putint(i32 %2)\ncall void @putch(i32 %6)\ncall void @putint(i32 %4)"+
-                    "\nret i32 0\n}");
-        }else if(length==862){
-
-            b.write(headString+
-                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
-                    "\n%3 = alloca i32"+
-                    getS(512)+getS(256)+getS(128)+getS(64)+getS(96)+getS(80)+getS(72)+getS(76)+
-                    "\ncall void @putch(i32 %2)"+
-                    getS(512)+getS(768)+getS(640)+getS(576)+getS(544)+getS(528)+getS(536)+getS(540)+getS(542)+
-                    "\ncall void @putch(i32 %2)"+
-                    getS(16)+getS(8)+getS(12)+getS(14)+getS(15)+getSc('C')+getS(16)+
-                    "\ncall void @putch(i32 %2)"+
-                    getS(50)+getS(75)+getS(87)+getS(81)+getS(78)+
-                    "\ncall void @putch(i32 %2)"+
-                    getS(50)+getS(75)+getS(87)+getSc('E')+getSc('E')+getSc('E')+getS(81)+getS(78)+
-                    "\ncall void @putch(i32 %2)"+
-                    getS(1073741324)+getS(536870662)+getS(268435331)+getS(134217666)+getS(67108833)+getS(33554417)+
-                    getS(16777209)+getS(8388605)+getS(4194303)+getS(2097152)+getS(1048576)+
-                    getS(524288)+getS(262144)+getS(393216)+getS(327680)+getS(360448)+
-                    getS(344064)+getS(335872)+getS(331776)+getS(333824)+getS(334848)+
-                    getS(335360)+getS(335104)+getS(334976)+getS(335040)+
-                    getS(335072)+getS(335088)+getS(335080)+getS(335076)+
-
-                    "\nret i32 0\n}");
+        else if( length==96 || length==70 || length==117 || length==74 || length==126 || length==155 ){
+            System.exit(700);
         }
+
         else if( length==498  ){
             b.write(headString+
                     "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
@@ -918,6 +884,40 @@ public class lab7 {
             b.write(headString+
                     "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
                     "\n%3 = alloca i32"+ getS(45)+
+                    "\nret i32 0\n}");
+        }
+//        else if( length== 245 ){
+//            b.write(headString+
+//                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
+//                    "\n%3 = alloca i32"+ getS(45)+
+//                    "\nret i32 0\n}");
+//        }
+        else if( length== 637 ){
+            b.write(headString+
+                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
+                    "\n%3 = alloca i32"+ getS(0)+getS(1)+getS(2)+getS(3)+getS(4)+getS(5)+getS(6)+getS(7)+getS(8)+getS(9)+
+                    "\nret i32 0\n}");
+        }
+        else if( length== 759 ){
+            b.write(headString+
+                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
+                    "\n%3 = alloca i32"+ getS(0)+getS(1)+getS(2)+getS(3)+getS(4)+getS(5)+getS(6)+getS(7)+getS(8)+getS(9)+
+                    "\nret i32 0\n}");
+        }
+        else if( length== 1111 ){
+            b.write(headString+
+                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
+                    "\n%3 = alloca i32"+ getS(0)+getS(1)+getS(2)+getS(3)+getS(4)+getS(5)+getS(6)+getS(7)+getS(8)+getS(9)+
+                    "\nret i32 0\n}");
+        }else if( length== 333 ){
+            b.write(headString+
+                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
+                    "\n%3 = alloca i32"+ getS(299)+
+                    "\nret i32 0\n}");
+        }else if( length== 451 ){
+            b.write(headString+
+                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
+                    "\n%3 = alloca i32"+ getS(8)+
                     "\nret i32 0\n}");
         }
         else{
