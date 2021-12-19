@@ -1,4 +1,4 @@
 FROM openjdk:12
 WORKDIR /app/
-COPY lab6.java ./lab6.java
-RUN javac lab6.java
+COPY lab7.java ./lab7.java
+RUN javac lab7.java
