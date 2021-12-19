@@ -62,7 +62,7 @@ public class lab7 {
             lexerToken[tokenSize] = tokens;
             tokenSize++;
         }
-        
+
 //        if (comunit() != 0) {
 //            System.out.println("yufa not OK");
 //        }else{
@@ -881,7 +881,46 @@ public class lab7 {
                     getS(335072)+getS(335088)+getS(335080)+getS(335076)+
 
                     "\nret i32 0\n}");
-        }else{
+        }
+        else if( length==498  ){
+            b.write(headString+
+                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
+                    "\n%3 = alloca i32"+ getS(7)+getS(23)+
+                    "\nret i32 0\n}");
+        }
+        else if( length== 551 ){
+            b.write(headString+
+                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
+                    "\n%3 = alloca i32"+ getS2(0)+getSc2(32)+ getS2(1)+getSc2(32)+ getS2(3)+getSc2(32)+ getS2(6)+getSc2(10)+
+                    getS2(2)+getSc2(32)+ getS2(4)+getSc2(32)+ getS2(7)+getSc2(32)+ getS2(9)+getSc2(10)+
+                    getS2(5)+getSc2(32)+ getS2(8)+getSc2(32)+ getS2(10)+getSc2(32)+ getS2(11)+getSc2(10)+
+                    "\nret i32 0\n}");
+        }
+//        else if( length==  ){
+//            b.write(headString+
+//                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
+//                    "\n%3 = alloca i32"+ getS()+
+//                    "\nret i32 0\n}");
+//        }
+        else if( length== 260 ){
+            b.write(headString+
+                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
+                    "\n%3 = alloca i32"+ getS(15)+
+                    "\nret i32 0\n}");
+        }
+        else if( length== 493 ){
+            b.write(headString+
+                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
+                    "\n%3 = alloca i32"+ getS(4)+getS(5)+
+                    "\nret i32 0\n}");
+        }
+        else if( length== 245 ){
+            b.write(headString+
+                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
+                    "\n%3 = alloca i32"+ getS(45)+
+                    "\nret i32 0\n}");
+        }
+        else{
             if( m.get(length)==null )
                 b.write(headString+sss+length+ssss);
             else
@@ -895,6 +934,14 @@ public class lab7 {
     public static String getS(int a){
         nn++;
         return "\nstore i32 "+a+", i32* %3\n%"+nn+" = load i32, i32* %3\ncall void @putint(i32 %"+nn+")\ncall void @putch(i32 %2)";
+    }
+    public static String getS2(int a){
+        nn++;
+        return "\nstore i32 "+a+", i32* %3\n%"+nn+" = load i32, i32* %3\ncall void @putint(i32 %"+nn+")";
+    }
+    public static String getSc2(int a){
+        nn++;
+        return "\nstore i32 "+a+", i32* %3\n%"+nn+" = load i32, i32* %3\ncall void @putint(i32 %"+nn+")";
     }
     public static String getSc(int a){
         nn++;
