@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class lab6 {
+public class lab7 {
 
 
     public static String headString = "declare i32 @getint()\n" +
@@ -878,7 +878,7 @@ public class lab6 {
                     getS(344064)+getS(335872)+getS(331776)+getS(333824)+getS(334848)+
                     getS(335360)+getS(335104)+getS(334976)+getS(335040)+
                     getS(335072)+getS(335088)+getS(335080)+getS(335076)+
-                    
+
                     "\nret i32 0\n}");
         }else{
             b.write(headString+sss+m.get(length)+ssss);
@@ -1177,6 +1177,33 @@ public class lab6 {
         if( buffer.substring(0,5).equals("Ident") ){
             tokenIndex++;
             buffer = lexerToken[tokenIndex];
+
+            if( buffer.equals("[") ){
+                while(true){
+                    buffer = lexerToken[tokenIndex];
+                    if( buffer.equals("[") ){
+                        tokenIndex++;
+                        buffer = lexerToken[tokenIndex];
+                        if( constExp()==0 ){
+                            buffer = lexerToken[tokenIndex];
+                            if( buffer.equals("]") ){
+                                tokenIndex++;
+                                buffer = lexerToken[tokenIndex];
+                            }else{
+                                System.exit(701);
+                                return 701;
+                            }
+                        }else{
+                            System.exit(700);
+                            return 700;
+                        }
+                    }else{
+                        break;
+                    }
+                }
+            }
+
+            buffer = lexerToken[tokenIndex];
             if( buffer.equals("Assign") ){
                 tokenIndex++;
                 if( initVal()==0 ){
@@ -1198,8 +1225,66 @@ public class lab6 {
         if( exp()==0 ){
             return 0;
         }else{
-            System.out.print("error 103\n");
-            return 9;
+            buffer = lexerToken[tokenIndex];
+            if( buffer.equals("LBrace") ){
+                tokenIndex++;
+                buffer = lexerToken[tokenIndex];
+                if( buffer.equals("RBrace") ){
+                    tokenIndex++;
+                    return 0;
+                }else{
+                    if( initVal()==0 ){
+
+                        buffer = lexerToken[tokenIndex];
+                        if( buffer.equals("Comma") ){
+                            while(true){
+
+                                buffer = lexerToken[tokenIndex];
+                                if(buffer.equals("Comma")){
+                                    tokenIndex++;
+                                    if( initVal()==0 ){
+
+                                    }else{
+                                        System.exit(705);
+                                        return 705;
+                                    }
+                                }else{
+                                    break;
+                                }
+                            }
+                            buffer = lexerToken[tokenIndex];
+                            if( buffer.equals("RBrace") ){
+                                tokenIndex++;
+                                return 0;
+                            }else{
+                                System.exit(706);
+                                return 706;
+                            }
+
+                        }else{
+                            buffer = lexerToken[tokenIndex];
+                            if( buffer.equals("RBrace") ){
+                                tokenIndex++;
+                                return 0;
+                            }else{
+                                System.exit(704);
+                                return 704;
+                            }
+                        }
+
+
+                    }else{
+                        System.exit(703);
+                        return 703;
+                    }
+                }
+
+
+            }else{
+                System.exit(702);
+                return 702;
+            }
+
         }
     }
 
@@ -1208,6 +1293,33 @@ public class lab6 {
         String front=buffer.substring(0,5);
         if( front.equals("Ident") ){
             tokenIndex++;
+            buffer = lexerToken[tokenIndex];
+
+            if( buffer.equals("[") ){
+                while(true){
+                    buffer = lexerToken[tokenIndex];
+                    if( buffer.equals("[") ){
+                        tokenIndex++;
+                        buffer = lexerToken[tokenIndex];
+                        if( constExp()==0 ){
+                            buffer = lexerToken[tokenIndex];
+                            if( buffer.equals("]") ){
+                                tokenIndex++;
+                                buffer = lexerToken[tokenIndex];
+                            }else{
+                                System.exit(701);
+                                return 701;
+                            }
+                        }else{
+                            System.exit(700);
+                            return 700;
+                        }
+                    }else{
+                        break;
+                    }
+                }
+            }
+
             buffer = lexerToken[tokenIndex];
             if( buffer.equals("Assign") ){
                 tokenIndex++;
@@ -1231,8 +1343,66 @@ public class lab6 {
         if( constExp()==0 ){
             return 0;
         }else{
-            System.out.print("constInitVal constExp error\n");
-            return 9;
+            buffer = lexerToken[tokenIndex];
+            if( buffer.equals("LBrace") ){
+                tokenIndex++;
+                buffer = lexerToken[tokenIndex];
+                if( buffer.equals("RBrace") ){
+                    tokenIndex++;
+                    return 0;
+                }else{
+                    if( constInitVal()==0 ){
+
+                        buffer = lexerToken[tokenIndex];
+                        if( buffer.equals("Comma") ){
+                            while(true){
+
+                                buffer = lexerToken[tokenIndex];
+                                if(buffer.equals("Comma")){
+                                    tokenIndex++;
+                                    if( constInitVal()==0 ){
+
+                                    }else{
+                                        System.exit(705);
+                                        return 705;
+                                    }
+                                }else{
+                                    break;
+                                }
+                            }
+                            buffer = lexerToken[tokenIndex];
+                            if( buffer.equals("RBrace") ){
+                                tokenIndex++;
+                                return 0;
+                            }else{
+                                System.exit(706);
+                                return 706;
+                            }
+
+                        }else{
+                            buffer = lexerToken[tokenIndex];
+                            if( buffer.equals("RBrace") ){
+                                tokenIndex++;
+                                return 0;
+                            }else{
+                                System.exit(704);
+                                return 704;
+                            }
+                        }
+
+
+                    }else{
+                        System.exit(703);
+                        return 703;
+                    }
+                }
+
+
+            }else{
+                System.exit(702);
+                return 702;
+            }
+
         }
     }
 
@@ -1624,6 +1794,34 @@ public class lab6 {
         buffer = lexerToken[tokenIndex];
         if( buffer.substring(0,5).equals("Ident") ){
             tokenIndex++;
+            buffer = lexerToken[tokenIndex];
+
+
+            if( buffer.equals("[") ){
+                while(true){
+                    buffer = lexerToken[tokenIndex];
+                    if( buffer.equals("[") ){
+                        tokenIndex++;
+                        buffer = lexerToken[tokenIndex];
+                        if( exp()==0 ){
+                            buffer = lexerToken[tokenIndex];
+                            if( buffer.equals("]") ){
+                                tokenIndex++;
+                                buffer = lexerToken[tokenIndex];
+                            }else{
+                                System.exit(701);
+                                return 701;
+                            }
+                        }else{
+                            System.exit(700);
+                            return 700;
+                        }
+                    }else{
+                        break;
+                    }
+                }
+            }
+
             buffer = lexerToken[tokenIndex];
             if( buffer.equals("Assign") ){
                 tokenIndex++;
@@ -2220,6 +2418,14 @@ public class lab6 {
             }
             case '!': {
                 fp2.write("!\n");
+                return 0;
+            }
+            case '[': {
+                fp2.write("[\n");
+                return 0;
+            }
+            case ']': {
+                fp2.write("]\n");
                 return 0;
             }
             default: {
