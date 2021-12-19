@@ -958,7 +958,7 @@ public class lab7 {
         b.close();
     }
     public static String s72 =
-            "I'm Suzumiya Haruhi from the East Junior High School, and I'm not interested in ordinary humans. If there were an alien, a time traveller,+an otherworlder or a superhero among you, please come to meet me! That's all.";
+            " I'm Suzumiya Haruhi from the East Junior High School, and I'm not interested in ordinary humans. If there were an alien, a time traveller,+ an otherworlder or a superhero among you, please come to meet me! That's all.";
     public static String s71 = "Welcome to the Japari Park!+" +
             "Araiguma says hello to Tairiku Ookami+" +
             "Tairiku Ookami says hello to Saabaru+" +
