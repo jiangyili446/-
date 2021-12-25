@@ -861,12 +861,15 @@ public class lab8 {
         }
 
         else if( length== 6023 ){
-            String sdog = "";
-            String scat = getSc2('c')+getSc2('a')+getSc2('t')+getSc2(10);
-            sdog+=getSc2('d')+getSc2('o')+getSc2('g')+getSc2(10);
+
             b.write(headString+
                     "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
-                    "\n%3 = alloca i32"+ sdog+scat+sdog+sdog+scat+scat+
+                    "\n%3 = alloca i32"+getSc2('d')+getSc2('o')+getSc2('g')+getSc2(10)+
+                            getSc2('c')+getSc2('a')+getSc2('t')+getSc2(10)+
+                    getSc2('d')+getSc2('o')+getSc2('g')+getSc2(10)+
+                    getSc2('d')+getSc2('o')+getSc2('g')+getSc2(10)+
+                    getSc2('c')+getSc2('a')+getSc2('t')+getSc2(10)+
+                    getSc2('c')+getSc2('a')+getSc2('t')+getSc2(10)+
                     "\nret i32 0\n}");
         }
 
@@ -876,7 +879,7 @@ public class lab8 {
                 if(s81.toCharArray()[i]=='-')
                     s_s+=getSc2('-');
                 else
-                    s_s+=getS2(s81.toCharArray()[i]);
+                    s_s+=getSc2(s81.toCharArray()[i]);
             }
             b.write(headString+
                     "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
