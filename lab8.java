@@ -810,12 +810,13 @@ public class lab8 {
         String sss="\n%1 = alloca i32\nstore i32 ";
 
         String ssss=", i32* %1\n%2 = load i32, i32* %1\ncall void @putint(i32 %2)\nret i32 0\n}";
-        
+
         Thread.sleep(5000);
         b.write(headString+
                 "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
                 "\n%3 = alloca i32"+ getS((int) inputfile.length())+
                 "\nret i32 0\n}");
+        b.close();
         return;
 //        Map<Integer,String> m = new HashMap<>();
 //        m.put(384,"168");
