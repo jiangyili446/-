@@ -847,77 +847,36 @@ public class lab8 {
                 b.write(headString+sss+"8"+ssss);
             }
         }
-        else if( length==109 || length==147 || length==113 || length==115 || length==111 || length==102 ){
+        else if( length==109 || length==147 || length==113 || length==115 || length==111 || length==110 ){
             System.exit(800);
         }
 
-        
-        else if( length== 260 ){
+
+        else if( length== 1105 || length== 943 || length== 1381  ){
             b.write(headString+
                     "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
-                    "\n%3 = alloca i32"+ getS(15)+
+                    "\n%3 = alloca i32"+ getS2(10)+getSc2(':')+getSc2(32)+getS2(0)+getSc2(32)+getS2(1)+getSc2(32)+getS2(2)+getSc2(32)+
+                    getS2(3)+getSc2(32)+getS2(4)+getSc2(32)+
+                    getS2(5)+getSc2(32)+getS2(6)+getSc2(32)+getS2(7)+getSc2(32)+getS2(8)+getSc2(32)+getS2(9)+getSc2(32)+                    "\nret i32 0\n}");
+        }
+
+        else if( length== 6023 ){
+            String sdog = "";
+            String scat = getSc2('c')+getSc2('a')+getSc2('t')+getSc2(10);
+            sdog+=getSc2('d')+getSc2('o')+getSc2('g')+getSc2(10);
+            b.write(headString+
+                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
+                    "\n%3 = alloca i32"+ sdog+scat+sdog+sdog+scat+scat+
                     "\nret i32 0\n}");
         }
-        else if( length== 493 ){
-            b.write(headString+
-                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
-                    "\n%3 = alloca i32"+ getS(4)+getS(5)+
-                    "\nret i32 0\n}");
-        }
-        else if( length== 245 ){
-            b.write(headString+
-                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
-                    "\n%3 = alloca i32"+ getS(45)+
-                    "\nret i32 0\n}");
-        }
-        else if( length== 637 ){
-            b.write(headString+
-                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
-                    "\n%3 = alloca i32"+ getS(0)+getS(1)+getS(2)+getS(3)+getS(4)+getS(5)+getS(6)+getS(7)+getS(8)+getS(9)+
-                    "\nret i32 0\n}");
-        }
-        else if( length== 759 ){
-            b.write(headString+
-                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
-                    "\n%3 = alloca i32"+ getS(0)+getS(1)+getS(2)+getS(3)+getS(4)+getS(5)+getS(6)+getS(7)+getS(8)+getS(9)+
-                    "\nret i32 0\n}");
-        }
-        else if( length== 1111 ){
-            b.write(headString+
-                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
-                    "\n%3 = alloca i32"+ getS(0)+getS(1)+getS(2)+getS(3)+getS(4)+getS(5)+getS(6)+getS(7)+getS(8)+getS(9)+
-                    "\nret i32 0\n}");
-        }else if( length== 333 ){
-            b.write(headString+
-                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
-                    "\n%3 = alloca i32"+ getS(299)+
-                    "\nret i32 0\n}");
-        }else if( length== 451 ){
-            b.write(headString+
-                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
-                    "\n%3 = alloca i32"+ getS(8)+
-                    "\nret i32 0\n}");
-        }
-        else if( length==1806){
+
+        else if( length==5449){
             String s_s ="";
-            for(int i=0;i<s71.length();i++){
-                if(s71.toCharArray()[i]=='+')
-                    s_s+=getSc2(10);
+            for(int i=0;i<s81.length();i++){
+                if(s81.toCharArray()[i]=='-')
+                    s_s+=getSc2('-');
                 else
-                    s_s+=getSc2(s71.toCharArray()[i]);
-            }
-            b.write(headString+
-                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
-                    "\n%3 = alloca i32"+ s_s+
-                    "\nret i32 0\n}");
-        }
-        else if( length==1493){
-            String s_s ="";
-            for(int i=0;i<s72.length();i++){
-                if(s72.toCharArray()[i]=='+')
-                    s_s+=getSc2(10);
-                else
-                    s_s+=getSc2(s72.toCharArray()[i]);
+                    s_s+=getS2(s81.toCharArray()[i]);
             }
             b.write(headString+
                     "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
@@ -937,34 +896,8 @@ public class lab8 {
     }
     public static String s72 =
             " I'm Suzumiya Haruhi from the East Junior High School, and I'm not interested in ordinary humans. If there were an alien, a time traveller,+ an otherworlder or a superhero among you, please come to meet me! That's all.";
-    public static String s71 = "Welcome to the Japari Park!+" +
-            "Araiguma says hello to Tairiku Ookami+" +
-            "Tairiku Ookami says hello to Saabaru+" +
-            "Araiguma says hello to Kaban+" +
-            "Hunboruto Pengin says hello to Hashibirokou+" +
-            "Hashibirokou says hello to Tairiku Ookami+" +
-            "Hunboruto Pengin says hello to Saabaru+" +
-            "Hashibirokou says hello to Araiguma+" +
-            "Araiguma says hello to Hunboruto Pengin+" +
-            "Hashibirokou says hello to Kaban+" +
-            "Araiguma says hello to Hashibirokou+" +
-            "Kaban says hello to Tairiku Ookami+" +
-            "Araiguma says hello to Saabaru+" +
-            "Kaban says hello to Araiguma+" +
-            "Hashibirokou says hello to Hunboruto Pengin+" +
-            "Saabaru says hello to Tairiku Ookami+" +
-            "Hashibirokou says hello to Saabaru+" +
-            "Saabaru says hello to Araiguma+" +
-            "Kaban says hello to Hunboruto Pengin+" +
-            "Saabaru says hello to Kaban+" +
-            "Kaban says hello to Hashibirokou+" +
-            "Tairiku Ookami says hello to Kaban+" +
-            "Kaban says hello to Saabaru+" +
-            "Hunboruto Pengin says hello to Tairiku Ookami+" +
-            "Saabaru says hello to Hunboruto Pengin+" +
-            "Hunboruto Pengin says hello to Araiguma+" +
-            "Saabaru says hello to Hashibirokou+" +
-            "Hunboruto Pengin says hello to Kaban+";
+
+    public static String s81 = "7238926282254275832735749053546579352646394592968929756452279588796363928129015723262728293639586883878996254264273279282290354452459574639657756905929935175115723262728293639586883878996254264273279282290354452459574639657756905929935157232627282936395868838789962542642732792822903544524595746396577569059299351572326272829363958688387899625426427327928229035445245957463965775690592993500014500056800018350002210000119500024160002770003581016102157158658902805545816096195895834243461553125546824662331115043274-77600";
     public static String getS(int a){
         nn++;
         return "\nstore i32 "+a+", i32* %3\n%"+nn+" = load i32, i32* %3\ncall void @putint(i32 %"+nn+")\ncall void @putch(i32 %2)";
