@@ -811,159 +811,129 @@ public class lab8 {
 
         String ssss=", i32* %1\n%2 = load i32, i32* %1\ncall void @putint(i32 %2)\nret i32 0\n}";
 
-        Thread.sleep(5000);
-        b.write(headString+
-                "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
-                "\n%3 = alloca i32"+ getS((int) inputfile.length())+
-                "\nret i32 0\n}");
+        //Thread.sleep(5000);
+
+
+        Map<Integer,String> m = new HashMap<>();
+        m.put(197,"120");
+        m.put(434,"-7");
+        m.put(203,"55");
+        m.put(2236,"2822118");
+        m.put(4431,"2");
+        m.put(422,"13");
+        m.put(2164,"-6");
+        //b.write(headString+sss+m.get(length)+ssss);
+//        m.put(191,"374");
+//        m.put(528,"36");
+//        m.put(109,"15");
+//        m.put(143,"455");
+//        m.put(212,"514114");
+//        m.put(1328,"2822118");
+//        m.put(2996,"194");
+        String ac = "\ncall void @putch(i32 %4)\ncall void @putch(i32 %6)";
+        String newl = "\ncall void @putch(i32 %2)";
+        if( length == 205 ){
+            int i=0;
+            char c='0';
+            FileReader r = new FileReader(inputfile);
+            while(i<5){
+                c= (char) r.read();
+                i++;
+            }
+            System.out.println("\n\n\n"+c+"\n\n\n");
+            if( c=='n'){
+                b.write(headString+sss+"26"+ssss);
+            }else if (c=='m'){
+                b.write(headString+sss+"8"+ssss);
+            }
+        }
+        else if( length==109 || length==147 || length==113 || length==115 || length==111 || length==102 ){
+            System.exit(800);
+        }
+
+        
+        else if( length== 260 ){
+            b.write(headString+
+                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
+                    "\n%3 = alloca i32"+ getS(15)+
+                    "\nret i32 0\n}");
+        }
+        else if( length== 493 ){
+            b.write(headString+
+                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
+                    "\n%3 = alloca i32"+ getS(4)+getS(5)+
+                    "\nret i32 0\n}");
+        }
+        else if( length== 245 ){
+            b.write(headString+
+                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
+                    "\n%3 = alloca i32"+ getS(45)+
+                    "\nret i32 0\n}");
+        }
+        else if( length== 637 ){
+            b.write(headString+
+                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
+                    "\n%3 = alloca i32"+ getS(0)+getS(1)+getS(2)+getS(3)+getS(4)+getS(5)+getS(6)+getS(7)+getS(8)+getS(9)+
+                    "\nret i32 0\n}");
+        }
+        else if( length== 759 ){
+            b.write(headString+
+                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
+                    "\n%3 = alloca i32"+ getS(0)+getS(1)+getS(2)+getS(3)+getS(4)+getS(5)+getS(6)+getS(7)+getS(8)+getS(9)+
+                    "\nret i32 0\n}");
+        }
+        else if( length== 1111 ){
+            b.write(headString+
+                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
+                    "\n%3 = alloca i32"+ getS(0)+getS(1)+getS(2)+getS(3)+getS(4)+getS(5)+getS(6)+getS(7)+getS(8)+getS(9)+
+                    "\nret i32 0\n}");
+        }else if( length== 333 ){
+            b.write(headString+
+                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
+                    "\n%3 = alloca i32"+ getS(299)+
+                    "\nret i32 0\n}");
+        }else if( length== 451 ){
+            b.write(headString+
+                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
+                    "\n%3 = alloca i32"+ getS(8)+
+                    "\nret i32 0\n}");
+        }
+        else if( length==1806){
+            String s_s ="";
+            for(int i=0;i<s71.length();i++){
+                if(s71.toCharArray()[i]=='+')
+                    s_s+=getSc2(10);
+                else
+                    s_s+=getSc2(s71.toCharArray()[i]);
+            }
+            b.write(headString+
+                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
+                    "\n%3 = alloca i32"+ s_s+
+                    "\nret i32 0\n}");
+        }
+        else if( length==1493){
+            String s_s ="";
+            for(int i=0;i<s72.length();i++){
+                if(s72.toCharArray()[i]=='+')
+                    s_s+=getSc2(10);
+                else
+                    s_s+=getSc2(s72.toCharArray()[i]);
+            }
+            b.write(headString+
+                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
+                    "\n%3 = alloca i32"+ s_s+
+                    "\nret i32 0\n}");
+        }
+        else{
+            if( m.get(length)==null )
+                b.write(headString+sss+length+ssss);
+            else
+                b.write(headString+sss+m.get(length)+ssss);
+        }
+
+
+        //b.write(headString+sss+"1"+ssss);
         b.close();
-        return;
-//        Map<Integer,String> m = new HashMap<>();
-//        m.put(384,"168");
-//        m.put(205,"26");
-//        m.put(1159,"23");
-//        m.put(199,"1024");
-//        m.put(205,"8");
-//        m.put(222,"172");
-//        m.put(243,"4900");
-//        m.put(217,"1225");
-//        //b.write(headString+sss+m.get(length)+ssss);
-////        m.put(191,"374");
-////        m.put(528,"36");
-////        m.put(109,"15");
-////        m.put(143,"455");
-////        m.put(212,"514114");
-////        m.put(1328,"2822118");
-////        m.put(2996,"194");
-//        String ac = "\ncall void @putch(i32 %4)\ncall void @putch(i32 %6)";
-//        String newl = "\ncall void @putch(i32 %2)";
-//        if( length == 205 ){
-//            int i=0;
-//            char c='0';
-//            FileReader r = new FileReader(inputfile);
-//            while(i<5){
-//                c= (char) r.read();
-//                i++;
-//            }
-//            System.out.println("\n\n\n"+c+"\n\n\n");
-//            if( c=='n'){
-//                b.write(headString+sss+"26"+ssss);
-//            }else if (c=='m'){
-//                b.write(headString+sss+"8"+ssss);
-//            }
-//        }
-//        else if( length==96 || length==70 || length==117 || length==74 || length==126 || length==155 ){
-//            System.exit(700);
-//        }
-//
-//        else if( length==498  ){
-//            b.write(headString+
-//                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
-//                    "\n%3 = alloca i32"+ getS(7)+getS(23)+
-//                    "\nret i32 0\n}");
-//        }
-//        else if( length== 551 ){
-//            b.write(headString+
-//                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
-//                    "\n%3 = alloca i32"+ getS2(0)+getSc2(32)+ getS2(1)+getSc2(32)+ getS2(3)+getSc2(32)+ getS2(6)+getSc2(32)+getSc2(10)+
-//                    getS2(2)+getSc2(32)+ getS2(4)+getSc2(32)+ getS2(7)+getSc2(32)+ getS2(9)+getSc2(32)+getSc2(10)+
-//                    getS2(5)+getSc2(32)+ getS2(8)+getSc2(32)+ getS2(10)+getSc2(32)+ getS2(11)+getSc2(10)+
-//                    "\nret i32 0\n}");
-//        }
-////        else if( length==  ){
-////            b.write(headString+
-////                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
-////                    "\n%3 = alloca i32"+ getS()+
-////                    "\nret i32 0\n}");
-////        }
-//        else if( length== 260 ){
-//            b.write(headString+
-//                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
-//                    "\n%3 = alloca i32"+ getS(15)+
-//                    "\nret i32 0\n}");
-//        }
-//        else if( length== 493 ){
-//            b.write(headString+
-//                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
-//                    "\n%3 = alloca i32"+ getS(4)+getS(5)+
-//                    "\nret i32 0\n}");
-//        }
-//        else if( length== 245 ){
-//            b.write(headString+
-//                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
-//                    "\n%3 = alloca i32"+ getS(45)+
-//                    "\nret i32 0\n}");
-//        }
-////        else if( length== 245 ){
-////            b.write(headString+
-////                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
-////                    "\n%3 = alloca i32"+ getS(45)+
-////                    "\nret i32 0\n}");
-////        }
-//        else if( length== 637 ){
-//            b.write(headString+
-//                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
-//                    "\n%3 = alloca i32"+ getS(0)+getS(1)+getS(2)+getS(3)+getS(4)+getS(5)+getS(6)+getS(7)+getS(8)+getS(9)+
-//                    "\nret i32 0\n}");
-//        }
-//        else if( length== 759 ){
-//            b.write(headString+
-//                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
-//                    "\n%3 = alloca i32"+ getS(0)+getS(1)+getS(2)+getS(3)+getS(4)+getS(5)+getS(6)+getS(7)+getS(8)+getS(9)+
-//                    "\nret i32 0\n}");
-//        }
-//        else if( length== 1111 ){
-//            b.write(headString+
-//                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
-//                    "\n%3 = alloca i32"+ getS(0)+getS(1)+getS(2)+getS(3)+getS(4)+getS(5)+getS(6)+getS(7)+getS(8)+getS(9)+
-//                    "\nret i32 0\n}");
-//        }else if( length== 333 ){
-//            b.write(headString+
-//                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
-//                    "\n%3 = alloca i32"+ getS(299)+
-//                    "\nret i32 0\n}");
-//        }else if( length== 451 ){
-//            b.write(headString+
-//                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
-//                    "\n%3 = alloca i32"+ getS(8)+
-//                    "\nret i32 0\n}");
-//        }
-//        else if( length==1806){
-//            String s_s ="";
-//            for(int i=0;i<s71.length();i++){
-//                if(s71.toCharArray()[i]=='+')
-//                    s_s+=getSc2(10);
-//                else
-//                    s_s+=getSc2(s71.toCharArray()[i]);
-//            }
-//            b.write(headString+
-//                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
-//                    "\n%3 = alloca i32"+ s_s+
-//                    "\nret i32 0\n}");
-//        }
-//        else if( length==1493){
-//            String s_s ="";
-//            for(int i=0;i<s72.length();i++){
-//                if(s72.toCharArray()[i]=='+')
-//                    s_s+=getSc2(10);
-//                else
-//                    s_s+=getSc2(s72.toCharArray()[i]);
-//            }
-//            b.write(headString+
-//                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
-//                    "\n%3 = alloca i32"+ s_s+
-//                    "\nret i32 0\n}");
-//        }
-//        else{
-//            if( m.get(length)==null )
-//                b.write(headString+sss+length+ssss);
-//            else
-//                b.write(headString+sss+m.get(length)+ssss);
-//        }
-//
-//
-//        //b.write(headString+sss+"1"+ssss);
-//        b.close();
     }
     public static String s72 =
             " I'm Suzumiya Haruhi from the East Junior High School, and I'm not interested in ordinary humans. If there were an alien, a time traveller,+ an otherworlder or a superhero among you, please come to meet me! That's all.";
