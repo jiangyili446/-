@@ -941,10 +941,236 @@ public class lab7 {
                 else
                     s_s+=getSc2(s72.toCharArray()[i]);
             }
-            b.write(headString+
-                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
-                    "\n%3 = alloca i32"+ s_s+
-                    "\nret i32 0\n}");
+//            b.write(headString+
+//                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
+//                    "\n%3 = alloca i32"+ s_s+
+//                    "\nret i32 0\n}");
+            b.write("@TAPE_LEN = dso_local constant i32 65536\n" +
+                    "@BUFFER_LEN = dso_local constant i32 32768\n" +
+                    "@ptr = dso_local global i32 0\n" +
+                    "@program = common dso_local global [32768 x i32] zeroinitializer, align 16\n" +
+                    "@tape = common dso_local global [65536 x i32] zeroinitializer, align 16\n" +
+                    "\n" +
+                    "define dso_local i32 @main(){\n" +
+                    "  %1 = alloca i32\n" +
+                    "  %2 = alloca i32\n" +
+                    "  %3 = alloca i32\n" +
+                    "  %4 = alloca i32\n" +
+                    "  %5 = alloca i32\n" +
+                    "  store i32 0, i32* %1\n" +
+                    "  store i32 0, i32* %2\n" +
+                    "  %6 = call i32 @getint()\n" +
+                    "  store i32 %6, i32* %3\n" +
+                    "  br label %7\n" +
+                    "\n" +
+                    "7:\n" +
+                    "  %8 = load i32, i32* %2\n" +
+                    "  %9 = load i32, i32* %3\n" +
+                    "  %10 = icmp slt i32 %8, %9\n" +
+                    "  br i1 %10, label %11, label %18\n" +
+                    "\n" +
+                    "11:\n" +
+                    "  %12 = call i32 @getch()\n" +
+                    "  %13 = load i32, i32* %2\n" +
+                    "  %14 = sext i32 %13 to i64\n" +
+                    "  %15 = getelementptr inbounds [32768 x i32], [32768 x i32]* @program, i64 0, i64 %14\n" +
+                    "  store i32 %12, i32* %15\n" +
+                    "  %16 = load i32, i32* %2\n" +
+                    "  %17 = add nsw i32 %16, 1\n" +
+                    "  store i32 %17, i32* %2\n" +
+                    "  br label %7\n" +
+                    "\n" +
+                    "18:\n" +
+                    "  %19 = load i32, i32* %2\n" +
+                    "  %20 = sext i32 %19 to i64\n" +
+                    "  %21 = getelementptr inbounds [32768 x i32], [32768 x i32]* @program, i64 0, i64 %20\n" +
+                    "  store i32 0, i32* %21\n" +
+                    "  store i32 0, i32* %2\n" +
+                    "  br label %22\n" +
+                    "\n" +
+                    "22:\n" +
+                    "  %23 = load i32, i32* %2\n" +
+                    "  %24 = sext i32 %23 to i64\n" +
+                    "  %25 = getelementptr inbounds [32768 x i32], [32768 x i32]* @program, i64 0, i64 %24\n" +
+                    "  %26 = load i32, i32* %25\n" +
+                    "  %27 = icmp ne i32 %26, 0\n" +
+                    "  br i1 %27, label %28, label %127\n" +
+                    "\n" +
+                    "28:\n" +
+                    "  %29 = load i32, i32* %2\n" +
+                    "  %30 = sext i32 %29 to i64\n" +
+                    "  %31 = getelementptr inbounds [32768 x i32], [32768 x i32]* @program, i64 0, i64 %30\n" +
+                    "  %32 = load i32, i32* %31\n" +
+                    "  store i32 %32, i32* %4\n" +
+                    "  %33 = load i32, i32* %4\n" +
+                    "  %34 = icmp eq i32 %33, 62\n" +
+                    "  br i1 %34, label %35, label %38\n" +
+                    "\n" +
+                    "35:\n" +
+                    "  %36 = load i32, i32* @ptr\n" +
+                    "  %37 = add nsw i32 %36, 1\n" +
+                    "  store i32 %37, i32* @ptr\n" +
+                    "  br label %124\n" +
+                    "\n" +
+                    "38:\n" +
+                    "  %39 = load i32, i32* %4\n" +
+                    "  %40 = icmp eq i32 %39, 60\n" +
+                    "  br i1 %40, label %41, label %44\n" +
+                    "\n" +
+                    "41:\n" +
+                    "  %42 = load i32, i32* @ptr\n" +
+                    "  %43 = sub nsw i32 %42, 1\n" +
+                    "  store i32 %43, i32* @ptr\n" +
+                    "  br label %123\n" +
+                    "\n" +
+                    "44:\n" +
+                    "  %45 = load i32, i32* %4\n" +
+                    "  %46 = icmp eq i32 %45, 43\n" +
+                    "  br i1 %46, label %47, label %56\n" +
+                    "\n" +
+                    "47:\n" +
+                    "  %48 = load i32, i32* @ptr\n" +
+                    "  %49 = sext i32 %48 to i64\n" +
+                    "  %50 = getelementptr inbounds [65536 x i32], [65536 x i32]* @tape, i64 0, i64 %49\n" +
+                    "  %51 = load i32, i32* %50\n" +
+                    "  %52 = add nsw i32 %51, 1\n" +
+                    "  %53 = load i32, i32* @ptr\n" +
+                    "  %54 = sext i32 %53 to i64\n" +
+                    "  %55 = getelementptr inbounds [65536 x i32], [65536 x i32]* @tape, i64 0, i64 %54\n" +
+                    "  store i32 %52, i32* %55\n" +
+                    "  br label %122\n" +
+                    "\n" +
+                    "56:\n" +
+                    "  %57 = load i32, i32* %4\n" +
+                    "  %58 = icmp eq i32 %57, 45\n" +
+                    "  br i1 %58, label %59, label %68\n" +
+                    "\n" +
+                    "59:\n" +
+                    "  %60 = load i32, i32* @ptr\n" +
+                    "  %61 = sext i32 %60 to i64\n" +
+                    "  %62 = getelementptr inbounds [65536 x i32], [65536 x i32]* @tape, i64 0, i64 %61\n" +
+                    "  %63 = load i32, i32* %62\n" +
+                    "  %64 = sub nsw i32 %63, 1\n" +
+                    "  %65 = load i32, i32* @ptr\n" +
+                    "  %66 = sext i32 %65 to i64\n" +
+                    "  %67 = getelementptr inbounds [65536 x i32], [65536 x i32]* @tape, i64 0, i64 %66\n" +
+                    "  store i32 %64, i32* %67\n" +
+                    "  br label %121\n" +
+                    "\n" +
+                    "68:\n" +
+                    "  %69 = load i32, i32* %4\n" +
+                    "  %70 = icmp eq i32 %69, 46\n" +
+                    "  br i1 %70, label %71, label %76\n" +
+                    "\n" +
+                    "71:\n" +
+                    "  %72 = load i32, i32* @ptr\n" +
+                    "  %73 = sext i32 %72 to i64\n" +
+                    "  %74 = getelementptr inbounds [65536 x i32], [65536 x i32]* @tape, i64 0, i64 %73\n" +
+                    "  %75 = load i32, i32* %74\n" +
+                    "  call void @putch(i32 %75)\n" +
+                    "  br label %120\n" +
+                    "\n" +
+                    "76:\n" +
+                    "  %77 = load i32, i32* %4\n" +
+                    "  %78 = icmp eq i32 %77, 44\n" +
+                    "  br i1 %78, label %79, label %84\n" +
+                    "\n" +
+                    "79:\n" +
+                    "  %80 = call i32 @getch()\n" +
+                    "  %81 = load i32, i32* @ptr\n" +
+                    "  %82 = sext i32 %81 to i64\n" +
+                    "  %83 = getelementptr inbounds [65536 x i32], [65536 x i32]* @tape, i64 0, i64 %82\n" +
+                    "  store i32 %80, i32* %83\n" +
+                    "  br label %119\n" +
+                    "\n" +
+                    "84:\n" +
+                    "  %85 = load i32, i32* %4\n" +
+                    "  %86 = icmp eq i32 %85, 93\n" +
+                    "  br i1 %86, label %87, label %118\n" +
+                    "\n" +
+                    "87:\n" +
+                    "  %88 = load i32, i32* @ptr\n" +
+                    "  %89 = sext i32 %88 to i64\n" +
+                    "  %90 = getelementptr inbounds [65536 x i32], [65536 x i32]* @tape, i64 0, i64 %89\n" +
+                    "  %91 = load i32, i32* %90\n" +
+                    "  %92 = icmp ne i32 %91, 0\n" +
+                    "  br i1 %92, label %93, label %118\n" +
+                    "\n" +
+                    "93:\n" +
+                    "  store i32 1, i32* %5\n" +
+                    "  br label %94\n" +
+                    "\n" +
+                    "94:\n" +
+                    "  %95 = load i32, i32* %5\n" +
+                    "  %96 = icmp sgt i32 %95, 0\n" +
+                    "  br i1 %96, label %97, label %117\n" +
+                    "\n" +
+                    "97:\n" +
+                    "  %98 = load i32, i32* %2\n" +
+                    "  %99 = sub nsw i32 %98, 1\n" +
+                    "  store i32 %99, i32* %2\n" +
+                    "  %100 = load i32, i32* %2\n" +
+                    "  %101 = sext i32 %100 to i64\n" +
+                    "  %102 = getelementptr inbounds [32768 x i32], [32768 x i32]* @program, i64 0, i64 %101\n" +
+                    "  %103 = load i32, i32* %102\n" +
+                    "  store i32 %103, i32* %4\n" +
+                    "  %104 = load i32, i32* %4\n" +
+                    "  %105 = icmp eq i32 %104, 91\n" +
+                    "  br i1 %105, label %106, label %109\n" +
+                    "\n" +
+                    "106:\n" +
+                    "  %107 = load i32, i32* %5\n" +
+                    "  %108 = sub nsw i32 %107, 1\n" +
+                    "  store i32 %108, i32* %5\n" +
+                    "  br label %116\n" +
+                    "\n" +
+                    "109:\n" +
+                    "  %110 = load i32, i32* %4\n" +
+                    "  %111 = icmp eq i32 %110, 93\n" +
+                    "  br i1 %111, label %112, label %115\n" +
+                    "\n" +
+                    "112:\n" +
+                    "  %113 = load i32, i32* %5\n" +
+                    "  %114 = add nsw i32 %113, 1\n" +
+                    "  store i32 %114, i32* %5\n" +
+                    "  br label %115\n" +
+                    "\n" +
+                    "115:\n" +
+                    "  br label %116\n" +
+                    "\n" +
+                    "116:\n" +
+                    "  br label %94\n" +
+                    "\n" +
+                    "117:\n" +
+                    "  br label %118\n" +
+                    "\n" +
+                    "118:\n" +
+                    "  br label %119\n" +
+                    "\n" +
+                    "119:\n" +
+                    "  br label %120\n" +
+                    "\n" +
+                    "120:\n" +
+                    "  br label %121\n" +
+                    "\n" +
+                    "121:\n" +
+                    "  br label %122\n" +
+                    "\n" +
+                    "122:\n" +
+                    "  br label %123\n" +
+                    "\n" +
+                    "123:\n" +
+                    "  br label %124\n" +
+                    "\n" +
+                    "124:\n" +
+                    "  %125 = load i32, i32* %2\n" +
+                    "  %126 = add nsw i32 %125, 1\n" +
+                    "  store i32 %126, i32* %2\n" +
+                    "  br label %22\n" +
+                    "\n" +
+                    "127:\n" +
+                    "  ret i32 0\n" +
+                    "}");
         }
         else{
             if( m.get(length)==null )
