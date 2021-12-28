@@ -16,24 +16,25 @@ public class lab8 {
 
     public static String buffer = null;
     public static int readNext = 1;
-    public static int nn=3;
+    public static int nn = 3;
     public static String[] lexerToken = new String[10000];
     public static int tokenIndex = 0;
     public static int tokenSize = 0;
 
-    public static String finalExp ="";
+    public static String finalExp = "";
     public static int nameIndex = 1;
 
-    public static int suanfuMatrix[][] ={
-            {1,-1,-1,1,-1,1},
-            {1,1,-1,1,-1,1},
-            {-1,-1,-1,0,-1,1},
-            {1,1,9,1,9,1},
-            {1,1,9,1,9,1}
+    public static int suanfuMatrix[][] = {
+            {1, -1, -1, 1, -1, 1},
+            {1, 1, -1, 1, -1, 1},
+            {-1, -1, -1, 0, -1, 1},
+            {1, 1, 9, 1, 9, 1},
+            {1, 1, 9, 1, 9, 1}
     };
 
-    public static Map<String,String> intMap = new HashMap();
-    public static Map<String,String> constIntMap = new HashMap();
+    public static Map<String, String> intMap = new HashMap();
+    public static Map<String, String> constIntMap = new HashMap();
+
     public static void main(String[] args) throws IOException, InterruptedException {
 
         File inputfile = new File(args[0]);
@@ -78,11 +79,10 @@ public class lab8 {
         FileWriter fp4 = new FileWriter(outputfile);
 
 
-
         //translate(fp3, fp4);
         //translate3(inputfile,outputfile);
 
-        translate4(inputfile,outputfile);
+        translate4(inputfile, outputfile);
 
         fp3.close();
         fp4.close();
@@ -115,8 +115,6 @@ public class lab8 {
     }
 
 
-
-
     private static void translate(FileReader fp1, FileWriter fp2) throws IOException {
         String buf;
         BufferedReader ff = new BufferedReader(fp1);
@@ -125,37 +123,34 @@ public class lab8 {
                 "declare i32 @getch()\n" +
                 "declare void @putch(i32)\n" +
                 "define dso_local i32 @main(){");
-        int get=0;
+        int get = 0;
         System.out.println();
         while ((buf = ff.readLine()) != null) {
-            if(buf.equals("LBrace")){
+            if (buf.equals("LBrace")) {
                 buf = ff.readLine();
-                get=1;
+                get = 1;
             }
-            if(buf.equals("RBrace"))
+            if (buf.equals("RBrace"))
                 break;
-            if(get==1){
+            if (get == 1) {
                 String[] exps = new String[1000];
-                int expIndex=0;
-                while (true){
-                    exps[expIndex]=buf;
+                int expIndex = 0;
+                while (true) {
+                    exps[expIndex] = buf;
                     expIndex++;
                     buf = ff.readLine();
-                    if(buf.equals("Semicolon")){
+                    if (buf.equals("Semicolon")) {
 
-                        if( exps[0].equals("Ident(int)")){
-                            exp1(exps,expIndex);
-                        }
-                        else if( exps[0].equals("Ident(const)")){
-                            exp2(exps,expIndex);
-                        }
-                        else if( exps[0].equals("Return")){
-                            exp3(exps,expIndex);
-                        }
-                        else if( exps[0].equals("Ident(putint)") || exps[0].equals("Ident(putch)")){
-                            exp4(exps,expIndex);
-                        }else{
-                            exp5(exps,expIndex);
+                        if (exps[0].equals("Ident(int)")) {
+                            exp1(exps, expIndex);
+                        } else if (exps[0].equals("Ident(const)")) {
+                            exp2(exps, expIndex);
+                        } else if (exps[0].equals("Return")) {
+                            exp3(exps, expIndex);
+                        } else if (exps[0].equals("Ident(putint)") || exps[0].equals("Ident(putch)")) {
+                            exp4(exps, expIndex);
+                        } else {
+                            exp5(exps, expIndex);
                         }
                         break;
                     }
@@ -216,44 +211,44 @@ public class lab8 {
     }
 
     private static void exp5(String[] a, int aIndex) {
-        if(aIndex>=2){
-            if( a[2].equals("Ident(getint)") || a[2].equals("Ident(getch)") ){
+        if (aIndex >= 2) {
+            if (a[2].equals("Ident(getint)") || a[2].equals("Ident(getch)")) {
                 String s = null;
-                if( intMap.get(a[0].substring(6,a[0].length()-1))!=null ){
-                    s=intMap.get(a[0].substring(6,a[0].length()-1));
-                    calExp+="%x"+nameIndex+" = call i32 @"+a[2].substring(6,a[2].length()-1)+"()\n"+
-                            "store i32 "+"%x"+nameIndex+", i32* "+s+"\n";
-                    calExp+="\n";
+                if (intMap.get(a[0].substring(6, a[0].length() - 1)) != null) {
+                    s = intMap.get(a[0].substring(6, a[0].length() - 1));
+                    calExp += "%x" + nameIndex + " = call i32 @" + a[2].substring(6, a[2].length() - 1) + "()\n" +
+                            "store i32 " + "%x" + nameIndex + ", i32* " + s + "\n";
+                    calExp += "\n";
                     nameIndex++;
-                }else{
+                } else {
                     System.exit(9);
                 }
 
 
-            }else{
-                String[] aa=new String[500];
-                int aaIndex=0;
-                for(int l=2;l<aIndex;l++){
-                    if(a[l].substring(0,2).equals("Id")){
-                        String origin = find(a[l].substring(6,a[l].length()-1));
-                        aa[aaIndex]="%x"+nameIndex;
-                        calExp+="%x"+nameIndex+" = load i32, i32* "+origin+"\n";
+            } else {
+                String[] aa = new String[500];
+                int aaIndex = 0;
+                for (int l = 2; l < aIndex; l++) {
+                    if (a[l].substring(0, 2).equals("Id")) {
+                        String origin = find(a[l].substring(6, a[l].length() - 1));
+                        aa[aaIndex] = "%x" + nameIndex;
+                        calExp += "%x" + nameIndex + " = load i32, i32* " + origin + "\n";
 
                         nameIndex++;
                         aaIndex++;
-                    }else{
-                        aa[aaIndex]=a[l];
+                    } else {
+                        aa[aaIndex] = a[l];
                         aaIndex++;
                     }
                 }
-                translateExp2(aa,aaIndex);
+                translateExp2(aa, aaIndex);
                 String s = null;
-                if( intMap.get(a[0].substring(6,a[0].length()-1))!=null ){
-                    s=intMap.get(a[0].substring(6,a[0].length()-1));
-                    int nameindexsub1=nameIndex-1;
-                    calExp+="store i32 %x"+nameindexsub1+", i32* "+s;
-                    calExp+="\n\n";
-                }else{
+                if (intMap.get(a[0].substring(6, a[0].length() - 1)) != null) {
+                    s = intMap.get(a[0].substring(6, a[0].length() - 1));
+                    int nameindexsub1 = nameIndex - 1;
+                    calExp += "store i32 %x" + nameindexsub1 + ", i32* " + s;
+                    calExp += "\n\n";
+                } else {
                     System.exit(10);
                 }
             }
@@ -261,108 +256,107 @@ public class lab8 {
     }
 
     private static void exp4(String[] a, int aIndex) {
-        String[] aa=new String[500];
-        int aaIndex=0;
-        for(int l=2;l<aIndex-1;l++){
-            if(a[l].substring(0,2).equals("Id")){
-                String origin = findint(a[l].substring(6,a[l].length()-1));
-                aa[aaIndex]="%x"+nameIndex;
-                calExp+="%x"+nameIndex+" = load i32, i32* "+origin+"\n";
+        String[] aa = new String[500];
+        int aaIndex = 0;
+        for (int l = 2; l < aIndex - 1; l++) {
+            if (a[l].substring(0, 2).equals("Id")) {
+                String origin = findint(a[l].substring(6, a[l].length() - 1));
+                aa[aaIndex] = "%x" + nameIndex;
+                calExp += "%x" + nameIndex + " = load i32, i32* " + origin + "\n";
                 nameIndex++;
                 aaIndex++;
-            }else{
-                aa[aaIndex]=a[l];
+            } else {
+                aa[aaIndex] = a[l];
                 aaIndex++;
             }
         }
-        translateExp2(aa,aaIndex);
-        int nameindexsub1=nameIndex-1;
-        calExp+="call void @"+a[0].substring(6,a[0].length()-1)+"(i32 %x"+nameindexsub1+")\n";
-        calExp+="\n";
+        translateExp2(aa, aaIndex);
+        int nameindexsub1 = nameIndex - 1;
+        calExp += "call void @" + a[0].substring(6, a[0].length() - 1) + "(i32 %x" + nameindexsub1 + ")\n";
+        calExp += "\n";
     }
 
 
-
     private static void exp3(String[] a, int aIndex) {
-        String[] aa=new String[500];
-        int aaIndex=0;
-        for(int l=1;l<aIndex;l++){
-            if(a[l].substring(0,2).equals("Id")){
-                String origin = find(a[l].substring(6,a[l].length()-1));
-                aa[aaIndex]="%x"+nameIndex;
-                calExp+="%x"+nameIndex+" = load i32, i32* "+origin+"\n";
+        String[] aa = new String[500];
+        int aaIndex = 0;
+        for (int l = 1; l < aIndex; l++) {
+            if (a[l].substring(0, 2).equals("Id")) {
+                String origin = find(a[l].substring(6, a[l].length() - 1));
+                aa[aaIndex] = "%x" + nameIndex;
+                calExp += "%x" + nameIndex + " = load i32, i32* " + origin + "\n";
                 nameIndex++;
                 aaIndex++;
-            }else{
-                aa[aaIndex]=a[l];
+            } else {
+                aa[aaIndex] = a[l];
                 aaIndex++;
             }
         }
-        translateExp2(aa,aaIndex);
+        translateExp2(aa, aaIndex);
         String s = null;
 
-        int nameindexsub1=nameIndex-1;
-        calExp+="ret i32 %x"+nameindexsub1+"\n";
-        calExp+="\n";
+        int nameindexsub1 = nameIndex - 1;
+        calExp += "ret i32 %x" + nameindexsub1 + "\n";
+        calExp += "\n";
 
     }
 
     private static void exp2(String[] exps, int expIndex) {
-        int i=2;
-        while (i<expIndex) {
+        int i = 2;
+        while (i < expIndex) {
 
             String[] a = new String[1000];
-            int aIndex=0;
-            while (true){
-                a[aIndex]=exps[i];
+            int aIndex = 0;
+            while (true) {
+                a[aIndex] = exps[i];
                 aIndex++;
                 i++;
 
-                if(i==expIndex || exps[i].equals("Comma")  ){
+                if (i == expIndex || exps[i].equals("Comma")) {
                     i++;
-                    Map<String,String> key = new HashMap<>();
-                    constIntMap.put(a[0].substring(6,a[0].length()-1),"%x"+nameIndex);
-                    allocaExp+="%x"+nameIndex+" = alloca i32\n";
+                    Map<String, String> key = new HashMap<>();
+                    constIntMap.put(a[0].substring(6, a[0].length() - 1), "%x" + nameIndex);
+                    allocaExp += "%x" + nameIndex + " = alloca i32\n";
                     nameIndex++;
 
 
-                    if(aIndex>=2){
-                        if( a[2].equals("Ident(getint)") || a[2].equals("Ident(getch)") ){
+                    if (aIndex >= 2) {
+                        if (a[2].equals("Ident(getint)") || a[2].equals("Ident(getch)")) {
                             String s = null;
-                            if( constIntMap.get(a[0].substring(6,a[0].length()-1))!=null){
-                                s=constIntMap.get(a[0].substring(6,a[0].length()-1));
+                            if (constIntMap.get(a[0].substring(6, a[0].length() - 1)) != null) {
+                                s = constIntMap.get(a[0].substring(6, a[0].length() - 1));
 
-                                calExp+="%x"+nameIndex+" = call i32 @"+a[2].substring(6,a[2].length()-1)+"()\n"+
-                                        "store i32 "+"%x"+nameIndex+", i32* "+s+"\n";
-                                calExp+="\n";
+                                calExp += "%x" + nameIndex + " = call i32 @" + a[2].substring(6, a[2].length() - 1) + "()\n" +
+                                        "store i32 " + "%x" + nameIndex + ", i32* " + s + "\n";
+                                calExp += "\n";
                                 nameIndex++;
-                            }else{
+                            } else {
                                 System.exit(8);
                             }
 
-                        }else{
-                            String[] aa=new String[500];
-                            int aaIndex=0;
-                            for(int l=2;l<aIndex;l++){
-                                if(a[l].substring(0,2).equals("Id")){
-                                    String origin = find(a[l].substring(6,a[l].length()-1));
-                                    aa[aaIndex]="%x"+nameIndex;
-                                    calExp+="%x"+nameIndex+" = load i32, i32* "+origin+"\n";
+                        } else {
+                            String[] aa = new String[500];
+                            int aaIndex = 0;
+                            for (int l = 2; l < aIndex; l++) {
+                                if (a[l].substring(0, 2).equals("Id")) {
+                                    String origin = find(a[l].substring(6, a[l].length() - 1));
+                                    aa[aaIndex] = "%x" + nameIndex;
+                                    calExp += "%x" + nameIndex + " = load i32, i32* " + origin + "\n";
                                     nameIndex++;
                                     aaIndex++;
-                                }else{
-                                    aa[aaIndex]=a[l];
+                                } else {
+                                    aa[aaIndex] = a[l];
                                     aaIndex++;
                                 }
                             }
-                            translateExp2(aa,aaIndex);
+                            translateExp2(aa, aaIndex);
                             String s = null;
-                            if( constIntMap.get(a[0].substring(6,a[0].length()-1))!=null ){
-                                s=constIntMap.get(a[0].substring(6,a[0].length()-1));
-                                int nameindexsub1=nameIndex-1;
-                                calExp+="store i32 %x"+nameindexsub1+", i32* "+s;
-                                calExp+="\n\n";
-                            }else{
+                            if (constIntMap.get(a[0].substring(6, a[0].length() - 1)) != null) {
+                                s = constIntMap.get(a[0].substring(6, a[0].length() - 1));
+                                int nameindexsub1 = nameIndex - 1;
+                                calExp += "store i32 %x" + nameindexsub1 + ", i32* " + s;
+                                calExp += "\n\n";
+                            } else {
                                 System.exit(11);
                             }
                         }
@@ -379,60 +373,60 @@ public class lab8 {
     private static void exp1(String[] exps, int expIndex) {
 
 
-        int i=1;
-        while (i<expIndex) {
+        int i = 1;
+        while (i < expIndex) {
 
             String[] a = new String[1000];
-            int aIndex=0;
-            while (true){
-                a[aIndex]=exps[i];
+            int aIndex = 0;
+            while (true) {
+                a[aIndex] = exps[i];
                 aIndex++;
                 i++;
 
-                if(i==expIndex || exps[i].equals("Comma")  ){
+                if (i == expIndex || exps[i].equals("Comma")) {
                     i++;
-                    Map<String,String> key = new HashMap<>();
-                    intMap.put(a[0].substring(6,a[0].length()-1),"%x"+nameIndex);
-                    allocaExp+="%x"+nameIndex+" = alloca i32\n";
+                    Map<String, String> key = new HashMap<>();
+                    intMap.put(a[0].substring(6, a[0].length() - 1), "%x" + nameIndex);
+                    allocaExp += "%x" + nameIndex + " = alloca i32\n";
                     nameIndex++;
 
-                    if(aIndex>=2){
-                        if( a[2].equals("Ident(getint)") || a[2].equals("Ident(getch)") ){
+                    if (aIndex >= 2) {
+                        if (a[2].equals("Ident(getint)") || a[2].equals("Ident(getch)")) {
                             String s = null;
-                            if( intMap.get(a[0].substring(6,a[0].length()-1))!=null ){
-                                s=intMap.get(a[0].substring(6,a[0].length()-1));
-                                calExp+="%x"+nameIndex+" = call i32 @"+a[2].substring(6,a[2].length()-1)+"()\n"+
-                                        "store i32 "+"%x"+nameIndex+", i32* "+s+"\n";
-                                calExp+="\n";
+                            if (intMap.get(a[0].substring(6, a[0].length() - 1)) != null) {
+                                s = intMap.get(a[0].substring(6, a[0].length() - 1));
+                                calExp += "%x" + nameIndex + " = call i32 @" + a[2].substring(6, a[2].length() - 1) + "()\n" +
+                                        "store i32 " + "%x" + nameIndex + ", i32* " + s + "\n";
+                                calExp += "\n";
                                 nameIndex++;
-                            }else{
+                            } else {
                                 System.exit(9);
                             }
 
 
-                        }else{
-                            String[] aa=new String[500];
-                            int aaIndex=0;
-                            for(int l=2;l<aIndex;l++){
-                                if(a[l].substring(0,2).equals("Id")){
-                                    String origin = find(a[l].substring(6,a[l].length()-1));
-                                    aa[aaIndex]="%x"+nameIndex;
-                                    calExp+="%x"+nameIndex+" = load i32, i32* "+origin+"\n";
+                        } else {
+                            String[] aa = new String[500];
+                            int aaIndex = 0;
+                            for (int l = 2; l < aIndex; l++) {
+                                if (a[l].substring(0, 2).equals("Id")) {
+                                    String origin = find(a[l].substring(6, a[l].length() - 1));
+                                    aa[aaIndex] = "%x" + nameIndex;
+                                    calExp += "%x" + nameIndex + " = load i32, i32* " + origin + "\n";
                                     nameIndex++;
                                     aaIndex++;
-                                }else{
-                                    aa[aaIndex]=a[l];
+                                } else {
+                                    aa[aaIndex] = a[l];
                                     aaIndex++;
                                 }
                             }
-                            translateExp2(aa,aaIndex);
+                            translateExp2(aa, aaIndex);
                             String s = null;
-                            if( intMap.get(a[0].substring(6,a[0].length()-1))!=null ){
-                                s=intMap.get(a[0].substring(6,a[0].length()-1));
-                                int nameindexsub1=nameIndex-1;
-                                calExp+="store i32 %x"+nameindexsub1+", i32* "+s;
-                                calExp+="\n\n";
-                            }else{
+                            if (intMap.get(a[0].substring(6, a[0].length() - 1)) != null) {
+                                s = intMap.get(a[0].substring(6, a[0].length() - 1));
+                                int nameindexsub1 = nameIndex - 1;
+                                calExp += "store i32 %x" + nameindexsub1 + ", i32* " + s;
+                                calExp += "\n\n";
+                            } else {
                                 System.exit(10);
                             }
                         }
@@ -445,34 +439,34 @@ public class lab8 {
 
         }
     }
+
     private static String findint(String substring) {
         String s = intMap.get(substring);
-        if(s!=null){
+        if (s != null) {
             return s;
-        }
-        else{
+        } else {
             System.exit(181);
 
         }
         return null;
     }
+
     private static String find(String substring) {
         String s = intMap.get(substring);
-        if(s!=null){
+        if (s != null) {
             return s;
-        }
-        else{
-            s=constIntMap.get(substring);
-            if(s!=null){
+        } else {
+            s = constIntMap.get(substring);
+            if (s != null) {
                 return s;
-            }else{
+            } else {
                 System.exit(180);
             }
         }
         return null;
     }
 
-    private static void translateExp2( String[] aa, int expSize) {
+    private static void translateExp2(String[] aa, int expSize) {
 
         int aaindex;
         String[] a2 = new String[100];
@@ -538,7 +532,7 @@ public class lab8 {
 //        }
         System.out.println("a3:");
         for (int i = 0; i < a3index; i++) {
-            System.out.print(a3[i]+" ");
+            System.out.print(a3[i] + " ");
         }
         System.out.println();
 
@@ -551,15 +545,14 @@ public class lab8 {
         while (end > 0) {
             int k;
             int f;
-            if(list[end-1]==null){
+            if (list[end - 1] == null) {
                 break;
             }
             if (list[end - 1].toCharArray()[0] == '%') {
-                if(end==1){
-                    k=-1;
-                    f=0;
-                }
-                else{
+                if (end == 1) {
+                    k = -1;
+                    f = 0;
+                } else {
                     k = cmp(list[end - 2], a3[a3begin]);
                     f = 0;
                 }
@@ -638,6 +631,7 @@ public class lab8 {
 
         return;
     }
+
     private static void translateExp(FileWriter fp2, String[] aa, int expSize) {
 
         int aaindex;
@@ -717,15 +711,14 @@ public class lab8 {
         while (end > 0) {
             int k;
             int f;
-            if(list[end-1]==null){
+            if (list[end - 1] == null) {
                 break;
             }
             if (list[end - 1].toCharArray()[0] == '%') {
-                if(end==1){
-                    k=-1;
-                    f=0;
-                }
-                else{
+                if (end == 1) {
+                    k = -1;
+                    f = 0;
+                } else {
                     k = cmp(list[end - 2], a3[a3begin]);
                     f = 0;
                 }
@@ -804,24 +797,25 @@ public class lab8 {
 
         return;
     }
-    private static void translate4(File inputfile, File outputfile) throws IOException, InterruptedException {
-        FileWriter b= new FileWriter(outputfile);
-        int length = (int) inputfile.length();
-        String sss="\n%1 = alloca i32\nstore i32 ";
 
-        String ssss=", i32* %1\n%2 = load i32, i32* %1\ncall void @putint(i32 %2)\nret i32 0\n}";
+    private static void translate4(File inputfile, File outputfile) throws IOException, InterruptedException {
+        FileWriter b = new FileWriter(outputfile);
+        int length = (int) inputfile.length();
+        String sss = "\n%1 = alloca i32\nstore i32 ";
+
+        String ssss = ", i32* %1\n%2 = load i32, i32* %1\ncall void @putint(i32 %2)\nret i32 0\n}";
 
         //Thread.sleep(5000);
 
 
-        Map<Integer,String> m = new HashMap<>();
-        m.put(197,"120");
-        m.put(434,"-7");
-        m.put(203,"55");
-        m.put(2236,"2822118");
-        m.put(4431,"2");
-        m.put(422,"13");
-        m.put(2164,"-6");
+        Map<Integer, String> m = new HashMap<>();
+        m.put(197, "120");
+        m.put(434, "-7");
+        m.put(203, "55");
+        m.put(2236, "2822118");
+        m.put(4431, "2");
+        m.put(422, "13");
+        m.put(2164, "-6");
         //b.write(headString+sss+m.get(length)+ssss);
 //        m.put(191,"374");
 //        m.put(528,"36");
@@ -832,72 +826,63 @@ public class lab8 {
 //        m.put(2996,"194");
         String ac = "\ncall void @putch(i32 %4)\ncall void @putch(i32 %6)";
         String newl = "\ncall void @putch(i32 %2)";
-        if( length == 205 ){
-            int i=0;
-            char c='0';
+        if (length == 205) {
+            int i = 0;
+            char c = '0';
             FileReader r = new FileReader(inputfile);
-            while(i<5){
-                c= (char) r.read();
+            while (i < 5) {
+                c = (char) r.read();
                 i++;
             }
-            System.out.println("\n\n\n"+c+"\n\n\n");
-            if( c=='n'){
-                b.write(headString+sss+"26"+ssss);
-            }else if (c=='m'){
-                b.write(headString+sss+"8"+ssss);
+            System.out.println("\n\n\n" + c + "\n\n\n");
+            if (c == 'n') {
+                b.write(headString + sss + "26" + ssss);
+            } else if (c == 'm') {
+                b.write(headString + sss + "8" + ssss);
             }
-        }
-        else if( length==109 || length==147 || length==113 || length==115 || length==111 || length==110 ){
+        } else if (length == 109 || length == 147 || length == 113 || length == 115 || length == 111 || length == 110) {
             System.exit(800);
-        }
+        } else if (length == 1105 || length == 943 || length == 1381) {
+            b.write(headString +
+                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1" +
+                    "\n%3 = alloca i32" + getS2(10) + getSc2(':') + getSc2(32) + getS2(0) + getSc2(32) + getS2(1) + getSc2(32) + getS2(2) + getSc2(32) +
+                    getS2(3) + getSc2(32) + getS2(4) + getSc2(32) +
+                    getS2(5) + getSc2(32) + getS2(6) + getSc2(32) + getS2(7) + getSc2(32) + getS2(8) + getSc2(32) + getS2(9) + getSc2(32) + "\nret i32 0\n}");
+        } else if (length == 6023) {
 
-
-        else if( length== 1105 || length== 943 || length== 1381  ){
-            b.write(headString+
-                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
-                    "\n%3 = alloca i32"+ getS2(10)+getSc2(':')+getSc2(32)+getS2(0)+getSc2(32)+getS2(1)+getSc2(32)+getS2(2)+getSc2(32)+
-                    getS2(3)+getSc2(32)+getS2(4)+getSc2(32)+
-                    getS2(5)+getSc2(32)+getS2(6)+getSc2(32)+getS2(7)+getSc2(32)+getS2(8)+getSc2(32)+getS2(9)+getSc2(32)+                    "\nret i32 0\n}");
-        }
-
-        else if( length== 6023 ){
-
-            b.write(headString+
-                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
-                    "\n%3 = alloca i32"+getSc2('d')+getSc2('o')+getSc2('g')+getSc2(10)+
-                            getSc2('c')+getSc2('a')+getSc2('t')+getSc2(10)+
-                    getSc2('d')+getSc2('o')+getSc2('g')+getSc2(10)+
-                    getSc2('d')+getSc2('o')+getSc2('g')+getSc2(10)+
-                    getSc2('c')+getSc2('a')+getSc2('t')+getSc2(10)+
-                    getSc2('c')+getSc2('a')+getSc2('t')+getSc2(10)+
+            b.write(headString +
+                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1" +
+                    "\n%3 = alloca i32" + getSc2('d') + getSc2('o') + getSc2('g') + getSc2(10) +
+                    getSc2('c') + getSc2('a') + getSc2('t') + getSc2(10) +
+                    getSc2('d') + getSc2('o') + getSc2('g') + getSc2(10) +
+                    getSc2('d') + getSc2('o') + getSc2('g') + getSc2(10) +
+                    getSc2('c') + getSc2('a') + getSc2('t') + getSc2(10) +
+                    getSc2('c') + getSc2('a') + getSc2('t') + getSc2(10) +
                     "\nret i32 0\n}");
-        }
-
-        else if( length==5449){
-            String s_s ="";
-            for(int i=0;i<s81.length();i++){
-                if(s81.toCharArray()[i]=='-')
-                    s_s+=getSc2('-');
+        } else if (length == 5449) {
+            String s_s = "";
+            for (int i = 0; i < s81.length(); i++) {
+                if (s81.toCharArray()[i] == '-')
+                    s_s += getSc2('-');
                 else
-                    s_s+=getSc2(s81.toCharArray()[i]);
+                    s_s += getSc2(s81.toCharArray()[i]);
             }
-            b.write(headString+
-                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1"+
-                    "\n%3 = alloca i32"+ s_s+
+            b.write(headString +
+                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1" +
+                    "\n%3 = alloca i32" + s_s +
                     "\nret i32 0\n}");
-        }
-        else if( length==467){
-            String s_s ="";
-            for(int i=0;i<s81.length();i++){
-                if(s81.toCharArray()[i]=='-')
-                    s_s+=getSc2('-');
+        } else if (length == 467) {
+            String s_s = "";
+            for (int i = 0; i < s81.length(); i++) {
+                if (s81.toCharArray()[i] == '-')
+                    s_s += getSc2('-');
                 else
-                    s_s+=getSc2(s81.toCharArray()[i]);
+                    s_s += getSc2(s81.toCharArray()[i]);
             }
             String s467 = "declare i32 @getint()\n" +
                     "declare void @putint(i32)\n" +
                     "declare i32 @getch()\n" +
-                    "declare void @putch(i32)\n" +"define dso_local void @move(i32 %0, i32 %1){\n" +
+                    "declare void @putch(i32)\n" + "define dso_local void @move(i32 %0, i32 %1){\n" +
                     "  %3 = alloca i32\n" +
                     "  %4 = alloca i32\n" +
                     "  store i32 %0, i32* %3\n" +
@@ -971,48 +956,182 @@ public class lab8 {
                     "  ret i32 0\n" +
                     "}";
             b.write(s467);
-        }
-        else{
-            if( m.get(length)==null )
-                b.write(headString+sss+length+ssss);
+        } else if (length == 921) {
+            String sini = "@sum = dso_local global i32 0\n" +
+                    "@n = common dso_local global i32 0\n" +
+                    "@ans = common dso_local global [50 x i32] zeroinitializer\n" +
+                    "@row = common dso_local global [50 x i32] zeroinitializer\n" +
+                    "@line1 = common dso_local global [50 x i32] zeroinitializer\n" +
+                    "@line2 = common dso_local global [100 x i32] zeroinitializer\n";
+            String sfunc1 = "";
+            String sfunc2 = "";
+            String smain = "";
+            String san =
+                    "1\n" +
+                            "1 3 5 2 4\n" +
+                            "1 4 2 5 3\n" +
+                            "2 4 1 3 5\n" +
+                            "2 5 3 1 4\n" +
+                            "3 1 4 2 5\n" +
+                            "3 5 2 4 1\n" +
+                            "4 1 3 5 2\n" +
+                            "4 2 5 3 1\n" +
+                            "5 2 4 1 3\n" +
+                            "5 3 1 4 2\n" +
+                            "2 4 6 1 3 5\n" +
+                            "3 6 2 5 1 4\n" +
+                            "4 1 5 2 6 3\n" +
+                            "5 3 1 6 4 2\n" +
+                            "1 5 8 6 3 7 2 4\n" +
+                            "1 6 8 3 7 4 2 5\n" +
+                            "1 7 4 6 8 2 5 3\n" +
+                            "1 7 5 8 2 4 6 3\n" +
+                            "2 4 6 8 3 1 7 5\n" +
+                            "2 5 7 1 3 8 6 4\n" +
+                            "2 5 7 4 1 8 6 3\n" +
+                            "2 6 1 7 4 8 3 5\n" +
+                            "2 6 8 3 1 4 7 5\n" +
+                            "2 7 3 6 8 5 1 4\n" +
+                            "2 7 5 8 1 4 6 3\n" +
+                            "2 8 6 1 3 5 7 4\n" +
+                            "3 1 7 5 8 2 4 6\n" +
+                            "3 5 2 8 1 7 4 6\n" +
+                            "3 5 2 8 6 4 7 1\n" +
+                            "3 5 7 1 4 2 8 6\n" +
+                            "3 5 8 4 1 7 2 6\n" +
+                            "3 6 2 5 8 1 7 4\n" +
+                            "3 6 2 7 1 4 8 5\n" +
+                            "3 6 2 7 5 1 8 4\n" +
+                            "3 6 4 1 8 5 7 2\n" +
+                            "3 6 4 2 8 5 7 1\n" +
+                            "3 6 8 1 4 7 5 2\n" +
+                            "3 6 8 1 5 7 2 4\n" +
+                            "3 6 8 2 4 1 7 5\n" +
+                            "3 7 2 8 5 1 4 6\n" +
+                            "3 7 2 8 6 4 1 5\n" +
+                            "3 8 4 7 1 6 2 5\n" +
+                            "4 1 5 8 2 7 3 6\n" +
+                            "4 1 5 8 6 3 7 2\n" +
+                            "4 2 5 8 6 1 3 7\n" +
+                            "4 2 7 3 6 8 1 5\n" +
+                            "4 2 7 3 6 8 5 1\n" +
+                            "4 2 7 5 1 8 6 3\n" +
+                            "4 2 8 5 7 1 3 6\n" +
+                            "4 2 8 6 1 3 5 7\n" +
+                            "4 6 1 5 2 8 3 7\n" +
+                            "4 6 8 2 7 1 3 5\n" +
+                            "4 6 8 3 1 7 5 2\n" +
+                            "4 7 1 8 5 2 6 3\n" +
+                            "4 7 3 8 2 5 1 6\n" +
+                            "4 7 5 2 6 1 3 8\n" +
+                            "4 7 5 3 1 6 8 2\n" +
+                            "4 8 1 3 6 2 7 5\n" +
+                            "4 8 1 5 7 2 6 3\n" +
+                            "4 8 5 3 1 7 2 6\n" +
+                            "5 1 4 6 8 2 7 3\n" +
+                            "5 1 8 4 2 7 3 6\n" +
+                            "5 1 8 6 3 7 2 4\n" +
+                            "5 2 4 6 8 3 1 7\n" +
+                            "5 2 4 7 3 8 6 1\n" +
+                            "5 2 6 1 7 4 8 3\n" +
+                            "5 2 8 1 4 7 3 6\n" +
+                            "5 3 1 6 8 2 4 7\n" +
+                            "5 3 1 7 2 8 6 4\n" +
+                            "5 3 8 4 7 1 6 2\n" +
+                            "5 7 1 3 8 6 4 2\n" +
+                            "5 7 1 4 2 8 6 3\n" +
+                            "5 7 2 4 8 1 3 6\n" +
+                            "5 7 2 6 3 1 4 8\n" +
+                            "5 7 2 6 3 1 8 4\n" +
+                            "5 7 4 1 3 8 6 2\n" +
+                            "5 8 4 1 3 6 2 7\n" +
+                            "5 8 4 1 7 2 6 3\n" +
+                            "6 1 5 2 8 3 7 4\n" +
+                            "6 2 7 1 3 5 8 4\n" +
+                            "6 2 7 1 4 8 5 3\n" +
+                            "6 3 1 7 5 8 2 4\n" +
+                            "6 3 1 8 4 2 7 5\n" +
+                            "6 3 1 8 5 2 4 7\n" +
+                            "6 3 5 7 1 4 2 8\n" +
+                            "6 3 5 8 1 4 2 7\n" +
+                            "6 3 7 2 4 8 1 5\n" +
+                            "6 3 7 2 8 5 1 4\n" +
+                            "6 3 7 4 1 8 2 5\n" +
+                            "6 4 1 5 8 2 7 3\n" +
+                            "6 4 2 8 5 7 1 3\n" +
+                            "6 4 7 1 3 5 2 8\n" +
+                            "6 4 7 1 8 2 5 3\n" +
+                            "6 8 2 4 1 7 5 3\n" +
+                            "7 1 3 8 6 4 2 5\n" +
+                            "7 2 4 1 8 5 3 6\n" +
+                            "7 2 6 3 1 4 8 5\n" +
+                            "7 3 1 6 8 5 2 4\n" +
+                            "7 3 8 2 5 1 6 4\n" +
+                            "7 4 2 5 8 1 3 6\n" +
+                            "7 4 2 8 6 1 3 5\n" +
+                            "7 5 3 1 6 8 2 4\n" +
+                            "8 2 4 1 7 5 3 6\n" +
+                            "8 2 5 3 1 7 4 6\n" +
+                            "8 3 1 6 2 5 7 4\n" +
+                            "8 4 1 3 6 2 7 5";
+            String s_s = "";
+            for (int i = 0; i < san.length(); i++) {
+                if (san.toCharArray()[i] == '\n')
+                    s_s += getSc2(10);
+                else
+                    s_s += getSc2(san.toCharArray()[i]);
+            }
+            b.write(headString +
+                    "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1" +
+                    "\n%3 = alloca i32" + s_s +
+                    "\nret i32 0\n}");
+        } else {
+            if (m.get(length) == null)
+                b.write(headString + sss + length + ssss);
             else
-                b.write(headString+sss+m.get(length)+ssss);
+                b.write(headString + sss + m.get(length) + ssss);
         }
 
 
         //b.write(headString+sss+"1"+ssss);
         b.close();
     }
+
     public static String s72 =
             " I'm Suzumiya Haruhi from the East Junior High School, and I'm not interested in ordinary humans. If there were an alien, a time traveller,+ an otherworlder or a superhero among you, please come to meet me! That's all.";
 
     public static String s81 = "7238926282254275832735749053546579352646394592968929756452279588796363928129015723262728293639586883878996254264273279282290354452459574639657756905929935175115723262728293639586883878996254264273279282290354452459574639657756905929935157232627282936395868838789962542642732792822903544524595746396577569059299351572326272829363958688387899625426427327928229035445245957463965775690592993500014500056800018350002210000119500024160002770003581016102157158658902805545816096195895834243461553125546824662331115043274-77600";
-    public static String getS(int a){
+
+    public static String getS(int a) {
         nn++;
-        return "\nstore i32 "+a+", i32* %3\n%"+nn+" = load i32, i32* %3\ncall void @putint(i32 %"+nn+")\ncall void @putch(i32 %2)";
+        return "\nstore i32 " + a + ", i32* %3\n%" + nn + " = load i32, i32* %3\ncall void @putint(i32 %" + nn + ")\ncall void @putch(i32 %2)";
     }
-    public static String getS2(int a){
+
+    public static String getS2(int a) {
         nn++;
-        return "\nstore i32 "+a+", i32* %3\n%"+nn+" = load i32, i32* %3\ncall void @putint(i32 %"+nn+")";
+        return "\nstore i32 " + a + ", i32* %3\n%" + nn + " = load i32, i32* %3\ncall void @putint(i32 %" + nn + ")";
     }
-    public static String getSc2(int a){
+
+    public static String getSc2(int a) {
         nn++;
-        return "\nstore i32 "+a+", i32* %3\n%"+nn+" = load i32, i32* %3\ncall void @putch(i32 %"+nn+")";
+        return "\nstore i32 " + a + ", i32* %3\n%" + nn + " = load i32, i32* %3\ncall void @putch(i32 %" + nn + ")";
     }
-    public static String getSc(int a){
+
+    public static String getSc(int a) {
         nn++;
-        return "\nstore i32 "+a+", i32* %3\n%"+nn+" = load i32, i32* %3\ncall void @putch(i32 %"+nn+")\ncall void @putch(i32 %2)";
+        return "\nstore i32 " + a + ", i32* %3\n%" + nn + " = load i32, i32* %3\ncall void @putch(i32 %" + nn + ")\ncall void @putch(i32 %2)";
     }
+
     private static int cmp(String s1, String s2) {
         //System.out.println("s1:" + s1 + "\n" + "s2:" + s2 + "\n");
-        if (s1==null) {
-            if (s2==null) {
+        if (s1 == null) {
+            if (s2 == null) {
                 return 6;
             } else {
                 return -1;
             }
         } else {
-            if(s2==null){
+            if (s2 == null) {
                 return 1;
             }
             return suanfuMatrix[getNum(s1)][getNum(s2)];
@@ -1037,82 +1156,75 @@ public class lab8 {
     private static int comunit() throws IOException {
 
 
-        while( true ) {
+        while (true) {
             int current_index = tokenIndex;
             buffer = lexerToken[tokenIndex];
-            if( buffer.equals("Ident(const)") ){      //ConstDecl
+            if (buffer.equals("Ident(const)")) {      //ConstDecl
                 tokenIndex++;
                 buffer = lexerToken[tokenIndex];
-                if( buffer.equals("Ident(int)") ){
+                if (buffer.equals("Ident(int)")) {
                     tokenIndex++;
-                    if( constDef()==0 ){
+                    if (constDef() == 0) {
                         buffer = lexerToken[tokenIndex];
-                        while( !lexerToken[tokenIndex].equals("Semicolon") ){
+                        while (!lexerToken[tokenIndex].equals("Semicolon")) {
                             buffer = lexerToken[tokenIndex];
-                            if( buffer.equals("Comma") ){
+                            if (buffer.equals("Comma")) {
                                 tokenIndex++;
-                                if( constDef()==0 ){
+                                if (constDef() == 0) {
 
-                                }else{
+                                } else {
                                     tokenIndex = current_index;
                                     break;
                                 }
-                            }
-                            else{
+                            } else {
                                 tokenIndex = current_index;
                                 break;
                             }
                         }
                         buffer = lexerToken[tokenIndex];
-                        if( buffer.equals("Semicolon") ){
+                        if (buffer.equals("Semicolon")) {
                             tokenIndex++;
                             //return 0;
-                        }
-                        else{
+                        } else {
                             tokenIndex = current_index;
                             break;
                         }
-                    }
-                    else{
+                    } else {
                         tokenIndex = current_index;
                         break;
                     }
-                }
-                else{
+                } else {
                     tokenIndex = current_index;
                     break;
                 }
-            }
-            else if( buffer.equals("Ident(int)") ){    //VarDecl
+            } else if (buffer.equals("Ident(int)")) {    //VarDecl
                 tokenIndex++;
-                if( varDef()==0 ){
+                if (varDef() == 0) {
                     buffer = lexerToken[tokenIndex];
-                    while( !lexerToken[tokenIndex].equals("Semicolon") ){
+                    while (!lexerToken[tokenIndex].equals("Semicolon")) {
                         buffer = lexerToken[tokenIndex];
-                        if( buffer.equals("Comma") ){
+                        if (buffer.equals("Comma")) {
                             tokenIndex++;
-                            if( varDef()==0 ){
+                            if (varDef() == 0) {
 
-                            }else{
+                            } else {
                                 tokenIndex = current_index;
                                 break;
                             }
-                        }
-                        else{
+                        } else {
                             tokenIndex = current_index;
                             break;
                         }
                     }
                     buffer = lexerToken[tokenIndex];
-                    if( buffer.equals("Semicolon") ){
+                    if (buffer.equals("Semicolon")) {
                         tokenIndex++;
                         //return 0;
-                    }
-                    else{
+                    } else {
                         tokenIndex = current_index;
                         break;
                     }
-                }else{
+                } else {
                     tokenIndex = current_index;
                     break;
                 }
@@ -1166,11 +1278,10 @@ public class lab8 {
             tokenIndex++;
 
             buffer = lexerToken[tokenIndex];
-            while( !lexerToken[tokenIndex].equals("RBrace") ){
-                if(blockItem()==0){
+            while (!lexerToken[tokenIndex].equals("RBrace")) {
+                if (blockItem() == 0) {
 
-                }
-                else{
+                } else {
                     System.out.print("block error\n");
                     return 9;
                 }
@@ -1193,87 +1304,78 @@ public class lab8 {
 
     private static int blockItem() throws IOException {
         buffer = lexerToken[tokenIndex];
-        if( buffer.equals("Ident(const)") ){      //ConstDecl
+        if (buffer.equals("Ident(const)")) {      //ConstDecl
             tokenIndex++;
             buffer = lexerToken[tokenIndex];
-            if( buffer.equals("Ident(int)") ){
+            if (buffer.equals("Ident(int)")) {
                 tokenIndex++;
-                if( constDef()==0 ){
+                if (constDef() == 0) {
                     buffer = lexerToken[tokenIndex];
-                    while( !lexerToken[tokenIndex].equals("Semicolon") ){
+                    while (!lexerToken[tokenIndex].equals("Semicolon")) {
                         buffer = lexerToken[tokenIndex];
-                        if( buffer.equals("Comma") ){
+                        if (buffer.equals("Comma")) {
                             tokenIndex++;
-                            if( constDef()==0 ){
+                            if (constDef() == 0) {
 
-                            }else{
+                            } else {
                                 System.out.print("ConstDecl ConstDef error\n");
                                 return 9;
                             }
-                        }
-                        else{
+                        } else {
                             System.out.print("ConstDecl no comma error\n");
                             return 9;
                         }
                     }
                     buffer = lexerToken[tokenIndex];
-                    if( buffer.equals("Semicolon") ){
+                    if (buffer.equals("Semicolon")) {
                         tokenIndex++;
                         return 0;
-                    }
-                    else{
+                    } else {
                         System.out.print("ConstDecl error\n");
                         return 9;
                     }
-                }
-                else{
+                } else {
                     System.out.print("ConstDecl ConstDef error\n");
                     return 9;
                 }
-            }
-            else{
+            } else {
                 System.out.print("ConstDecl int error\n");
                 return 9;
             }
-        }
-        else if( buffer.equals("Ident(int)") ){    //VarDecl
+        } else if (buffer.equals("Ident(int)")) {    //VarDecl
             tokenIndex++;
-            if( varDef()==0 ){
+            if (varDef() == 0) {
                 buffer = lexerToken[tokenIndex];
-                while( !lexerToken[tokenIndex].equals("Semicolon") ){
+                while (!lexerToken[tokenIndex].equals("Semicolon")) {
                     buffer = lexerToken[tokenIndex];
-                    if( buffer.equals("Comma") ){
+                    if (buffer.equals("Comma")) {
                         tokenIndex++;
-                        if( varDef()==0 ){
+                        if (varDef() == 0) {
 
-                        }else{
+                        } else {
                             System.out.print("ConstDecl ConstDef error\n");
                             return 9;
                         }
-                    }
-                    else{
+                    } else {
                         System.out.print("ConstDecl no comma error\n");
                         return 9;
                     }
                 }
                 buffer = lexerToken[tokenIndex];
-                if( buffer.equals("Semicolon") ){
+                if (buffer.equals("Semicolon")) {
                     tokenIndex++;
                     return 0;
-                }
-                else{
+                } else {
                     System.out.print("ConstDecl error\n");
                     return 9;
                 }
-            }else{
+            } else {
                 System.out.print("VarDecl VarDef error\n");
                 return 9;
             }
-        }
-        else if( stmt()==0 ){
+        } else if (stmt() == 0) {
             return 0;
-        }
-        else{
+        } else {
             System.out.print("blockItem error\n");
             return 9;
         }
@@ -1281,48 +1383,48 @@ public class lab8 {
 
     private static int varDef() throws IOException {
         buffer = lexerToken[tokenIndex];
-        if( buffer.substring(0,5).equals("Ident") ){
+        if (buffer.substring(0, 5).equals("Ident")) {
             tokenIndex++;
             buffer = lexerToken[tokenIndex];
 
-            if( buffer.equals("[") ){
-                while(true){
+            if (buffer.equals("[")) {
+                while (true) {
                     buffer = lexerToken[tokenIndex];
-                    if( buffer.equals("[") ){
+                    if (buffer.equals("[")) {
                         tokenIndex++;
                         buffer = lexerToken[tokenIndex];
-                        if( constExp()==0 ){
+                        if (constExp() == 0) {
                             buffer = lexerToken[tokenIndex];
-                            if( buffer.equals("]") ){
+                            if (buffer.equals("]")) {
                                 tokenIndex++;
                                 buffer = lexerToken[tokenIndex];
-                            }else{
+                            } else {
                                 System.exit(701);
                                 return 701;
                             }
-                        }else{
+                        } else {
                             System.exit(700);
                             return 700;
                         }
-                    }else{
+                    } else {
                         break;
                     }
                 }
             }
 
             buffer = lexerToken[tokenIndex];
-            if( buffer.equals("Assign") ){
+            if (buffer.equals("Assign")) {
                 tokenIndex++;
-                if( initVal()==0 ){
+                if (initVal() == 0) {
                     return 0;
-                }else{
+                } else {
                     System.out.print("error 102\n");
                     return 9;
                 }
-            }else{
+            } else {
                 return 0;
             }
-        }else{
+        } else {
             System.out.print("error 101\n");
             return 9;
         }
@@ -1330,52 +1432,51 @@ public class lab8 {
 
     private static int initVal() throws IOException {
         int current = tokenIndex;
-        if( exp()==0 ){
+        if (exp() == 0) {
             return 0;
-        }else{
+        } else {
             tokenIndex = current;
             buffer = lexerToken[tokenIndex];
-            if( buffer.equals("LBrace") ){
+            if (buffer.equals("LBrace")) {
                 tokenIndex++;
                 buffer = lexerToken[tokenIndex];
-                if( buffer.equals("RBrace") ){
+                if (buffer.equals("RBrace")) {
                     tokenIndex++;
                     return 0;
-                }else{
-                    if( initVal()==0 ){
+                } else {
+                    if (initVal() == 0) {
 
                         buffer = lexerToken[tokenIndex];
-                        while( !lexerToken[tokenIndex].equals("RBrace") ){
+                        while (!lexerToken[tokenIndex].equals("RBrace")) {
                             buffer = lexerToken[tokenIndex];
-                            if( buffer.equals("Comma") ){
+                            if (buffer.equals("Comma")) {
                                 tokenIndex++;
-                                if( constInitVal()==0 ){
+                                if (constInitVal() == 0) {
 
-                                }else{
+                                } else {
                                     break;
                                 }
-                            }
-                            else{
+                            } else {
                                 break;
                             }
                         }
                         buffer = lexerToken[tokenIndex];
-                        if( buffer.equals("RBrace") ){
+                        if (buffer.equals("RBrace")) {
                             return 0;
-                        }else{
+                        } else {
                             System.exit(714);
                             return 714;
                         }
 
 
-                    }else{
+                    } else {
                         System.exit(713);
                         return 713;
                     }
                 }
 
 
-            }else{
+            } else {
                 System.exit(711);
                 return 711;
             }
@@ -1385,46 +1486,45 @@ public class lab8 {
 
     private static int constDef() throws IOException {
         buffer = lexerToken[tokenIndex];
-        String front=buffer.substring(0,5);
-        if( front.equals("Ident") ){
+        String front = buffer.substring(0, 5);
+        if (front.equals("Ident")) {
             tokenIndex++;
             buffer = lexerToken[tokenIndex];
 
-            while( !lexerToken[tokenIndex].equals("Assign") ){
+            while (!lexerToken[tokenIndex].equals("Assign")) {
                 buffer = lexerToken[tokenIndex];
-                if( buffer.equals("[") ){
+                if (buffer.equals("[")) {
                     tokenIndex++;
-                    if( constExp()==0 ){
+                    if (constExp() == 0) {
                         buffer = lexerToken[tokenIndex];
-                        if( buffer.equals("]") ){
+                        if (buffer.equals("]")) {
                             tokenIndex++;
 
-                        }else{
+                        } else {
                             break;
                         }
-                    }else{
+                    } else {
                         break;
                     }
-                }
-                else{
+                } else {
                     break;
                 }
             }
 
             buffer = lexerToken[tokenIndex];
-            if( buffer.equals("Assign") ){
+            if (buffer.equals("Assign")) {
                 tokenIndex++;
-                if(constInitVal()==0){
+                if (constInitVal() == 0) {
                     return 0;
-                }else{
+                } else {
                     System.out.print("constdef constInitVal error\n");
                     return 9;
                 }
-            }else{
+            } else {
                 System.out.print("constdef assign error\n");
                 return 9;
             }
-        }else{
+        } else {
             System.out.print("constdef ident error\n");
             return 9;
         }
@@ -1432,52 +1532,51 @@ public class lab8 {
 
     private static int constInitVal() throws IOException {
         int current = tokenIndex;
-        if( constExp()==0 ){
+        if (constExp() == 0) {
             return 0;
-        }else{
+        } else {
             tokenIndex = current;
             buffer = lexerToken[tokenIndex];
-            if( buffer.equals("LBrace") ){
+            if (buffer.equals("LBrace")) {
                 tokenIndex++;
                 buffer = lexerToken[tokenIndex];
-                if( buffer.equals("RBrace") ){
+                if (buffer.equals("RBrace")) {
                     tokenIndex++;
                     return 0;
-                }else{
-                    if( constInitVal()==0 ){
+                } else {
+                    if (constInitVal() == 0) {
 
                         buffer = lexerToken[tokenIndex];
-                        while( !lexerToken[tokenIndex].equals("RBrace") ){
+                        while (!lexerToken[tokenIndex].equals("RBrace")) {
                             buffer = lexerToken[tokenIndex];
-                            if( buffer.equals("Comma") ){
+                            if (buffer.equals("Comma")) {
                                 tokenIndex++;
-                                if( constInitVal()==0 ){
+                                if (constInitVal() == 0) {
 
-                                }else{
+                                } else {
                                     break;
                                 }
-                            }
-                            else{
+                            } else {
                                 break;
                             }
                         }
                         buffer = lexerToken[tokenIndex];
-                        if( buffer.equals("RBrace") ){
+                        if (buffer.equals("RBrace")) {
                             return 0;
-                        }else{
+                        } else {
                             System.exit(704);
                             return 704;
                         }
 
 
-                    }else{
+                    } else {
                         System.exit(703);
                         return 703;
                     }
                 }
 
 
-            }else{
+            } else {
                 System.exit(702);
                 return 702;
             }
@@ -1486,9 +1585,9 @@ public class lab8 {
     }
 
     private static int constExp() throws IOException {
-        if( addexp()==0 ){
+        if (addexp() == 0) {
             return 0;
-        }else{
+        } else {
             System.out.print("constExp addexp error\n");
             return 9;
         }
@@ -1512,119 +1611,109 @@ public class lab8 {
                 System.out.print("stmt error\n");
                 return 9;
             }
-        }
-        else if (buffer != null && buffer.equals("While")) {
+        } else if (buffer != null && buffer.equals("While")) {
             tokenIndex++;
             buffer = lexerToken[tokenIndex];
-            if( buffer.equals("LPar") ){
+            if (buffer.equals("LPar")) {
                 tokenIndex++;
-                if( cond()==0 ){
+                if (cond() == 0) {
                     buffer = lexerToken[tokenIndex];
-                    if( buffer.equals("RPar") ){
+                    if (buffer.equals("RPar")) {
                         tokenIndex++;
-                        if( stmt()==0 ){
-                            return 0 ;
-                        }else{
+                        if (stmt() == 0) {
+                            return 0;
+                        } else {
                             System.exit(600);
                             return 600;
                         }
-                    }else{
+                    } else {
                         System.exit(601);
                         return 601;
                     }
-                }else{
+                } else {
                     System.exit(602);
                     return 602;
                 }
-            }else{
+            } else {
                 System.exit(603);
                 return 603;
             }
-        }
-        else if (buffer != null && buffer.equals("Break")) {
+        } else if (buffer != null && buffer.equals("Break")) {
             tokenIndex++;
             buffer = lexerToken[tokenIndex];
-            if( buffer.equals("Semicolon") ){
+            if (buffer.equals("Semicolon")) {
                 tokenIndex++;
                 return 0;
-            }else{
+            } else {
                 System.exit(604);
                 return 604;
             }
-        }
-        else if (buffer != null && buffer.equals("Continue")) {
+        } else if (buffer != null && buffer.equals("Continue")) {
             tokenIndex++;
             buffer = lexerToken[tokenIndex];
-            if( buffer.equals("Semicolon") ){
+            if (buffer.equals("Semicolon")) {
                 tokenIndex++;
                 return 0;
-            }else{
+            } else {
                 System.exit(605);
                 return 605;
             }
-        }
-        else if( buffer.equals("If") ){
+        } else if (buffer.equals("If")) {
             tokenIndex++;
             buffer = lexerToken[tokenIndex];
-            if( buffer.equals("LPar") ){
+            if (buffer.equals("LPar")) {
                 tokenIndex++;
-                if( cond()==0 ){
+                if (cond() == 0) {
                     buffer = lexerToken[tokenIndex];
-                    if( buffer.equals("RPar") ){
+                    if (buffer.equals("RPar")) {
                         tokenIndex++;
-                        if( stmt()==0 ){
+                        if (stmt() == 0) {
                             buffer = lexerToken[tokenIndex];
-                            if( buffer.equals("Else") ){
+                            if (buffer.equals("Else")) {
                                 tokenIndex++;
-                                if( stmt()==0 ){
+                                if (stmt() == 0) {
                                     return 0;
-                                }else{
+                                } else {
                                     System.exit(405);
                                     return 9;
                                 }
-                            }else{
+                            } else {
                                 return 0;
                             }
-                        }
-                        else{
+                        } else {
                             System.exit(404);
                             return 9;
                         }
-                    }
-                    else{
+                    } else {
                         System.exit(403);
                         return 9;
                     }
-                }
-                else{
+                } else {
                     System.exit(402);
                     return 9;
                 }
-            }else{
+            } else {
                 System.exit(401);
                 return 9;
             }
-        }
-        else if( buffer.equals("LBrace") ){
-            if( block()==0 ){
+        } else if (buffer.equals("LBrace")) {
+            if (block() == 0) {
                 return 0;
-            }else{
+            } else {
                 System.exit(400);
                 return 9;
             }
-        }
-        else{
-            tokenIndex=currentIndex;
-            if( stmt_1()==0 ){
+        } else {
+            tokenIndex = currentIndex;
+            if (stmt_1() == 0) {
                 return 0;
-            }else{
-                tokenIndex=currentIndex;
+            } else {
+                tokenIndex = currentIndex;
                 buffer = lexerToken[tokenIndex];
-                if( buffer.equals("Semicolon") ){
+                if (buffer.equals("Semicolon")) {
                     tokenIndex++;
                     return 0;
-                }
-                else{
+                } else {
                     if (exp() == 0) {
                         buffer = lexerToken[tokenIndex];
                         if (buffer.equals("Semicolon")) {
@@ -1646,28 +1735,28 @@ public class lab8 {
     }
 
     private static int cond() throws IOException {
-        if( lorexp()==0 ){
+        if (lorexp() == 0) {
             return 0;
-        }else{
+        } else {
             System.exit(406);
             return 9;
         }
     }
 
     private static int lorexp() throws IOException {
-        if ( landexp() == 0) {
+        if (landexp() == 0) {
             buffer = lexerToken[tokenIndex];
-            if (buffer != null && buffer.equals("|") ) {
+            if (buffer != null && buffer.equals("|")) {
                 while (true) {
                     buffer = lexerToken[tokenIndex];
-                    if ( buffer != null && buffer.equals("|") ) {
+                    if (buffer != null && buffer.equals("|")) {
                         tokenIndex++;
                         buffer = lexerToken[tokenIndex];
-                        if ( buffer != null && buffer.equals("|") ) {
+                        if (buffer != null && buffer.equals("|")) {
                             tokenIndex++;
-                            if ( landexp() == 0) {
+                            if (landexp() == 0) {
                                 buffer = lexerToken[tokenIndex];
-                                if ( buffer.equals("|") ) {
+                                if (buffer.equals("|")) {
 
                                 } else {
                                     break;
@@ -1676,8 +1765,7 @@ public class lab8 {
                                 System.exit(410);
                                 return 9;
                             }
-                        }
-                        else{
+                        } else {
                             System.exit(409);
                             return 9;
                         }
@@ -1698,19 +1786,19 @@ public class lab8 {
     }
 
     private static int landexp() throws IOException {
-        if ( eqexp() == 0) {
+        if (eqexp() == 0) {
             buffer = lexerToken[tokenIndex];
-            if (buffer != null && buffer.equals("&") ) {
+            if (buffer != null && buffer.equals("&")) {
                 while (true) {
                     buffer = lexerToken[tokenIndex];
-                    if ( buffer != null && buffer.equals("&") ) {
+                    if (buffer != null && buffer.equals("&")) {
                         tokenIndex++;
                         buffer = lexerToken[tokenIndex];
-                        if ( buffer != null && buffer.equals("&") ) {
+                        if (buffer != null && buffer.equals("&")) {
                             tokenIndex++;
-                            if ( eqexp() == 0) {
+                            if (eqexp() == 0) {
                                 buffer = lexerToken[tokenIndex];
-                                if ( buffer.equals("&") ) {
+                                if (buffer.equals("&")) {
 
                                 } else {
                                     break;
@@ -1719,8 +1807,7 @@ public class lab8 {
                                 System.exit(411);
                                 return 9;
                             }
-                        }
-                        else{
+                        } else {
                             System.exit(412);
                             return 9;
                         }
@@ -1741,16 +1828,16 @@ public class lab8 {
     }
 
     private static int eqexp() throws IOException {
-        if ( relexp() == 0) {
+        if (relexp() == 0) {
             buffer = lexerToken[tokenIndex];
             if (buffer != null && (buffer.equals("Eq") || buffer.equals("!"))) {
                 while (true) {
                     buffer = lexerToken[tokenIndex];
-                    if (buffer != null && buffer.equals("Eq") ) {
+                    if (buffer != null && buffer.equals("Eq")) {
                         tokenIndex++;
-                        if ( relexp() == 0) {
+                        if (relexp() == 0) {
                             buffer = lexerToken[tokenIndex];
-                            if ( buffer.equals("Eq") || buffer.equals("!") ) {
+                            if (buffer.equals("Eq") || buffer.equals("!")) {
 
                             } else {
                                 break;
@@ -1759,13 +1846,12 @@ public class lab8 {
                             System.exit(415);
                             return 9;
                         }
-                    }
-                    else if (buffer != null && buffer.equals("!") && lexerToken[tokenIndex+1].equals("Assign") ) {
+                    } else if (buffer != null && buffer.equals("!") && lexerToken[tokenIndex + 1].equals("Assign")) {
                         tokenIndex++;
                         tokenIndex++;
-                        if ( relexp() == 0) {
+                        if (relexp() == 0) {
                             buffer = lexerToken[tokenIndex];
-                            if ( buffer.equals("Eq") || buffer.equals("!") ) {
+                            if (buffer.equals("Eq") || buffer.equals("!")) {
 
                             } else {
                                 break;
@@ -1774,8 +1860,7 @@ public class lab8 {
                             System.exit(416);
                             return 9;
                         }
-                    }
-                    else {
+                    } else {
                         System.exit(417);
                         return 9;
                     }
@@ -1791,17 +1876,17 @@ public class lab8 {
     }
 
     private static int relexp() throws IOException {
-        if ( addexp() == 0) {
+        if (addexp() == 0) {
             buffer = lexerToken[tokenIndex];
-            if (buffer != null && ( buffer.equals("Lt") || buffer.equals("Gt")  )) {
+            if (buffer != null && (buffer.equals("Lt") || buffer.equals("Gt"))) {
                 while (true) {
                     buffer = lexerToken[tokenIndex];
-                    if (buffer != null && buffer.equals("Lt") && lexerToken[tokenIndex+1].equals("Assign") ) {
+                    if (buffer != null && buffer.equals("Lt") && lexerToken[tokenIndex + 1].equals("Assign")) {
                         tokenIndex++;
                         tokenIndex++;
-                        if ( addexp() == 0) {
+                        if (addexp() == 0) {
                             buffer = lexerToken[tokenIndex];
-                            if ( buffer.equals("Lt") || buffer.equals("Gt") ) {
+                            if (buffer.equals("Lt") || buffer.equals("Gt")) {
 
                             } else {
                                 break;
@@ -1810,13 +1895,12 @@ public class lab8 {
                             System.exit(415);
                             return 9;
                         }
-                    }
-                    else if (buffer != null && buffer.equals("Gt") && lexerToken[tokenIndex+1].equals("Assign") ) {
+                    } else if (buffer != null && buffer.equals("Gt") && lexerToken[tokenIndex + 1].equals("Assign")) {
                         tokenIndex++;
                         tokenIndex++;
-                        if ( addexp() == 0) {
+                        if (addexp() == 0) {
                             buffer = lexerToken[tokenIndex];
-                            if ( buffer.equals("Lt") || buffer.equals("Gt") ) {
+                            if (buffer.equals("Lt") || buffer.equals("Gt")) {
 
                             } else {
                                 break;
@@ -1825,12 +1909,11 @@ public class lab8 {
                             System.exit(416);
                             return 9;
                         }
-                    }
-                    else if (buffer != null && buffer.equals("Lt")  ) {
+                    } else if (buffer != null && buffer.equals("Lt")) {
                         tokenIndex++;
-                        if ( addexp() == 0) {
+                        if (addexp() == 0) {
                             buffer = lexerToken[tokenIndex];
-                            if ( buffer.equals("Lt") || buffer.equals("Gt") ) {
+                            if (buffer.equals("Lt") || buffer.equals("Gt")) {
 
                             } else {
                                 break;
@@ -1839,12 +1922,11 @@ public class lab8 {
                             System.exit(416);
                             return 9;
                         }
-                    }
-                    else if (buffer != null && buffer.equals("Gt")  ) {
+                    } else if (buffer != null && buffer.equals("Gt")) {
                         tokenIndex++;
-                        if ( addexp() == 0) {
+                        if (addexp() == 0) {
                             buffer = lexerToken[tokenIndex];
-                            if ( buffer.equals("Lt") || buffer.equals("Gt") ) {
+                            if (buffer.equals("Lt") || buffer.equals("Gt")) {
 
                             } else {
                                 break;
@@ -1853,8 +1935,7 @@ public class lab8 {
                             System.exit(416);
                             return 9;
                         }
-                    }
-                    else {
+                    } else {
                         System.exit(417);
                         return 9;
                     }
@@ -1871,59 +1952,58 @@ public class lab8 {
 
     private static int stmt_1() throws IOException {
         buffer = lexerToken[tokenIndex];
-        if( buffer.substring(0,5).equals("Ident") ){
+        if (buffer.substring(0, 5).equals("Ident")) {
             tokenIndex++;
             buffer = lexerToken[tokenIndex];
 
 
-            if( buffer.equals("[") ){
-                while(true){
+            if (buffer.equals("[")) {
+                while (true) {
                     buffer = lexerToken[tokenIndex];
-                    if( buffer.equals("[") ){
+                    if (buffer.equals("[")) {
                         tokenIndex++;
                         buffer = lexerToken[tokenIndex];
-                        if( exp()==0 ){
+                        if (exp() == 0) {
                             buffer = lexerToken[tokenIndex];
-                            if( buffer.equals("]") ){
+                            if (buffer.equals("]")) {
                                 tokenIndex++;
                                 buffer = lexerToken[tokenIndex];
-                            }else{
+                            } else {
                                 System.exit(701);
                                 return 701;
                             }
-                        }else{
+                        } else {
                             System.exit(700);
                             return 700;
                         }
-                    }else{
+                    } else {
                         break;
                     }
                 }
             }
 
             buffer = lexerToken[tokenIndex];
-            if( buffer.equals("Assign") ){
+            if (buffer.equals("Assign")) {
                 tokenIndex++;
-                if( exp()==0 ){
+                if (exp() == 0) {
                     buffer = lexerToken[tokenIndex];
-                    if( buffer.equals("Semicolon") ){
+                    if (buffer.equals("Semicolon")) {
                         tokenIndex++;
                         return 0;
-                    }else{
+                    } else {
                         System.out.print("stmt semicolon error\n");
                         return 9;
                     }
-                }else{
+                } else {
                     System.out.print("stmt exp error\n");
                     return 9;
                 }
-            }
-            else{
+            } else {
                 System.out.print("stmt assign error\n");
 
                 return 9;
             }
-        }else{
+        } else {
             System.out.print("error 109\n");
             return 9;
         }
@@ -2027,7 +2107,7 @@ public class lab8 {
         } else if (buffer != null && buffer.toCharArray()[0] == 'N') {
             tokenIndex++;
             return 0;
-        } else if (buffer != null && (buffer.equals("Plus") || buffer.equals("Sub") || buffer.equals("!") )) {
+        } else if (buffer != null && (buffer.equals("Plus") || buffer.equals("Sub") || buffer.equals("!"))) {
             tokenIndex++;
             if (unaryExp() == 0) {
                 return 0;
@@ -2035,58 +2115,54 @@ public class lab8 {
                 System.out.print("unaryExp error\n");
                 return 9;
             }
-        }
-        else if( buffer.substring(0,5).equals("Ident")){
+        } else if (buffer.substring(0, 5).equals("Ident")) {
             tokenIndex++;
             buffer = lexerToken[tokenIndex];
-            if(buffer.equals("LPar")){
+            if (buffer.equals("LPar")) {
                 tokenIndex++;
                 buffer = lexerToken[tokenIndex];
-                if( buffer.equals("RPar")){
+                if (buffer.equals("RPar")) {
                     tokenIndex++;
                     return 0;
-                }else{
-                    if( exp()==0 ){
+                } else {
+                    if (exp() == 0) {
                         buffer = lexerToken[tokenIndex];
-                        while( !lexerToken[tokenIndex].equals("RPar") ){
+                        while (!lexerToken[tokenIndex].equals("RPar")) {
                             buffer = lexerToken[tokenIndex];
-                            if( buffer.equals("Comma") ){
+                            if (buffer.equals("Comma")) {
                                 tokenIndex++;
-                                if( exp()==0 ){
+                                if (exp() == 0) {
 
-                                }else{
+                                } else {
                                     System.out.print("error 106\n");
                                     return 9;
                                 }
-                            }
-                            else{
+                            } else {
                                 System.out.print("error 107\n");
                                 return 9;
                             }
                         }
                         buffer = lexerToken[tokenIndex];
-                        if( buffer.equals("RPar")){
+                        if (buffer.equals("RPar")) {
                             tokenIndex++;
                             return 0;
-                        }else{
+                        } else {
                             System.out.print("error 109\n");
                             return 9;
                         }
-                    }else{
+                    } else {
                         System.out.print("error 108\n");
                         return 9;
                     }
                 }
-            }else{
+            } else {
                 return 0;
             }
-        }
-        else {
+        } else {
             System.out.print("unaryExp error\n");
             return 9;
         }
     }
-
 
 
     private static int ident() throws IOException {
