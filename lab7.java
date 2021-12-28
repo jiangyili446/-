@@ -951,6 +951,10 @@ public class lab7 {
                     "@program = common dso_local global [32768 x i32] zeroinitializer, align 16\n" +
                     "@tape = common dso_local global [65536 x i32] zeroinitializer, align 16\n" +
                     "\n" +
+                    "declare i32 @getint()\n" +
+                    "declare void @putint(i32)\n" +
+                    "declare i32 @getch()\n" +
+                    "declare void @putch(i32)\n" +
                     "define dso_local i32 @main(){\n" +
                     "  %1 = alloca i32\n" +
                     "  %2 = alloca i32\n" +
