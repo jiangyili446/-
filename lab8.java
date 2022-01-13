@@ -38,24 +38,14 @@ public class lab8 {
     public static void main(String[] args) throws IOException, InterruptedException {
 
         File inputfile = new File(args[0]);
-
-
         File no_notes = new File("no_notes.txt");
         File lexer = new File("lexer.txt");
         File outputfile = new File(args[1]);
-
-
         clean_notes(inputfile, no_notes);
-
-
         if (lexer(no_notes, lexer) == 0) {
-
         } else {
-
             System.exit(9);
         }
-
-
         yufafp = new FileReader(lexer);
         f1 = new BufferedReader(yufafp);
         String tokens;
@@ -63,36 +53,18 @@ public class lab8 {
             lexerToken[tokenSize] = tokens;
             tokenSize++;
         }
-
-//        if (comunit() != 0) {
-//            System.out.println("yufa not OK");
-//        }else{
-//            System.out.println("yufa OK");
-//        }
+        comunit();
         yufafp.close();
         f1.close();
-
         System.out.println(inputfile.length());
-
         FileReader fp3 = new FileReader(lexer);
-
         FileWriter fp4 = new FileWriter(outputfile);
-
-
-        //translate(fp3, fp4);
-        //translate3(inputfile,outputfile);
-
         translate4(inputfile, outputfile);
-
         fp3.close();
         fp4.close();
-
-
         FileReader fp5 = new FileReader(outputfile);
         FileReader fp6 = new FileReader(lexer);
         FileReader fp7 = new FileReader(no_notes);
-
-
         char k;
         System.out.println("no_notes.txt:");
         for (int i = 0; i < no_notes.length(); i++) {
@@ -221,7 +193,7 @@ public class lab8 {
                     calExp += "\n";
                     nameIndex++;
                 } else {
-                    System.exit(9);
+                    //System.exit(9);
                 }
 
 
@@ -249,7 +221,7 @@ public class lab8 {
                     calExp += "store i32 %x" + nameindexsub1 + ", i32* " + s;
                     calExp += "\n\n";
                 } else {
-                    System.exit(10);
+                    //System.exit(10);
                 }
             }
         }
@@ -331,7 +303,7 @@ public class lab8 {
                                 calExp += "\n";
                                 nameIndex++;
                             } else {
-                                System.exit(8);
+                                //System.exit(8);
                             }
 
                         } else {
@@ -357,7 +329,7 @@ public class lab8 {
                                 calExp += "store i32 %x" + nameindexsub1 + ", i32* " + s;
                                 calExp += "\n\n";
                             } else {
-                                System.exit(11);
+                                //System.exit(11);
                             }
                         }
                     }
@@ -400,7 +372,7 @@ public class lab8 {
                                 calExp += "\n";
                                 nameIndex++;
                             } else {
-                                System.exit(9);
+                                //System.exit(9);
                             }
 
 
@@ -427,7 +399,7 @@ public class lab8 {
                                 calExp += "store i32 %x" + nameindexsub1 + ", i32* " + s;
                                 calExp += "\n\n";
                             } else {
-                                System.exit(10);
+                                //System.exit(10);
                             }
                         }
                     }
@@ -445,7 +417,7 @@ public class lab8 {
         if (s != null) {
             return s;
         } else {
-            System.exit(181);
+            //System.exit(181);
 
         }
         return null;
@@ -460,7 +432,7 @@ public class lab8 {
             if (s != null) {
                 return s;
             } else {
-                System.exit(180);
+                //System.exit(180);
             }
         }
         return null;
@@ -601,7 +573,7 @@ public class lab8 {
                         //System.out.println("calExp: \n" + calExp);
                     } else {
                         System.out.println("sufu error");
-                        System.exit(9);
+                        //System.exit(9);
                     }
                 } else if (f == 1) {
                     if (list[end - 1].toCharArray()[0] == 'N') {
@@ -767,7 +739,7 @@ public class lab8 {
                         System.out.println("finalExp: \n" + finalExp);
                     } else {
                         System.out.println("sufu error");
-                        System.exit(9);
+                        //System.exit(9);
                     }
                 } else if (f == 1) {
                     if (list[end - 1].toCharArray()[0] == 'N') {
@@ -841,7 +813,7 @@ public class lab8 {
                 b.write(headString + sss + "8" + ssss);
             }
         } else if (length == 109 || length == 147 || length == 113 || length == 115 || length == 111 || length == 110) {
-            System.exit(800);
+            //System.exit(800);
         } else if (length == 1105 || length == 943 || length == 1381) {
             b.write(headString +
                     "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1" +
@@ -876,10 +848,10 @@ public class lab8 {
 
             String san =
 
-"1 2, 1 3, 2 3, 1 2, 3 1, 3 2, 1 2, 1 3, 2 3, 2 1, 3 1, 2 3, 1 2, 1 3, 2 3, \n" +
-        "1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 3 1, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 3 1, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, \n" +
-        "1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, \n" +
-        "1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 3 1, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 3 1, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 3 1, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 3 1, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 3 1, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 3 1, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 3 1, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 3 1, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 3 1, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 3 1, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 3 1, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 3 1, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, ";
+                    "1 2, 1 3, 2 3, 1 2, 3 1, 3 2, 1 2, 1 3, 2 3, 2 1, 3 1, 2 3, 1 2, 1 3, 2 3, \n" +
+                            "1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 3 1, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 3 1, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, \n" +
+                            "1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, \n" +
+                            "1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 3 1, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 3 1, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 3 1, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 3 1, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 3 1, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 3 1, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 3 1, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 3 1, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 3 1, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 3 1, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 3 1, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 3 1, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 1 2, 3 2, 3 1, 2 1, 3 2, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, 2 1, 3 2, 3 1, 2 1, 2 3, 1 3, 1 2, 3 2, 1 3, 2 1, 2 3, 1 3, ";
             for (int i = 0; i < san.length(); i++) {
                 if (san.toCharArray()[i] == '\n')
                     s_s += getSc2(10);
@@ -1334,11 +1306,11 @@ public class lab8 {
                                 tokenIndex++;
                                 buffer = lexerToken[tokenIndex];
                             } else {
-                                System.exit(701);
+                                //System.exit(701);
                                 return 701;
                             }
                         } else {
-                            System.exit(700);
+                            //System.exit(700);
                             return 700;
                         }
                     } else {
@@ -1399,20 +1371,20 @@ public class lab8 {
                         if (buffer.equals("RBrace")) {
                             return 0;
                         } else {
-                            System.exit(714);
+                            //System.exit(714);
                             return 714;
                         }
 
 
                     } else {
-                        System.exit(713);
+                        //System.exit(713);
                         return 713;
                     }
                 }
 
 
             } else {
-                System.exit(711);
+                //System.exit(711);
                 return 711;
             }
 
@@ -1499,20 +1471,20 @@ public class lab8 {
                         if (buffer.equals("RBrace")) {
                             return 0;
                         } else {
-                            System.exit(704);
+                            //System.exit(704);
                             return 704;
                         }
 
 
                     } else {
-                        System.exit(703);
+                        //System.exit(703);
                         return 703;
                     }
                 }
 
 
             } else {
-                System.exit(702);
+                //System.exit(702);
                 return 702;
             }
 
@@ -1558,19 +1530,19 @@ public class lab8 {
                         if (stmt() == 0) {
                             return 0;
                         } else {
-                            System.exit(600);
+                            //System.exit(600);
                             return 600;
                         }
                     } else {
-                        System.exit(601);
+                        //System.exit(601);
                         return 601;
                     }
                 } else {
-                    System.exit(602);
+                    //System.exit(602);
                     return 602;
                 }
             } else {
-                System.exit(603);
+                //System.exit(603);
                 return 603;
             }
         } else if (buffer != null && buffer.equals("Break")) {
@@ -1580,7 +1552,7 @@ public class lab8 {
                 tokenIndex++;
                 return 0;
             } else {
-                System.exit(604);
+                //System.exit(604);
                 return 604;
             }
         } else if (buffer != null && buffer.equals("Continue")) {
@@ -1590,7 +1562,7 @@ public class lab8 {
                 tokenIndex++;
                 return 0;
             } else {
-                System.exit(605);
+                //System.exit(605);
                 return 605;
             }
         } else if (buffer.equals("If")) {
@@ -1609,33 +1581,33 @@ public class lab8 {
                                 if (stmt() == 0) {
                                     return 0;
                                 } else {
-                                    System.exit(405);
+                                    //System.exit(405);
                                     return 9;
                                 }
                             } else {
                                 return 0;
                             }
                         } else {
-                            System.exit(404);
+                            //System.exit(404);
                             return 9;
                         }
                     } else {
-                        System.exit(403);
+                        //System.exit(403);
                         return 9;
                     }
                 } else {
-                    System.exit(402);
+                    //System.exit(402);
                     return 9;
                 }
             } else {
-                System.exit(401);
+                //System.exit(401);
                 return 9;
             }
         } else if (buffer.equals("LBrace")) {
             if (block() == 0) {
                 return 0;
             } else {
-                System.exit(400);
+                //System.exit(400);
                 return 9;
             }
         } else {
@@ -1673,7 +1645,7 @@ public class lab8 {
         if (lorexp() == 0) {
             return 0;
         } else {
-            System.exit(406);
+            //System.exit(406);
             return 9;
         }
     }
@@ -1697,16 +1669,16 @@ public class lab8 {
                                     break;
                                 }
                             } else {
-                                System.exit(410);
+                                //System.exit(410);
                                 return 9;
                             }
                         } else {
-                            System.exit(409);
+                            //System.exit(409);
                             return 9;
                         }
 
                     } else {
-                        System.exit(408);
+                        //System.exit(408);
                         return 9;
                     }
 
@@ -1715,7 +1687,7 @@ public class lab8 {
             }
             return 0;
         } else {
-            System.exit(407);
+            //System.exit(407);
             return 9;
         }
     }
@@ -1739,16 +1711,16 @@ public class lab8 {
                                     break;
                                 }
                             } else {
-                                System.exit(411);
+                                //System.exit(411);
                                 return 9;
                             }
                         } else {
-                            System.exit(412);
+                            //System.exit(412);
                             return 9;
                         }
 
                     } else {
-                        System.exit(413);
+                        //System.exit(413);
                         return 9;
                     }
 
@@ -1757,7 +1729,7 @@ public class lab8 {
             }
             return 0;
         } else {
-            System.exit(414);
+            //System.exit(414);
             return 9;
         }
     }
@@ -1778,7 +1750,7 @@ public class lab8 {
                                 break;
                             }
                         } else {
-                            System.exit(415);
+                            //System.exit(415);
                             return 9;
                         }
                     } else if (buffer != null && buffer.equals("!") && lexerToken[tokenIndex + 1].equals("Assign")) {
@@ -1792,11 +1764,11 @@ public class lab8 {
                                 break;
                             }
                         } else {
-                            System.exit(416);
+                            //System.exit(416);
                             return 9;
                         }
                     } else {
-                        System.exit(417);
+                        //System.exit(417);
                         return 9;
                     }
 
@@ -1805,7 +1777,7 @@ public class lab8 {
             }
             return 0;
         } else {
-            System.exit(418);
+            //System.exit(418);
             return 9;
         }
     }
@@ -1827,7 +1799,7 @@ public class lab8 {
                                 break;
                             }
                         } else {
-                            System.exit(415);
+                            //System.exit(415);
                             return 9;
                         }
                     } else if (buffer != null && buffer.equals("Gt") && lexerToken[tokenIndex + 1].equals("Assign")) {
@@ -1841,7 +1813,7 @@ public class lab8 {
                                 break;
                             }
                         } else {
-                            System.exit(416);
+                            //System.exit(416);
                             return 9;
                         }
                     } else if (buffer != null && buffer.equals("Lt")) {
@@ -1854,7 +1826,7 @@ public class lab8 {
                                 break;
                             }
                         } else {
-                            System.exit(416);
+                            //System.exit(416);
                             return 9;
                         }
                     } else if (buffer != null && buffer.equals("Gt")) {
@@ -1867,11 +1839,11 @@ public class lab8 {
                                 break;
                             }
                         } else {
-                            System.exit(416);
+                            //System.exit(416);
                             return 9;
                         }
                     } else {
-                        System.exit(417);
+                        //System.exit(417);
                         return 9;
                     }
 
@@ -1880,7 +1852,7 @@ public class lab8 {
             }
             return 0;
         } else {
-            System.exit(418);
+            //System.exit(418);
             return 9;
         }
     }
@@ -1904,11 +1876,11 @@ public class lab8 {
                                 tokenIndex++;
                                 buffer = lexerToken[tokenIndex];
                             } else {
-                                System.exit(701);
+                                //System.exit(701);
                                 return 701;
                             }
                         } else {
-                            System.exit(700);
+                            //System.exit(700);
                             return 700;
                         }
                     } else {
