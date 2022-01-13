@@ -75,8 +75,7 @@ public class lab5 {
 
 
 
-        //translate(fp3, fp4);
-        //translate3(inputfile,outputfile);
+       
 
         translate4(inputfile,outputfile);
 
