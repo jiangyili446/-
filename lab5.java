@@ -73,10 +73,6 @@ public class lab5 {
 
         FileWriter fp4 = new FileWriter(outputfile);
 
-
-
-       
-
         translate4(inputfile,outputfile);
 
         fp3.close();
