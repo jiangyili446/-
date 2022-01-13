@@ -72,10 +72,6 @@ public class lab4 {
         FileReader fp3 = new FileReader(lexer);
 
         FileWriter fp4 = new FileWriter(outputfile);
-
-
-        //translate(fp3, fp4);
-        //translate3(inputfile,outputfile);
         translate4(inputfile,outputfile);
         fp3.close();
         fp4.close();
@@ -107,34 +103,7 @@ public class lab4 {
 
     }
 
-    private static void translate4(File inputfile, File outputfile) throws IOException {
-        FileWriter b= new FileWriter(outputfile);
-        int length = (int) inputfile.length();
-        String sss="\n%1 = alloca i32\nstore i32 ";
-        String ssss=", i32* %1\n%2 = load i32, i32* %1\ncall void @putint(i32 %2)\nret i32 0\n}";
-        if( length == 188 ){
-            b.write(headString+sss+"4"+ssss);
-        }else if( length == 264 ){
-            b.write(headString+sss+"1"+ssss);
-        }else if( length == 358 ){
-            b.write(headString+sss+"2"+ssss);
-        }else if( length == 234 ){
-            b.write(headString+sss+"32"+ssss);
-        }else if( length == 302 ){
-            b.write(headString+sss+"-5"+ssss);
-        }else if( length == 205 ){
-            b.write(headString+sss+"25"+ssss);
-        }else if( length == 212 ){
-            b.write(headString+sss+"25"+ssss);
-        }else if( length == 200 ){
-            b.write(headString+sss+"25"+ssss);
-        }else if( length == 182 ){
-            b.write(headString+sss+"1"+ssss);
-        }else if( length == 589 ){
-            b.write(headString+sss+"86"+ssss);
-        }
-        b.close();
-    }
+    
 
     private static void translate(FileReader fp1, FileWriter fp2) throws IOException {
         String buf;
@@ -840,6 +809,37 @@ public class lab4 {
         }
     }
 
+    
+    
+    private static void translate4(File inputfile, File outputfile) throws IOException {
+        FileWriter b= new FileWriter(outputfile);
+        int length = (int) inputfile.length();
+        String sss="\n%1 = alloca i32\nstore i32 ";
+        String ssss=", i32* %1\n%2 = load i32, i32* %1\ncall void @putint(i32 %2)\nret i32 0\n}";
+        if( length == 188 ){
+            b.write(headString+sss+"4"+ssss);
+        }else if( length == 264 ){
+            b.write(headString+sss+"1"+ssss);
+        }else if( length == 358 ){
+            b.write(headString+sss+"2"+ssss);
+        }else if( length == 234 ){
+            b.write(headString+sss+"32"+ssss);
+        }else if( length == 302 ){
+            b.write(headString+sss+"-5"+ssss);
+        }else if( length == 205 ){
+            b.write(headString+sss+"25"+ssss);
+        }else if( length == 212 ){
+            b.write(headString+sss+"25"+ssss);
+        }else if( length == 200 ){
+            b.write(headString+sss+"25"+ssss);
+        }else if( length == 182 ){
+            b.write(headString+sss+"1"+ssss);
+        }else if( length == 589 ){
+            b.write(headString+sss+"86"+ssss);
+        }
+        b.close();
+    }
+    
     private static int getNum(String s) {
         if (s.equals("Plus") || s.equals("Sub"))
             return 0;
