@@ -37,8 +37,6 @@ public class lab6 {
     public static void main(String[] args) throws IOException {
 
         File inputfile = new File(args[0]);
-
-
         File no_notes = new File("no_notes.txt");
         File lexer = new File("lexer.txt");
         File outputfile = new File(args[1]);
