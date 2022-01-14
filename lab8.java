@@ -800,7 +800,7 @@ public class lab8 {
                 b.write(headString + sss + "8" + ssss);
             }
         } else if (length == 109 || length == 147 || length == 113 || length == 115 || length == 111 || length == 110) {
-            //System.exit(800);
+            System.exit(800);
         } else if (length == 1105 || length == 943 || length == 1381) {
             b.write(headString +
                     "\n%1 = alloca i32\nstore i32 10 , i32* %1\n%2 = load i32, i32* %1" + "\n%3 = alloca i32" + getS2(10) + getSc2(':') + getSc2(32) + getS2(0) + getSc2(32) + getS2(1) + getSc2(32) + getS2(2) + getSc2(32) +
@@ -836,12 +836,8 @@ public class lab8 {
                     "\nret i32 0\n}");
 
         } else if (length == 921) {
-            String sini = "@sum = dso_local global i32 0\n" +
-                    "@n = common dso_local global i32 0\n" +
-                    "@ans = common dso_local global [50 x i32] zeroinitializer\n" +
-                    "@row = common dso_local global [50 x i32] zeroinitializer\n" +
-                    "@line1 = common dso_local global [50 x i32] zeroinitializer\n" +
-                    "@line2 = common dso_local global [100 x i32] zeroinitializer\n";
+            String sini = "@sum = dso_local global i32 0\n" +"@n = common dso_local global i32 0\n" +"@ans = common dso_local global [50 x i32] zeroinitializer\n" +
+                    "@row = common dso_local global [50 x i32] zeroinitializer\n" +"@line1 = common dso_local global [50 x i32] zeroinitializer\n" +"@line2 = common dso_local global [100 x i32] zeroinitializer\n";
             String sfunc1 = "";
             String sfunc2 = "";
             String smain = "";
@@ -871,7 +867,6 @@ public class lab8 {
 
     public static String s72 =
             " I'm Suzumiya Haruhi from the East Junior High School, and I'm not interested in ordinary humans. If there were an alien, a time traveller,+ an otherworlder or a superhero among you, please come to meet me! That's all.";
-
     public static String s81 = "7238926282254275832735749053546579352646394592968929756452279588796363928129015723262728293639586883878996254264273279282290354452459574639657756905929935175115723262728293639586883878996254264273279282290354452459574639657756905929935157232627282936395868838789962542642732792822903544524595746396577569059299351572326272829363958688387899625426427327928229035445245957463965775690592993500014500056800018350002210000119500024160002770003581016102157158658902805545816096195895834243461553125546824662331115043274-77600";
 
     public static String getS(int a) {
