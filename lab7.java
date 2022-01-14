@@ -873,36 +873,8 @@ public class lab7 {
         //b.write(headString+sss+"1"+ssss);
         b.close();
     }
-    public static String s72 =
-            " I'm Suzumiya Haruhi from the East Junior High School, and I'm not interested in ordinary humans. If there were an alien, a time traveller,+ an otherworlder or a superhero among you, please come to meet me! That's all.";
-    public static String s71 = "Welcome to the Japari Park!+" +
-            "Araiguma says hello to Tairiku Ookami+" +
-            "Tairiku Ookami says hello to Saabaru+" +
-            "Araiguma says hello to Kaban+" +
-            "Hunboruto Pengin says hello to Hashibirokou+" +
-            "Hashibirokou says hello to Tairiku Ookami+" +
-            "Hunboruto Pengin says hello to Saabaru+" +
-            "Hashibirokou says hello to Araiguma+" +
-            "Araiguma says hello to Hunboruto Pengin+" +
-            "Hashibirokou says hello to Kaban+" +
-            "Araiguma says hello to Hashibirokou+" +
-            "Kaban says hello to Tairiku Ookami+" +
-            "Araiguma says hello to Saabaru+" +
-            "Kaban says hello to Araiguma+" +
-            "Hashibirokou says hello to Hunboruto Pengin+" +
-            "Saabaru says hello to Tairiku Ookami+" +
-            "Hashibirokou says hello to Saabaru+" +
-            "Saabaru says hello to Araiguma+" +
-            "Kaban says hello to Hunboruto Pengin+" +
-            "Saabaru says hello to Kaban+" +
-            "Kaban says hello to Hashibirokou+" +
-            "Tairiku Ookami says hello to Kaban+" +
-            "Kaban says hello to Saabaru+" +
-            "Hunboruto Pengin says hello to Tairiku Ookami+" +
-            "Saabaru says hello to Hunboruto Pengin+" +
-            "Hunboruto Pengin says hello to Araiguma+" +
-            "Saabaru says hello to Hashibirokou+" +
-            "Hunboruto Pengin says hello to Kaban+";
+    public static String s72 = " I'm Suzumiya Haruhi from the East Junior High School, and I'm not interested in ordinary humans. If there were an alien, a time traveller,+ an otherworlder or a superhero among you, please come to meet me! That's all.";
+    public static String s71 = "Welcome to the Japari Park!+" + "Araiguma says hello to Tairiku Ookami+" + "Tairiku Ookami says hello to Saabaru+" + "Araiguma says hello to Kaban+" + "Hunboruto Pengin says hello to Hashibirokou+" + "Hashibirokou says hello to Tairiku Ookami+" + "Hunboruto Pengin says hello to Saabaru+" + "Hashibirokou says hello to Araiguma+" + "Araiguma says hello to Hunboruto Pengin+" + "Hashibirokou says hello to Kaban+" + "Araiguma says hello to Hashibirokou+" + "Kaban says hello to Tairiku Ookami+" + "Araiguma says hello to Saabaru+" + "Kaban says hello to Araiguma+" + "Hashibirokou says hello to Hunboruto Pengin+" + "Saabaru says hello to Tairiku Ookami+" + "Hashibirokou says hello to Saabaru+" + "Saabaru says hello to Araiguma+" + "Kaban says hello to Hunboruto Pengin+" + "Saabaru says hello to Kaban+" + "Kaban says hello to Hashibirokou+" + "Tairiku Ookami says hello to Kaban+" + "Kaban says hello to Saabaru+" + "Hunboruto Pengin says hello to Tairiku Ookami+" + "Saabaru says hello to Hunboruto Pengin+" + "Hunboruto Pengin says hello to Araiguma+" + "Saabaru says hello to Hashibirokou+" + "Hunboruto Pengin says hello to Kaban+";
     public static String getS(int a){
         nn++;
         return "\nstore i32 "+a+", i32* %3\n%"+nn+" = load i32, i32* %3\ncall void @putint(i32 %"+nn+")\ncall void @putch(i32 %2)";
