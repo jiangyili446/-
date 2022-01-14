@@ -36,24 +36,16 @@ public class lab4 {
     public static void main(String[] args) throws IOException {
 
         File inputfile = new File(args[0]);
-
-
         File no_notes = new File("no_notes.txt");
         File lexer = new File("lexer.txt");
         File outputfile = new File(args[1]);
-
-
         clean_notes(inputfile, no_notes);
-
-
         if (lexer(no_notes, lexer) == 0) {
 
         } else {
 
             System.exit(9);
         }
-
-
         yufafp = new FileReader(lexer);
         f1 = new BufferedReader(yufafp);
         String tokens;
@@ -68,20 +60,14 @@ public class lab4 {
         }
         yufafp.close();
         f1.close();
-
         FileReader fp3 = new FileReader(lexer);
-
         FileWriter fp4 = new FileWriter(outputfile);
         translate4(inputfile,outputfile);
         fp3.close();
         fp4.close();
-
-        
         FileReader fp5 = new FileReader(outputfile);
         FileReader fp6 = new FileReader(lexer);
         FileReader fp7 = new FileReader(no_notes);
-
-
         char k;
         System.out.println("no_notes.txt:");
         for (int i = 0; i < no_notes.length(); i++) {
